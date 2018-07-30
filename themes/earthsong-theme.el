@@ -43,6 +43,7 @@
 '(font-lock-variable-name-face ((t (:foreground "#95CC5E"))))
 '(font-lock-warning-face ((t (:background "#00a8c6" :foreground "#f8f8f0"))))
 '(button ((t (:inherit (link)))))
+'(line-number ((t (:foreground "#AFAFAF" :background "36312C"))))
 '(link ((((class color) (min-colors 88) (background light)) (:underline (:color foreground-color :style line) :foreground "RoyalBlue3")) (((class color) (background light)) (:underline (:color foreground-color :style line) :foreground "blue")) (((class color) (min-colors 88) (background dark)) (:underline (:color foreground-color :style line) :foreground "cyan1")) (((class color) (background dark)) (:underline (:color foreground-color :style line) :foreground "cyan")) (t (:inherit (underline)))))
 '(link-visited ((default (:inherit (link))) (((class color) (background light)) (:foreground "magenta4")) (((class color) (background dark)) (:foreground "violet"))))
 '(fringe ((((class color) (background light)) (:background "grey95")) (((class color) (background dark)) (:background "grey10")) (t (:background "gray"))))
@@ -62,4 +63,3 @@
 )
 
 (provide-theme 'earthsong )
-
