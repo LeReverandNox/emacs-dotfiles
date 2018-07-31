@@ -1,41 +1,5 @@
-;; Setup package, so we can install use-package
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
-(package-initialize)
-
-;; Install use-package if not already present
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile
-  (require 'use-package))
-
-;; Load evil-mode
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode t))
-;; Load powerline
-(use-package powerline
-  :ensure t
-  :config
-  (powerline-default-theme))
-;; Load helm
-(use-package helm
-  :ensure t
-  :bind (
-	 ("M-x" . helm-M-x)
-	 ("C-x C-f" . helm-find-files)
-	 ("C-x b" . helm-mini)
-	 ("C-x C-b" . helm-mini))
-  :config
-  (helm-mode t))
-;; (use-package helm-descbinds
-;;   :ensure t
-;;   :bind ("C-h b" . helm-descbinds))
+;; Load all the packages
+(load "~/.emacs.d/packages.el")
 
 ;; Set encoding to UTF-8
 (set-language-environment "UTF-8")
