@@ -31,7 +31,13 @@
 
 
 
+;; Show trailing whitespaces
+(setq-default show-trailing-whitespace t)
 
+;; Delete trailing whitespaces on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Set default method for TRAMP
 (setq tramp-default-method "ssh")
+;; Add a blank line at the end of a file before save
+(setq require-final-newline t)
