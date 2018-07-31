@@ -9,7 +9,9 @@
  '(custom-safe-themes
    (quote
     ("59f42f7028e0cf1d8d6a7bc172dc37da64e4cd11fd29cf03c6ca950451cc2a00" default)))
- '(package-selected-packages (quote (helm-descbinds helm powerline evil))))
+ '(package-selected-packages
+   (quote
+    (git-gutter-fringe git-gutter magit evil-mc multiple-cursors helm-descbinds helm powerline evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
