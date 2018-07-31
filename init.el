@@ -1,8 +1,6 @@
 ;; Load all the packages
 (load "~/.emacs.d/packages.el")
 
-;; Set encoding to UTF-8
-(set-language-environment "UTF-8")
 ;; Load style relative settings
 (load "~/.emacs.d/style.el")
 
@@ -29,7 +27,11 @@
       kept-new-versions 5    ; keep some new versions
       kept-old-versions 2)   ; and some old ones, too
 
+;; Set encoding to UTF-8
+(set-language-environment "UTF-8")
 
+;; Set default method for TRAMP
+(setq tramp-default-method "ssh")
 
 ;; Show trailing whitespaces
 (setq-default show-trailing-whitespace t)
@@ -37,7 +39,5 @@
 ;; Delete trailing whitespaces on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Set default method for TRAMP
-(setq tramp-default-method "ssh")
 ;; Add a blank line at the end of a file before save
 (setq require-final-newline t)
