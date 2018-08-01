@@ -51,7 +51,9 @@
 (use-package magit
   :ensure t
   :bind (
-	 ("C-x g" . magit-status)))
+	 ("C-x g" . magit-status))
+  :config
+  (use-package evil-magit))
 
 (use-package git-gutter-fringe
   :ensure t
