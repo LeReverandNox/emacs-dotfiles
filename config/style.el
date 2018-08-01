@@ -9,7 +9,7 @@
 ;; Hide the toolbar
 (tool-bar-mode -1)
 ;; Hide scroll bar
-(toggle-scroll-bar -1)
+(scroll-bar-mode -1)
 
 ;; Display line numbers
 (global-display-line-numbers-mode t)
