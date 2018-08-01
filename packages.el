@@ -13,19 +13,20 @@
 (eval-when-compile
   (require 'use-package))
 
+
+;; Ensure that packages are present
+(setq use-package-always-ensure t)
+
 ;; Load evil-mode
 (use-package evil
-  :ensure t
   :config
   (evil-mode t))
 ;; Load powerline
 (use-package powerline
-  :ensure t
   :config
   (powerline-default-theme))
 ;; Load helm
 (use-package helm
-  :ensure t
   :bind (
 	 ("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files)
@@ -34,12 +35,10 @@
   :config
   (helm-mode t))
 (use-package helm-descbinds
-  :ensure t
   :bind ("C-h b" . helm-descbinds))
 
 ;; Load evil-mc
 (use-package evil-mc
-  :ensure t
   :bind (
 	 ("C->" . evil-mc-make-and-goto-next-match)
 	 ("C-<" . evil-mc-make-and-goto-prev-match)
@@ -49,13 +48,11 @@
 
 ;; Load Magit
 (use-package magit
-  :ensure t
   :bind (
 	 ("C-x g" . magit-status))
   :config
   (use-package evil-magit))
 
 (use-package git-gutter-fringe
-  :ensure t
   :config
   (global-git-gutter-mode 1))
