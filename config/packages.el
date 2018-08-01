@@ -63,3 +63,25 @@
 (use-package git-gutter-fringe
   :config
   (global-git-gutter-mode 1))
+
+;; Dimish, so I can hide or rename mode in modeline
+(defmacro diminish-minor-mode (filename mode &optional abbrev)
+  `(eval-after-load (symbol-name ,filename)
+     '(diminish ,mode ,abbrev)))
+
+(defmacro diminish-major-mode (mode-hook abbrev)
+  `(add-hook ,mode-hook
+             (lambda () (setq mode-name ,abbrev))))
+
+(use-package diminish
+  :config
+  (diminish-major-mode 'emacs-lisp-mode-hook "el")
+  (diminish-major-mode 'python-mode-hook "Py")
+  (diminish-major-mode 'js-mode-hook "JS")
+  (diminish-major-mode 'sh-mode-hook "Sh")
+  (diminish-minor-mode 'abbrev 'abbrev-mode)
+  (diminish-minor-mode 'undo-tree 'undo-tree-mode)
+  (diminish-minor-mode 'git-gutter 'git-gutter-mode)
+  (diminish-minor-mode 'evil-mc 'evil-mc-mode)
+  (diminish-minor-mode 'eldoc 'eldoc-mode)
+  (diminish-minor-mode 'helm-mode 'helm-mode))
