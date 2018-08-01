@@ -41,3 +41,20 @@
 (sensible-defaults/always-highlight-code)
 (sensible-defaults/refresh-buffers-when-files-change)
 (sensible-defaults/bind-commenting-and-uncommenting)
+
+;; Stole some @hrs cool functions
+(defun hrs/kill-current-buffer ()
+  "Kill the current buffer without prompting."
+  (interactive)
+  (kill-buffer (current-buffer)))
+
+(global-set-key (kbd "C-x k") 'hrs/kill-current-buffer)
+
+;; Always indent with spaces
+(setq-default indent-tabs-mode nil)
+
+(defun hrs/generate-scratch-buffer ()
+  "Create and switch to a temporary scratch buffer with a random
+     name."
+  (interactive)
+  (switch-to-buffer (make-temp-name "scratch-")))
