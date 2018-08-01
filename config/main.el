@@ -25,8 +25,15 @@
 ;; Show trailing whitespaces
 (setq-default show-trailing-whitespace t)
 
-;; Delete trailing whitespaces on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; Add a blank line at the end of a file before save
-(setq require-final-newline t)
+;; Enable some sensible-defaults (by @hrs) settings
+(sensible-defaults/shorten-yes-or-no)
+(sensible-defaults/show-matching-parens)
+(sensible-defaults/delete-trailing-whitespace)
+(sensible-defaults/make-scripts-executable)
+(sensible-defaults/overwrite-selected-text)
+(sensible-defaults/ensure-that-files-end-with-newline)
+(sensible-defaults/confirm-closing-emacs)
+(sensible-defaults/quiet-startup)
+(sensible-defaults/always-highlight-code)
+(sensible-defaults/refresh-buffers-when-files-change)
+(sensible-defaults/bind-commenting-and-uncommenting)

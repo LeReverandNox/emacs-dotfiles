@@ -23,9 +23,6 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 . 80))
 (add-to-list 'default-frame-alist '(alpha . (90 . 80)))
 
-;; Disable the welcome screen
-(setq inhibit-startup-screen t)
-
 ;; Stuff to manage the font ! Thanks @hrs
 (setq hrs/default-font "RobotoMono Nerd Font")
 (setq hrs/default-font-size 13)
