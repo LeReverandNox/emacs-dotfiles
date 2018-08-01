@@ -19,8 +19,15 @@
 
 ;; Load evil-mode
 (use-package evil
+  :init
+  (setq evil-want-abbrev-expand-on-insert-exit nil)
   :config
   (evil-mode t))
+
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode t))
+
 ;; Load powerline
 (use-package powerline
   :config
