@@ -68,3 +68,6 @@ other, future frames."
 (define-key global-map (kbd "C--") 'hrs/decrease-font-size)
 
 (hrs/reset-font-size)
+
+;; Display tabs with 2 characters
+(setq-default tab-width 2)
