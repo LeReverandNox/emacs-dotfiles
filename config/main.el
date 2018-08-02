@@ -76,3 +76,26 @@
                    (setq show-paren-style 'expression)
                    (paredit-mode)
                    (rainbow-delimiters-mode))))
+
+;; Always switch to the new pane when splitting
+(defun hrs/split-window-below-and-switch ()
+  "Split the window horizontally, then switch to the new pane."
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
+
+(defun hrs/split-window-right-and-switch ()
+  "Split the window vertically, then switch to the new pane."
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+
+(define-key evil-window-map "v" 'hrs/split-window-right-and-switch)
+(define-key evil-window-map "\C-v" 'hrs/split-window-right-and-switch)
+
+(define-key evil-window-map "s" 'hrs/split-window-below-and-switch)
+(define-key evil-window-map "S" 'hrs/split-window-below-and-switch)
+(define-key evil-window-map "\C-s" 'hrs/split-window-below-and-switch)
+(define-key evil-window-map (kbd "C-S-s") 'hrs/split-window-below-and-switch)
