@@ -1,11 +1,11 @@
 ;; Load sensible-defaults
 (load "~/.emacs.d/config/sensible-defaults/sensible-defaults.el")
 
-;; Load the main config file
-(load "~/.emacs.d/config/main.el")
-
 ;; Load all the packages
 (load "~/.emacs.d/config/packages.el")
+
+;; Load the main config file
+(load "~/.emacs.d/config/main.el")
 
 ;; Load style relative settings
 (load "~/.emacs.d/config/style.el")
