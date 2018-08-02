@@ -58,6 +58,7 @@
   :bind (
 	 ("C-x g" . magit-status))
   :config
+  (add-hook 'with-editor-mode-hook 'evil-insert-state)
   (use-package evil-magit))
 
 (use-package git-gutter-fringe
