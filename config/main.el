@@ -58,3 +58,7 @@
      name."
   (interactive)
   (switch-to-buffer (make-temp-name "scratch-")))
+
+;; Treat lower/upper CamelCase as separate words
+(global-subword-mode 1)
+
