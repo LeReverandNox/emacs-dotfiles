@@ -93,3 +93,19 @@
 (use-package paredit)
 (use-package rainbow-delimiters)
 
+;; Use AG, The_Silver_Searcher binding for Emacs. Needs the_silver_searcher
+;; in order to work
+(use-package ag)
+
+;; Use Projectile to handle project easily
+(defun hrs/search-project-for-symbol-at-point ()
+  "Use `projectile-ag' to search the current project for `symbol-at-point'."
+  (interactive)
+  (projectile-ag (projectile-symbol-at-point)))
+
+(use-package projectile
+  :init
+  (setq projectile-require-project-root nil)
+  :config
+  (global-set-key (kbd "C-c v") 'projectile-ag)
+  (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point))
