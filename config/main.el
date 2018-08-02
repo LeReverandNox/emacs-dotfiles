@@ -62,3 +62,14 @@
 ;; Treat lower/upper CamelCase as separate words
 (global-subword-mode 1)
 
+;; Enable lisp specific modes for... lisp modes
+(setq lispy-mode-hooks
+      '(clojure-mode-hook
+        emacs-lisp-mode-hook
+        lisp-mode-hook))
+
+(dolist (hook lispy-mode-hooks)
+  (add-hook hook (lambda ()
+                   (setq show-paren-style 'expression)
+                   (paredit-mode)
+                   (rainbow-delimiters-mode))))

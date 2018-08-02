@@ -80,9 +80,16 @@
   (diminish-major-mode 'python-mode-hook "Py")
   (diminish-major-mode 'js-mode-hook "JS")
   (diminish-major-mode 'sh-mode-hook "Sh")
+  (diminish-minor-mode 'paredit 'paredit-mode)
+  (diminish-minor-mode 'subword 'subword-mode)
   (diminish-minor-mode 'abbrev 'abbrev-mode)
   (diminish-minor-mode 'undo-tree 'undo-tree-mode)
   (diminish-minor-mode 'git-gutter 'git-gutter-mode)
   (diminish-minor-mode 'evil-mc 'evil-mc-mode)
   (diminish-minor-mode 'eldoc 'eldoc-mode)
   (diminish-minor-mode 'helm-mode 'helm-mode))
+
+;; Use Paredit and rainbow-delimiters to facilitate work with lisp files
+(use-package paredit)
+(use-package rainbow-delimiters)
+
