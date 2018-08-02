@@ -12,7 +12,7 @@
  '(global-evil-surround-mode t)
  '(package-selected-packages
    (quote
-    (diminish evil-magit git-gutter-fringe git-gutter magit evil-mc multiple-cursors helm-descbinds helm powerline evil))))
+    (ag projectile rainbow-delimiters paredit diminish evil-magit git-gutter-fringe git-gutter magit evil-mc multiple-cursors helm-descbinds helm powerline evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
