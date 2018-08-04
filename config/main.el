@@ -48,7 +48,7 @@
   (interactive)
   (kill-buffer (current-buffer)))
 
-(global-set-key (kbd "C-x k") 'hrs/kill-current-buffer)
+(global-set-key (kbd "C-x k") 'kill-buffer-and-window)
 
 ;; Always indent with spaces
 (setq-default indent-tabs-mode nil)
