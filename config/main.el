@@ -99,3 +99,16 @@
 (define-key evil-window-map "S" 'hrs/split-window-below-and-switch)
 (define-key evil-window-map "\C-s" 'hrs/split-window-below-and-switch)
 (define-key evil-window-map (kbd "C-S-s") 'hrs/split-window-below-and-switch)
+
+;; Allow org-babel to evaluate languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (ruby . t)
+   (dot . t)
+   (shell . t)
+   (python . t)
+   (gnuplot . t)))
+
+;; Don't ask before evaluating code blocks
+(setq org-confirm-babel-evaluate nil)

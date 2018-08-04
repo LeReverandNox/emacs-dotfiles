@@ -109,3 +109,33 @@
   :config
   (global-set-key (kbd "C-c v") 'projectile-ag)
   (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point))
+
+;; Load org and configure LaTeX export
+(use-package org
+  :config
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+  (setq org-latex-pdf-process
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  ;; Syntax highlight src blocks in org-mode
+  (setq org-src-fontify-natively t)
+  ;; Make tab work like in a code buffer for src blocks
+  (setq org-src-tab-acts-natively t)
+  ;; Use current window when editing a code snippet
+  (setq org-src-window-setup 'current-window)
+  ;; Remove footer when exporting in HTML mode
+  (setq org-html-postamble nil))
+
+;; Require ox-md and ox-beamer to export as md or beamer !
+(require 'ox-md)
+(require 'ox-beamer)
+
+;; Use org-bullets to have pretty bullets
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook #'org-bullets-mode))
+
+;; Use htmlize to export nicely text decorations
+(use-package htmlize)
