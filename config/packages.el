@@ -80,6 +80,7 @@
   (diminish-major-mode 'python-mode-hook "Py")
   (diminish-major-mode 'js-mode-hook "JS")
   (diminish-major-mode 'sh-mode-hook "Sh")
+  (diminish-minor-mode 'simple 'auto-fill-function)
   (diminish-minor-mode 'paredit 'paredit-mode)
   (diminish-minor-mode 'subword 'subword-mode)
   (diminish-minor-mode 'abbrev 'abbrev-mode)
@@ -125,12 +126,16 @@
   (setq org-src-tab-acts-natively t)
   ;; Use current window when editing a code snippet
   (setq org-src-window-setup 'current-window)
+  ;; Log the date when a TODO is DONE
+  (setq org-log-done 'time)
   ;; Remove footer when exporting in HTML mode
   (setq org-html-postamble nil))
 
 ;; Require ox-md and ox-beamer to export as md or beamer !
 (require 'ox-md)
 (require 'ox-beamer)
+;; Use ox-twbs to export as Boostrap
+(use-package ox-twbs)
 
 ;; Use org-bullets to have pretty bullets
 (use-package org-bullets
