@@ -144,3 +144,25 @@
 
 ;; Use htmlize to export nicely text decorations
 (use-package htmlize)
+
+;; Use company-mode to have completions !
+(use-package company
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+
+;; Use flycheck to have syntax checking
+(use-package flycheck)
+
+;; Python packages
+(use-package py-autopep8)
+(use-package elpy
+  :config
+  (elpy-enable)
+  (add-hook 'elpy-mode-hook 'flycheck-mode)
+  (require 'py-autopep8)
+  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
+(use-package company-jedi
+  :config
+  (add-to-list 'company-backends 'company-jedi)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t))

@@ -2,5 +2,6 @@ auto-save-list/
 tmp/
 elpa/
 url/
+.python-environments/
 recentf
 tramp
