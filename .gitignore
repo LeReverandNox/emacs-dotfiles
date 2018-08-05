@@ -5,3 +5,4 @@ url/
 .python-environments/
 recentf
 tramp
+.mc-lists.el
