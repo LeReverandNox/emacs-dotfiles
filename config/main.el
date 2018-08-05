@@ -41,6 +41,7 @@
 (sensible-defaults/always-highlight-code)
 (sensible-defaults/refresh-buffers-when-files-change)
 (sensible-defaults/bind-commenting-and-uncommenting)
+(sensible-defaults/set-default-line-length-to 80)
 
 ;; Stole some @hrs cool functions
 (defun hrs/kill-current-buffer ()
@@ -112,3 +113,10 @@
 
 ;; Don't ask before evaluating code blocks
 (setq org-confirm-babel-evaluate nil)
+
+;; Automatically activat auto-fill for text or org
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+;; Adda shortcut to disable auto-fil easily
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
