@@ -25,7 +25,7 @@
 
 ;; Stuff to manage the font ! Thanks @hrs
 (setq hrs/default-font "RobotoMono Nerd Font")
-(setq hrs/default-font-size 13)
+(setq hrs/default-font-size 11)
 (setq hrs/current-font-size hrs/default-font-size)
 
 (setq hrs/font-change-increment 1.05)
