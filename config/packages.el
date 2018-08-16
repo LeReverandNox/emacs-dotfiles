@@ -192,5 +192,4 @@
   (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
   (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq neo-smart-open t)
   (setq neo-window-fixed-size nil))
