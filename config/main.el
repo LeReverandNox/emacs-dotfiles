@@ -114,9 +114,9 @@
 ;; Don't ask before evaluating code blocks
 (setq org-confirm-babel-evaluate nil)
 
-;; Automatically activat auto-fill for text or org
+;; Automatically activate auto-fill for text or org
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
-;; Adda shortcut to disable auto-fil easily
+;; Add a shortcut to disable auto-fil easily
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
