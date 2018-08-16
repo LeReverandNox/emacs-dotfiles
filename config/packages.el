@@ -80,6 +80,7 @@
   (diminish-major-mode 'python-mode-hook "Py")
   (diminish-major-mode 'js-mode-hook "JS")
   (diminish-major-mode 'sh-mode-hook "Sh")
+  (diminish-minor-mode 'projectile 'projectile-mode)
   (diminish-minor-mode 'simple 'auto-fill-function)
   (diminish-minor-mode 'paredit 'paredit-mode)
   (diminish-minor-mode 'subword 'subword-mode)
@@ -109,7 +110,9 @@
   (setq projectile-require-project-root nil)
   :config
   (global-set-key (kbd "C-c v") 'projectile-ag)
-  (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point))
+  (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point)
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+  (projectile-mode t))
 
 ;; Load org and configure LaTeX export
 (use-package org
@@ -189,4 +192,5 @@
   (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
   (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-smart-open t)
   (setq neo-window-fixed-size nil))
