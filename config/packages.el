@@ -167,6 +167,9 @@
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t))
 
+;; Use all-the-icons to have pretty icons !
+(use-package all-the-icons)
+
 ;; Use neotree to have a tree... NerdTree like
 (use-package neotree
   :config
@@ -184,4 +187,6 @@
   (evil-define-key 'normal neotree-mode-map (kbd "O") 'neotree-open-file-in-system-application)
   (evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-filepath-to-yank-ring)
   (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
-  (define-key evil-motion-state-map (kbd "C-b") 'neotree-show))
+  (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-window-fixed-size nil))
