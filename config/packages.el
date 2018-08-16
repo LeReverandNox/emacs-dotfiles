@@ -166,3 +166,22 @@
   (add-to-list 'company-backends 'company-jedi)
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t))
+
+;; Use neotree to have a tree... NerdTree like
+(use-package neotree
+  :config
+  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-change-root)
+  (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+  (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+  (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+  (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+  (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+  (evil-define-key 'normal neotree-mode-map (kbd "s") 'neotree-enter-horizontal-split)
+  (evil-define-key 'normal neotree-mode-map (kbd "v") 'neotree-enter-vertical-split)
+  (evil-define-key 'normal neotree-mode-map (kbd "O") 'neotree-open-file-in-system-application)
+  (evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-filepath-to-yank-ring)
+  (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
+  (define-key evil-motion-state-map (kbd "C-b") 'neotree-show))
