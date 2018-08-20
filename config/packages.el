@@ -189,6 +189,7 @@
   (evil-define-key 'normal neotree-mode-map (kbd "v") 'neotree-enter-vertical-split)
   (evil-define-key 'normal neotree-mode-map (kbd "O") 'neotree-open-file-in-system-application)
   (evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-filepath-to-yank-ring)
+  (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
   (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
   (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
