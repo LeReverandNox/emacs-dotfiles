@@ -194,3 +194,6 @@
   (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-window-fixed-size nil))
+
+;; Use yaml-mode, to edit YAML in good conditions :)
+(use-package yaml-mode)
