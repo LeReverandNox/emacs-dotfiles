@@ -22,6 +22,7 @@
   :init
   (setq evil-want-abbrev-expand-on-insert-exit nil)
   :config
+  (setq-default evil-shift-width 2)
   (evil-mode t))
 
 (use-package evil-surround
@@ -197,3 +198,11 @@
 
 ;; Use yaml-mode, to edit YAML in good conditions :)
 (use-package yaml-mode)
+
+;; Use highlight-indent-guide to show indentation
+(use-package highlight-indent-guides
+  :init
+  (setq highlight-indent-guides-method 'character)
+  :config
+  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+  (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode))
