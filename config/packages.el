@@ -94,7 +94,11 @@
   (diminish-minor-mode 'helm-mode 'helm-mode))
 
 ;; Use Paredit and rainbow-delimiters to facilitate work with lisp files
-(use-package paredit)
+(use-package paredit
+  :config
+;; Disable bindings on M-down/up, to avoid conflict with move-text
+  (define-key paredit-mode-map (kbd "<M-down>") nil)
+  (define-key paredit-mode-map (kbd "<M-up>") nil))
 (use-package rainbow-delimiters)
 
 ;; Use AG, The_Silver_Searcher binding for Emacs. Needs the_silver_searcher
