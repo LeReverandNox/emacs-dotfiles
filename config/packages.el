@@ -217,3 +217,7 @@
   :config
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode))
+
+(use-package move-text
+  :config
+  (move-text-default-bindings))
