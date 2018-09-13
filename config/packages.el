@@ -90,6 +90,7 @@
   (diminish-minor-mode 'git-gutter 'git-gutter-mode)
   (diminish-minor-mode 'evil-mc 'evil-mc-mode)
   (diminish-minor-mode 'eldoc 'eldoc-mode)
+  (diminish-minor-mode 'company 'company-mode)
   (diminish-minor-mode 'helm-mode 'helm-mode))
 
 ;; Use Paredit and rainbow-delimiters to facilitate work with lisp files
