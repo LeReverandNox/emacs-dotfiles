@@ -120,3 +120,6 @@
 
 ;; Add a shortcut to disable auto-fil easily
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
+
+;; Enable electric-pair-mode to automaticaly write pair of quotes, brackets and stuff
+(electric-pair-mode t)
