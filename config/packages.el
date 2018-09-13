@@ -203,6 +203,7 @@
   (evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-filepath-to-yank-ring)
   (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
   (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
+  (evil-define-key 'normal neotree-mode-map (kbd "C-c C-y") 'neotree-copy-node)
   (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-window-fixed-size nil))
