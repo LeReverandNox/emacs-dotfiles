@@ -25,10 +25,6 @@
 ;; Show trailing whitespaces
 (setq-default show-trailing-whitespace t)
 
-;; Set a cutom undo directory, and enable persistent undo
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/tmp/undo")))
-(setq undo-tree-auto-save-history t)
-
 ;; Enable some sensible-defaults (by @hrs) settings
 (sensible-defaults/shorten-yes-or-no)
 (sensible-defaults/show-matching-parens)

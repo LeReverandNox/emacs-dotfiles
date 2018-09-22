@@ -93,7 +93,6 @@
   (diminish-minor-mode 'paredit 'paredit-mode)
   (diminish-minor-mode 'subword 'subword-mode)
   (diminish-minor-mode 'abbrev 'abbrev-mode)
-  (diminish-minor-mode 'undo-tree 'undo-tree-mode)
   (diminish-minor-mode 'git-gutter 'git-gutter-mode)
   (diminish-minor-mode 'evil-mc 'evil-mc-mode)
   (diminish-minor-mode 'eldoc 'eldoc-mode)
@@ -228,3 +227,15 @@
 (use-package move-text
   :config
   (move-text-default-bindings))
+
+;; Use undo-tree to have a nice... undo-tree, with persistent undo and stuff
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :config
+  (progn
+    (global-undo-tree-mode)
+    ;; Set a cutom undo directory, and enable persistent undo
+    (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/tmp/undo")))
+    (setq undo-tree-auto-save-history t)
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)))
