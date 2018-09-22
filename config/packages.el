@@ -241,3 +241,13 @@
     (setq undo-tree-auto-save-history t)
     (setq undo-tree-visualizer-timestamps t)
     (setq undo-tree-visualizer-diff t)))
+
+;; Use guide-key, because reminding all bindings is hard... show a pop-up after
+;; a short delay when a binding is not completed
+(use-package guide-key
+  :defer t
+  :diminish guide-key-mode
+  :config
+  (progn
+    (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
+    (guide-key-mode 1)))  ; Enable guide-key-mode
