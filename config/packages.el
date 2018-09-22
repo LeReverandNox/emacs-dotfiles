@@ -33,15 +33,22 @@
 (use-package powerline
   :config
   (powerline-default-theme))
+
 ;; Load helm
 (use-package helm
+  :diminish helm-mode
+  :init
+  (progn
+    (setq helm-apropos-fuzzy-match t)
+    (helm-mode t))
   :bind (
 	 ("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files)
+   ("C-x y" . helm-show-kill-ring)
 	 ("C-x b" . helm-mini)
-	 ("C-x C-b" . helm-mini))
-  :config
-  (helm-mode t))
+	 ("C-x C-b" . helm-mini)
+   ("C-x c o" . helm-occur)
+	 ("C-h a" . helm-apropos)))
 (use-package helm-descbinds
   :bind ("C-h b" . helm-descbinds))
 
@@ -90,8 +97,7 @@
   (diminish-minor-mode 'git-gutter 'git-gutter-mode)
   (diminish-minor-mode 'evil-mc 'evil-mc-mode)
   (diminish-minor-mode 'eldoc 'eldoc-mode)
-  (diminish-minor-mode 'company 'company-mode)
-  (diminish-minor-mode 'helm-mode 'helm-mode))
+  (diminish-minor-mode 'company 'company-mode))
 
 ;; Use Paredit and rainbow-delimiters to facilitate work with lisp files
 (use-package paredit
