@@ -120,3 +120,10 @@
 
 ;; Enable electric-pair-mode to automaticaly write pair of quotes, brackets and stuff
 (electric-pair-mode t)
+
+;; Indent by 4 spaces for C files
+(setq-default c-basic-offset 4)
+(add-hook 'c-mode-hook (lambda ()
+                         (setq tab-width 4)))
+;; Set C coding to "linux" to doesn't indent braces in C files
+(setq-default c-default-style "linux")
