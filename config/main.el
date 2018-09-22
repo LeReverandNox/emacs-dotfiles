@@ -127,3 +127,6 @@
                          (setq tab-width 4)))
 ;; Set C coding to "linux" to doesn't indent braces in C files
 (setq-default c-default-style "linux")
+
+;; Enable winner mode to easily go back and forth betweed window configuration
+(winner-mode t)
