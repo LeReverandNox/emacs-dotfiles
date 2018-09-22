@@ -50,7 +50,8 @@
    ("C-x c o" . helm-occur)
 	 ("C-h a" . helm-apropos)))
 (use-package helm-descbinds
-  :bind ("C-h b" . helm-descbinds))
+  :bind ("C-h b" . helm-descbinds)
+  :bind ("C-h w" . helm-descbinds))
 
 ;; Load evil-mc
 (use-package evil-mc
