@@ -130,3 +130,6 @@
 
 ;; Enable winner mode to easily go back and forth betweed window configuration
 (winner-mode t)
+
+;; Sentence end with a single space
+(setq sentence-end-double-space nil)
