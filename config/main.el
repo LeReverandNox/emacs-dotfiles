@@ -54,9 +54,6 @@
 ;; Always indent with spaces
 (setq-default indent-tabs-mode nil)
 
-;; Never indent with tabs !
-(setq-default indent-tabs-mode nil)
-
 (defun hrs/generate-scratch-buffer ()
   "Create and switch to a temporary scratch buffer with a random
      name."
