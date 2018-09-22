@@ -225,6 +225,7 @@
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode))
 
+;; Use move-text so I can move line ith M-up/down
 (use-package move-text
   :config
   (move-text-default-bindings))
