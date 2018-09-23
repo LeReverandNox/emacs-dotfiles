@@ -53,6 +53,21 @@
   :bind ("C-h b" . helm-descbinds)
   :bind ("C-h w" . helm-descbinds))
 
+;; Use helm-swoop to easily find stuff in the buffer
+(use-package helm-swoop
+  :bind
+  (("C-S-s" . helm-swoop)
+   ("M-i" . helm-swoop)
+   ("M-I" . helm-swoop-back-to-last-point)
+   ("C-c M-i" . helm-multi-swoop)
+   ("C-x M-i" . helm-multi-swoop-all))
+  :config
+  (progn
+    (setq helm-swoop-split-with-multiple-windows t)
+    (setq helm-swoop-split-direction 'split-window-horizontally)
+    (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+    (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)))
+
 ;; Load evil-mc
 (use-package evil-mc
   :bind (
