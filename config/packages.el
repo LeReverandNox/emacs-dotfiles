@@ -49,6 +49,7 @@
 	 ("C-x C-b" . helm-mini)
    ("C-x c o" . helm-occur)
 	 ("C-h a" . helm-apropos)))
+
 (use-package helm-descbinds
   :bind ("C-h b" . helm-descbinds)
   :bind ("C-h w" . helm-descbinds))
@@ -104,7 +105,6 @@
   (diminish-major-mode 'python-mode-hook "Py")
   (diminish-major-mode 'js-mode-hook "JS")
   (diminish-major-mode 'sh-mode-hook "Sh")
-  (diminish-minor-mode 'projectile 'projectile-mode)
   (diminish-minor-mode 'simple 'auto-fill-function)
   (diminish-minor-mode 'paredit 'paredit-mode)
   (diminish-minor-mode 'subword 'subword-mode)
@@ -133,13 +133,16 @@
   (projectile-ag (projectile-symbol-at-point)))
 
 (use-package projectile
+  :diminish projectile-mode
   :init
   (setq projectile-require-project-root nil)
   :config
-  (global-set-key (kbd "C-c v") 'projectile-ag)
-  (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point)
-  (setq projectile-switch-project-action 'neotree-projectile-action)
-  (projectile-mode t))
+  (progn
+    (global-set-key (kbd "C-c v") 'projectile-ag)
+    (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point)
+    (setq projectile-switch-project-action 'neotree-projectile-action)
+    (projectile-mode t)))
+(use-package helm-projectile)
 
 ;; Load org and configure LaTeX export
 (use-package org
