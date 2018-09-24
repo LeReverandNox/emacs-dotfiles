@@ -229,6 +229,7 @@
   (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "C-c C-y") 'neotree-copy-node)
   (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
+  (define-key evil-motion-state-map (kbd "C-S-b") 'neotree-projectile-action)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-window-fixed-size nil))
 
