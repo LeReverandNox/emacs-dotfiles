@@ -141,6 +141,7 @@
     (global-set-key (kbd "C-c v") 'projectile-ag)
     (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point)
     (setq projectile-switch-project-action 'neotree-projectile-action)
+    (setq projectile-completion-system 'helm)
     (projectile-mode t)))
 (use-package helm-projectile)
 
