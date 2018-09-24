@@ -120,7 +120,8 @@
 ;; Indent by 4 spaces for C files
 (setq-default c-basic-offset 4)
 (add-hook 'c-mode-hook (lambda ()
-                         (setq tab-width 4)))
+                         (setq tab-width 4)
+                         (setq indent-tabs-mode t)))
 ;; Set C coding to "linux" to doesn't indent braces in C files
 (setq-default c-default-style "linux")
 
