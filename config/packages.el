@@ -200,8 +200,9 @@
 (use-package py-autopep8)
 (use-package pyenv-mode
   :init
+  (progn
   (add-to-list 'exec-path "~/.pyenv/shims")
-  (setenv "WORKON_HOME" "~/.pyenv/versions/")
+  (setenv "WORKON_HOME" "~/.pyenv/versions/"))
   :config
   (pyenv-mode))
 (use-package elpy
