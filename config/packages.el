@@ -53,8 +53,9 @@
 	 ("C-h a" . helm-apropos)))
 
 (use-package helm-descbinds
-  :bind ("C-h b" . helm-descbinds)
-  :bind ("C-h w" . helm-descbinds))
+  :bind (
+   ("C-h b" . helm-descbinds)
+   ("C-h w" . helm-descbinds)))
 
 ;; Use helm-swoop to easily find stuff in the buffer
 (use-package helm-swoop
