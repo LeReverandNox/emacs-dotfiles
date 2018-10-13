@@ -210,6 +210,14 @@
 ;; Use all-the-icons to have pretty icons !
 (use-package all-the-icons)
 
+(defun my/neotree-close-parent ()
+  "Close parent directory of current node."
+  (interactive)
+  (neotree-select-up-node)
+  (let* ((btn-full-path (neo-buffer--get-filename-current-line))
+         (path (if btn-full-path btn-full-path neo-buffer--start-node)))
+        (when (file-name-directory path)
+          (if (neo-buffer--expanded-node-p path) (neotree-enter)))))
 ;; Use neotree to have a tree... NerdTree like
 (use-package neotree
   :config
@@ -229,6 +237,7 @@
   (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
   (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "C-c C-y") 'neotree-copy-node)
+  (evil-define-key 'normal neotree-mode-map (kbd "x") 'my/neotree-close-parent)
   (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
   (define-key evil-motion-state-map (kbd "C-S-b") 'neotree-projectile-action)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
