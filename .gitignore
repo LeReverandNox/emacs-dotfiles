@@ -6,3 +6,7 @@ url/
 recentf
 tramp
 .mc-lists.el
+var/
+semanticdb/
+projectile-bookmarks.eld
+ede-projects.el
