@@ -73,6 +73,7 @@
 
 ;; Load evil-mc
 (use-package evil-mc
+  :diminish evil-mc-mode
   :bind (
 	 ("C->" . evil-mc-make-and-goto-next-match)
 	 ("C-<" . evil-mc-make-and-goto-prev-match)
@@ -108,16 +109,14 @@
   (diminish-major-mode 'js-mode-hook "JS")
   (diminish-major-mode 'sh-mode-hook "Sh")
   (diminish-minor-mode 'simple 'auto-fill-function)
-  (diminish-minor-mode 'paredit 'paredit-mode)
   (diminish-minor-mode 'subword 'subword-mode)
   (diminish-minor-mode 'abbrev 'abbrev-mode)
   (diminish-minor-mode 'git-gutter 'git-gutter-mode)
-  (diminish-minor-mode 'evil-mc 'evil-mc-mode)
-  (diminish-minor-mode 'eldoc 'eldoc-mode)
-  (diminish-minor-mode 'company 'company-mode))
+  (diminish-minor-mode 'eldoc 'eldoc-mode))
 
 ;; Use Paredit and rainbow-delimiters to facilitate work with lisp files
 (use-package paredit
+  :diminish paredit-mode
   :config
 ;; Disable bindings on M-down/up, to avoid conflict with move-text
   (define-key paredit-mode-map (kbd "<M-down>") nil)
@@ -183,6 +182,7 @@
 
 ;; Use company-mode to have completions !
 (use-package company
+  :diminish company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
