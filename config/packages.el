@@ -276,7 +276,6 @@
 ;; Use guide-key, because reminding all bindings is hard... show a pop-up after
 ;; a short delay when a binding is not completed
 (use-package guide-key
-  :defer t
   :diminish guide-key-mode
   :config
   (progn
