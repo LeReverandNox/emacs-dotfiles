@@ -117,6 +117,10 @@
 ;; Enable electric-pair-mode to automaticaly write pair of quotes, brackets and stuff
 (electric-pair-mode t)
 
+;; Add /usr/local/bin to exec-path and PATH so `ag' can works on OSX
+(add-to-list 'exec-path "/usr/local/bin")
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
 ;; Indent by 4 spaces for C files
 (setq-default c-basic-offset 4)
 (add-hook 'c-mode-hook (lambda ()
