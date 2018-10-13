@@ -271,3 +271,8 @@
   (progn
     (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
     (guide-key-mode 1)))  ; Enable guide-key-mode
+
+;; Use gist to manipulate gists from Emacs
+(use-package gist
+  :bind (
+	("C-x C-g" . gist-list)))
