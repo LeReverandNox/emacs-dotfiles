@@ -60,8 +60,7 @@
 ;; Use helm-swoop to easily find stuff in the buffer
 (use-package helm-swoop
   :bind
-  (("C-S-s" . helm-swoop)
-   ("M-i" . helm-swoop)
+  (("M-i" . helm-swoop)
    ("M-I" . helm-swoop-back-to-last-point)
    ("C-c M-i" . helm-multi-swoop)
    ("C-x M-i" . helm-multi-swoop-all))
