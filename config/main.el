@@ -134,3 +134,7 @@
 
 ;; Sentence end with a single space
 (setq sentence-end-double-space nil)
+
+;; Automatically save/restore Emacs session
+(setq desktop-path (list (concat user-emacs-directory "tmp")))
+(desktop-save-mode t)
