@@ -180,11 +180,18 @@
 ;; Use htmlize to export nicely text decorations
 (use-package htmlize)
 
-;; Use company-mode to have completions !
+;; Use company-mode to have completions popup !
 (use-package company
   :diminish company-mode
+  :init
+  (progn
+    (global-company-mode))
   :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  (progn
+    (setq company-tooltip-limit 30) ; bigger popup window
+    (setq company-idle-delay .15)    ; decrease delay before autocompletion popup shows
+    (setq company-echo-delay 0)     ; remove annoying blinking
+    (setq company-begin-commands '(self-insert-command)))) ; start autocompletion only after typing
 
 ;; Use flycheck to have syntax checking
 (use-package flycheck)
