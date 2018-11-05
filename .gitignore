@@ -10,3 +10,6 @@ var/
 semanticdb/
 projectile-bookmarks.eld
 ede-projects.el
+irony/
+compile_commands.json
+bookmarks
