@@ -194,7 +194,10 @@
     (setq company-begin-commands '(self-insert-command)))) ; start autocompletion only after typing
 
 ;; Use flycheck to have syntax checking
-(use-package flycheck)
+(use-package flycheck
+  :config
+  (progn
+    (global-flycheck-mode)))
 
 ;; Python packages
 (use-package py-autopep8)
