@@ -125,6 +125,7 @@
 (setq-default c-basic-offset 4)
 (add-hook 'c-mode-hook (lambda ()
                          (setq tab-width 4)
+                         (setq evil-shift-width 4)
                          (setq indent-tabs-mode t)))
 ;; Set C coding to "linux" to doesn't indent braces in C files
 (setq-default c-default-style "linux")
@@ -138,3 +139,14 @@
 ;; Automatically save/restore Emacs session
 (setq desktop-path (list (concat user-emacs-directory "tmp")))
 (desktop-save-mode t)
+
+;; Test stuff for C
+;; (require 'semantic)
+;; (require 'semantic/bovine/gcc)
+;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;; (semantic-mode 1)
+;; (global-ede-mode t)
+;; (ede-enable-generic-projects)

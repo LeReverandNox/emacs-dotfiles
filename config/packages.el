@@ -25,6 +25,7 @@
   (setq evil-want-abbrev-expand-on-insert-exit nil)
   :config
   (setq-default evil-shift-width 2)
+  (define-key evil-normal-state-map (kbd "M-.") nil)
   (evil-mode t))
 
 (use-package evil-surround
@@ -297,3 +298,86 @@
 (use-package gist
   :bind (
 	("C-x C-g" . gist-list)))
+
+;; C/C++ packages
+;; Thx to http://martinsosic.com/development/emacs/2017/12/09/emacs-cpp-ide.html
+;; Irony
+;; (use-package irony
+;;   :config
+;;   (progn
+;;     ;; If irony server was never installed, install it.
+;;     (unless (irony--find-server-executable) (call-interactively #'irony-install-server))
+;;     (add-hook 'c++-mode-hook 'irony-mode)
+;;     (add-hook 'c-mode-hook 'irony-mode)
+;;     ;; Use compilation database first, clang_complete as fallback.
+;;     (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
+;;                                                     irony-cdb-clang-complete))
+;;     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)))
+
+;; (use-package company-irony
+  ;; :config
+  ;; (progn
+    ;; (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
+
+;; (use-package flycheck-irony
+;;   :config
+;;   (progn
+;;     (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))))
+
+;; (use-package irony-eldoc
+;;   :config
+;;   (progn
+;;     (add-hook 'irony-mode-hook #'irony-eldoc)))
+
+;; Rtags
+(use-package rtags
+  :config
+  (progn
+    (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
+    (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
+    (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
+    (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
+    (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
+    (rtags-enable-standard-keybindings)
+    (setq rtags-use-helm t)
+    ;; Needed to avoid Emacs freeze when calling find-symbol
+    (setq rtags-rdm-process-use-pipe t)
+    ;; Start rdm
+    (rtags-start-process-unless-running)
+    ;; Shutdown rdm when leaving emacs.
+    (add-hook 'kill-emacs-hook 'rtags-quit-rdm)))
+
+(use-package helm-rtags
+  :config
+  (progn
+    (setq rtags-display-result-backend 'helm)
+    ))
+
+;; Use rtags for auto-completion.
+(use-package company-rtags
+  :config
+  (progn
+    (setq rtags-autostart-diagnostics t)
+    (rtags-diagnostics)
+    (setq rtags-completions-enabled t)
+    (push 'company-rtags company-backends)
+    ))
+
+;; Live code checking.
+(use-package flycheck-rtags
+  :init
+  (progn
+    ;; ensure that we use only rtags checking
+    ;; https://github.com/Andersbakken/rtags#optional-1
+    (defun setup-flycheck-rtags ()
+      (flycheck-select-checker 'rtags)
+      (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+      (setq-local flycheck-check-syntax-automatically nil)
+      (setq-local rtags-autostart-diagnostics t)
+      (rtags-set-periodic-reparse-timeout 1)  ;; Run flycheck 2 seconds after being idle.
+      )
+    (add-hook 'c-mode-hook #'setup-flycheck-rtags)
+    (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
+    ))
+
+(use-package cmake-mode)
