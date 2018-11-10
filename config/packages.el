@@ -381,3 +381,9 @@
     ))
 
 (use-package cmake-mode)
+
+(use-package exec-path-from-shell
+  :config
+  (progn
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize))))
