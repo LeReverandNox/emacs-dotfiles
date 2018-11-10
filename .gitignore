@@ -9,7 +9,9 @@ tramp
 var/
 semanticdb/
 projectile-bookmarks.eld
+projectile.cache
 ede-projects.el
 irony/
 compile_commands.json
 bookmarks
+configuration.el
