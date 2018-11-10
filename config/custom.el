@@ -12,7 +12,7 @@
  '(global-evil-surround-mode t)
  '(package-selected-packages
    (quote
-    (cmake-mode cmake-ide flycheck-rtags company-rtags helm-rtags rtags irony-eldoc gist helm-projectile helm-swoop guide-key miniedit move-text move-lines autopair pyenv-mode elpy origami vimish-fold highlight-indent-guides smart-shift yaml-mode all-the-icons neotree flycheck company ox-twbs ox-beamer ox-md ox-latex htmlize org-beautify-theme org-bullets ag projectile rainbow-delimiters paredit diminish evil-magit git-gutter-fringe git-gutter magit evil-mc multiple-cursors helm-descbinds helm powerline evil))))
+    (exec-path-from-shell pipenv cmake-mode cmake-ide flycheck-rtags company-rtags helm-rtags rtags irony-eldoc gist helm-projectile helm-swoop guide-key miniedit move-text move-lines autopair pyenv-mode elpy origami vimish-fold highlight-indent-guides smart-shift yaml-mode all-the-icons neotree flycheck company ox-twbs ox-beamer ox-md ox-latex htmlize org-beautify-theme org-bullets ag projectile rainbow-delimiters paredit diminish evil-magit git-gutter-fringe git-gutter magit evil-mc multiple-cursors helm-descbinds helm powerline evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

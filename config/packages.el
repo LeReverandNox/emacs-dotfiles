@@ -202,19 +202,22 @@
 
 ;; Python packages
 (use-package py-autopep8)
-(use-package pyenv-mode
+(use-package pipenv
+  :hook (python-mode . pipenv-mode)
   :init
-  (progn
-  (add-to-list 'exec-path "~/.pyenv/shims")
-  (setenv "WORKON_HOME" "~/.pyenv/versions/"))
-  :config
-  (pyenv-mode))
+  (setenv "WORKON_HOME" "~/.local/share/virtualenvs")
+  (setq
+   pipenv-projectile-after-switch-function
+   #'pipenv-projectile-after-switch-extended))
 (use-package elpy
   :config
-  (elpy-enable)
-  (add-hook 'elpy-mode-hook 'flycheck-mode)
-  (require 'py-autopep8)
-  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
+  (progn
+    (elpy-enable)
+    (setq elpy-modules (delq 'elpy-module-company elpy-modules))
+    (add-hook 'elpy-mode-hook 'flycheck-mode)
+    (remove-hook 'elpy-modules 'elpy-module-flymake)
+    (require 'py-autopep8)
+    (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)))
 (use-package company-jedi
   :config
   (add-to-list 'company-backends 'company-jedi)
