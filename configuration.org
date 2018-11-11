@@ -362,7 +362,7 @@ directory of a node easily !
 Emacs often !
 
    #+BEGIN_SRC emacs-lisp
-     (setq desktop-path (list (concat user-emacs-directory "tmp")))
+     (setq desktop-path (list (concat user-emacs-directory "tmp/sessions")))
      (desktop-save-mode t)
    #+END_SRC
 
