@@ -379,7 +379,8 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (load custom-file)
    #+END_SRC
-* =backup= and =auto-saves=
+* Persitency
+** =backup= and =auto-save=
   I love to keep my backups and auto-saves neatly in separates directories.
   This is the first settings I used when I start using Emacs in 2016, I should
   review them someday.
