@@ -671,7 +671,7 @@ Emacs often !
 ** VCS
    Everything needed to work with =Git= in the best conditions
 *** =magit=
-    Magit is greaaaaaaat. So much great ! Every other Git client can get back at
+    =magit= is greaaaaaaat. So much great ! Every other Git client can get back at
     their moms house.
     Just hit =C-x g=  and let the magic operate.
 
