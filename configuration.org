@@ -752,6 +752,7 @@ Emacs often !
         (setq projectile-require-project-root nil)
         :config
         (progn
+          (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
           (global-set-key (kbd "C-c v") 'projectile-ag)
           (global-set-key (kbd "C-c C-v") 'hrs/search-project-for-symbol-at-point)
           (setq projectile-switch-project-action 'neotree-projectile-action)
