@@ -37,6 +37,8 @@ Insert with =C-c C-h=
 * Package management (=package=, =use-package= and =auto-compile=)
 ** Setup =package= and it' s sources...
 *** Setup
+    Note to myself: I need to try [[https://emacs.stackexchange.com/a/2989][that]] sometime, to achieve source
+    prioritization. For now, let's disable =melpa-stable=
    #+BEGIN_SRC emacs-lisp
      (require 'package)
      (setq package-enable-at-startup nil)
