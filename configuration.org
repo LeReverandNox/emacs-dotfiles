@@ -1049,7 +1049,7 @@ Emacs often !
      #+END_SRC
 
      helper function to setup =flycheck-rtags=, apparently needed to ensure that
-     only rtags is used for checking. See [[            https://github.com/Andersbakken/rtags#optional-1][here]]
+     only rtags is used for checking. See [[https://github.com/Andersbakken/rtags#optional-1][here]]
      #+BEGIN_SRC emacs-lisp
        (defun setup-flycheck-rtags ()
          (flycheck-select-checker 'rtags)
