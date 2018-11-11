@@ -51,6 +51,40 @@ Insert with =C-c C-h=
      (package-initialize)
    #+END_SRC
 
+   Don't forget to run =M-x package-refresh-contents= to reload the package list
+   when you add a new source or if you can't find a package.
+
+*** Upgrade
+    From [[https://emacs.stackexchange.com/a/31874][this]] post.
+    To upgrade packages, run =M-x list-packages=, hit =U= to mark available
+    upgrades, then =x= to install them and finally =y= to confirm.
+    Then run =M-x package-autoremove= to remove old versions.
+    Apparently, it can be done via another package... but for now I prefer to do
+    it manually.
+
+    Here's 2 cool functions from the StackExchange post, to save some time in
+    the package menu.
+    The first one allows to find marked packages and the second one allows to
+    filter by status. Respectively bind to =a= and =s=
+
+    #+BEGIN_SRC emacs-lisp
+      (defun package-menu-find-marks ()
+        "Find packages marked for action in *Packages*."
+        (interactive)
+        (occur "^[A-Z]"))
+
+      ;; Only in Emacs 25.1+
+      (defun package-menu-filter-by-status (status)
+        "Filter the *Packages* buffer by status."
+        (interactive
+         (list (completing-read
+                "Status: " '("new" "installed" "dependency" "obsolete"))))
+        (package-menu-filter (concat "status:" status)))
+
+      (define-key package-menu-mode-map "s" #'package-menu-filter-by-status)
+      (define-key package-menu-mode-map "a" #'package-menu-find-marks)
+    #+END_SRC
+
 ** then, setup =use-package=, our beloved package-manager...
    #+BEGIN_SRC emacs-lisp
      (unless (package-installed-p 'use-package)
