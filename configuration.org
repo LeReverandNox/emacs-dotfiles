@@ -59,14 +59,12 @@ Insert with =C-c C-h=
 
     To upgrade packages, run =M-x list-packages=, hit =U= to mark available
     upgrades, then =x= to install them and finally =y= to confirm.
-    Then run =M-x package-autoremove= to remove old versions.
-
+    Then run =M-x package-autoremove= to remove old versions.\\
     Apparently, it can be done via another package... but for now I prefer to do
     it manually.
 
     Here's 2 cool functions from the StackExchange post, to save some time in
-    the package menu.
-
+    the package menu.\\
     The first one allows to find marked packages and the second one allows to
     filter by status. Respectively bind to =a= and =s=
 
