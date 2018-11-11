@@ -401,6 +401,22 @@ Emacs often !
           kept-new-versions 5    ; keep some new versions
           kept-old-versions 2)   ; and some old ones, too
   #+END_SRC
+
+** History
+   From [[http://pages.sachachua.com/.emacs.d/Sacha.html#org40a3abb][here]] (and from [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html][here]] too)
+   It's cool to be able to re-run commands, searches and stuff from a previous session
+   when opening Emacs.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq savehist-file "~/.emacs.d/tmp/savehist")
+     (savehist-mode +1)
+     (setq savehist-save-minibuffer-history +1)
+     (setq savehist-additional-variables
+           '(kill-ring
+             search-ring
+             regexp-search-ring))
+   #+END_SRC
+
 * Editing
   Some settings I didn't know where to put... not really Programming stuff, but
   kinda' quand meme.
