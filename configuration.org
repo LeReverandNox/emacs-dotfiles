@@ -93,6 +93,8 @@ Insert with =C-c C-h=
       :config
       (progn
         (setq-default evil-shift-width 2)
+        ;; Enable Evil bindings in the minibuffer
+        (setq evil-want-minibuffer t)
         ;; I need to unbind M-. to make goto-definition work when programming
         (define-key evil-normal-state-map (kbd "M-.") nil)
         (evil-mode t)))
