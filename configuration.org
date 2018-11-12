@@ -514,6 +514,7 @@ Emacs often !
    sweet highlighting.
    #+BEGIN_SRC emacs-lisp
      (use-package highlight-indent-guides
+       :diminish highlight-indent-guides-mode
        :init
        (setq highlight-indent-guides-method 'character)
        :config
