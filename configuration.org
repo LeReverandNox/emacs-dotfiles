@@ -574,6 +574,16 @@ Emacs often !
        :config
        (move-text-default-bindings))
    #+END_SRC
+** =rainbow-mode=
+   Because it can be usefull to visualise the actual color of hex colors, not
+   only in =CSS Mode=.
+   #+BEGIN_SRC emacs-lisp
+     (use-package rainbow-mode
+       :diminish rainbow-mode
+       :config
+       (progn
+         (rainbow-mode t)))
+   #+END_SRC
 * Windows and buffers
 ** =C-x k=
    Kill current buffer and window without confirmation when hitting =C-x k=
