@@ -290,6 +290,42 @@ Insert with =C-c C-h=
     #+BEGIN_SRC emacs-lisp
       (setq display-time-format "%H:%M:%S")
     #+END_SRC
+*** =diminish=
+    The =modeline= is often waaaay to crowded, when a lot of modes are enabled.
+    Hopefully, there's =dimisish= ! It allows you to rename every minor/major
+    modes to save space.
+
+    =diminish= is also supported directly by =use-package= with the =:dimish= option.
+    I try to use it whenever I can, but for some default modes, I still need to
+    write it here.
+
+    First, to macros to make things easier
+
+    TODO: =htmlize= won't export the file because of the =&optional= below... I
+    haven't find any solution yet
+    #+BEGIN_SRC emacs-lisp
+      (defmacro diminish-minor-mode (filename mode &optional abbrev)
+        `(eval-after-load (symbol-name ,filename)
+           '(diminish ,mode ,abbrev)))
+
+      (defmacro diminish-major-mode (mode-hook abbrev)
+        `(add-hook ,mode-hook
+                   (lambda () (setq mode-name ,abbrev))))
+    #+END_SRC
+
+    And now =diminish=  itself.
+    #+BEGIN_SRC emacs-lisp
+      (use-package diminish
+        :config
+        (diminish-major-mode 'emacs-lisp-mode-hook "el")
+        (diminish-major-mode 'python-mode-hook "Py")
+        (diminish-major-mode 'js-mode-hook "JS")
+        (diminish-major-mode 'sh-mode-hook "Sh")
+        (diminish-minor-mode 'simple 'auto-fill-function)
+        (diminish-minor-mode 'subword 'subword-mode)
+        (diminish-minor-mode 'abbrev 'abbrev-mode)
+        (diminish-minor-mode 'eldoc 'eldoc-mode))
+    #+END_SRC
 ** Icons
    Because it's always nice to have cool icons instead of plain text
    #+BEGIN_SRC emacs-lisp
@@ -379,42 +415,6 @@ directory of a node easily !
        (progn
          (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
          (guide-key-mode 1)))
-   #+END_SRC
-** =diminish=
-   The =modeline= is often waaaay to crowded, when a lot of modes are enabled.
-   Hopefully, there's =dimisish= ! It allows you to rename every minor/major
-   modes to save space.
-
-   =diminish= is also supported directly by =use-package= with the =:dimish= option.
-   I try to use it whenever I can, but for some default modes, I still need to
-   write it here.
-
-   First, to macros to make things easier
-
-   TODO: =htmlize= won't export the file because of the =&optional= below... I
-   haven't find any solution yet
-   #+BEGIN_SRC emacs-lisp
-     (defmacro diminish-minor-mode (filename mode &optional abbrev)
-       `(eval-after-load (symbol-name ,filename)
-          '(diminish ,mode ,abbrev)))
-
-     (defmacro diminish-major-mode (mode-hook abbrev)
-       `(add-hook ,mode-hook
-                  (lambda () (setq mode-name ,abbrev))))
-   #+END_SRC
-
-   And now =diminish=  itself.
-   #+BEGIN_SRC emacs-lisp
-     (use-package diminish
-       :config
-       (diminish-major-mode 'emacs-lisp-mode-hook "el")
-       (diminish-major-mode 'python-mode-hook "Py")
-       (diminish-major-mode 'js-mode-hook "JS")
-       (diminish-major-mode 'sh-mode-hook "Sh")
-       (diminish-minor-mode 'simple 'auto-fill-function)
-       (diminish-minor-mode 'subword 'subword-mode)
-       (diminish-minor-mode 'abbrev 'abbrev-mode)
-       (diminish-minor-mode 'eldoc 'eldoc-mode))
    #+END_SRC
 ** Sessions
    Emacs can save and restore the current session. Convenient since I'm closing
