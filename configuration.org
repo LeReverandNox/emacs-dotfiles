@@ -554,6 +554,7 @@ Emacs often !
          ;; Disable the highlight when spawning a pair, it doesn't go away
          ;; until exiting Insert mode or hitting backspace...
          (setq sp-highlight-pair-overlay nil)
+         (require 'smartparens-config)
          (show-smartparens-global-mode t)
          (smartparens-global-mode t)))
    #+END_SRC
