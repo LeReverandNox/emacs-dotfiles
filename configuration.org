@@ -275,6 +275,21 @@ Insert with =C-c C-h=
         :config
         (powerline-evil-center-color-theme))
     #+END_SRC
+*** Clock
+    It's sometime more convenient to check the time directly in Emacs, instead of
+    looking at the OS status bar. Especially in fullscreen mode.\\
+    I not enabling it for now, for I spend most of my time on MacOS. But I use it
+    for sure on Linux.
+
+    #+BEGIN_SRC emacs-lisp
+      ;; (display-time-mode)
+
+    #+END_SRC
+
+    Let's also customize the time format. See [[https://help.gnome.org/users/gthumb/stable/gthumb-date-formats.html.en][here]] for reference :)
+    #+BEGIN_SRC emacs-lisp
+      (setq display-time-format "%H:%M:%S")
+    #+END_SRC
 ** Icons
    Because it's always nice to have cool icons instead of plain text
    #+BEGIN_SRC emacs-lisp
