@@ -172,6 +172,12 @@ Insert with =C-c C-h=
    #+BEGIN_SRC emacs-lisp
      (global-display-line-numbers-mode t)
    #+END_SRC
+
+   Make the frame title a bit more meaningful by displaying the current project
+   name instead of the current filename
+   #+BEGIN_SRC emacs-lisp
+     (setq frame-title-format '((:eval (projectile-project-name))))
+   #+END_SRC
 ** Theme
    Set the =themes= directory
    #+BEGIN_SRC emacs-lisp
