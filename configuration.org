@@ -58,8 +58,8 @@ Insert with =C-c C-h=
 *** Upgrade
     From [[https://emacs.stackexchange.com/a/31874][this]] post.
 
-    To upgrade packages, run =M-x list-packages=, hit =U= to mark available
-    upgrades, then =x= to install them and finally =y= to confirm.
+    To upgrade packages, run =M-x list-packages=, hit =U= (=package-menu-mark-upgrades=) to mark available
+    upgrades, then =x= (=package-menu-execute=) to install them and finally =y= to confirm.
     Then run =M-x package-autoremove= to remove old versions.\\
     Apparently, it can be done via another package... but for now I prefer to do
     it manually.
@@ -544,6 +544,7 @@ Emacs often !
    Let's give it a shot, it's always nice to have a good expression
    management... and it works with other pairs too ! Quotes, brackets and stuff.
 
+   Maybe someday I'll get some ideas from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgdd725d2][here]] too :)
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
        :diminish smartparens-mode
@@ -599,7 +600,7 @@ Emacs often !
          (setq undo-tree-visualizer-diff t)))
    #+END_SRC
 ** =move-text=
-   =move-text= allows to text up and down with =M-<UP>= / =M-<DOWN>=, like in VSCode
+   =move-text= allows to text up and down with =<M-up>= / =<M-down>=, like in VSCode
    #+BEGIN_SRC emacs-lisp
      (use-package move-text
        :config
@@ -663,8 +664,8 @@ Emacs often !
        (switch-to-buffer (make-temp-name "scratch-")))
    #+END_SRC
 ** =winner-mode=
-   Allow to switch back and forth between window configuration with =C-c <LEFT>=
-   and =C-c <RIGHT>=!
+   Allow to switch back and forth between window configuration with =C-c <left>=
+   and =C-c <right>=!
    So useful.
    #+BEGIN_SRC emacs-lisp
      (winner-mode t)
@@ -782,7 +783,7 @@ Emacs often !
 *** =magit=
     =magit= is greaaaaaaat. So much great ! Every other Git client can get back at
     their moms house.
-    Just hit =C-x g=  and let the magic operate.
+    Just hit =C-x g= (=magit-status=) and let the magic operate.
 
     I also add =evil-magit=  to have =evil= bindings within =magit=
     #+BEGIN_SRC emacs-lisp
