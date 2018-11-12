@@ -722,6 +722,14 @@ Emacs often !
              "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
    #+END_SRC
 
+** Global bindings
+   Because sometimes =org-mode= features are so great, I want to use them in
+   every other mode !
+
+   Let's make =org-open-at-point= globally available
+   #+BEGIN_SRC emacs-lisp
+     (bind-key "C-c C-o" 'org-open-at-point-global)
+   #+END_SRC
 * Programming
   I will put a lot of stuff in this section, sometimes not justified at all !
   But I don't know how to organize everything...
