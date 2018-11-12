@@ -561,6 +561,22 @@ Emacs often !
      (setq sentence-end-double-space nil)
    #+END_SRC
 
+** Selection
+*** =expand-region=
+    =expand-region= ([[https://github.com/magnars/expand-region.el][here]]) allows to expand the selection by semantic units...
+    wathever that means.\\
+    From what I undertand, it first selects the word, then the quote, the
+    sentence, the block, etc... Sounds great.
+    I probably can do the same with =visual= state of =evil=...
+
+    I know that I override the bindings for =right-word= and =left-word=, but I
+    don't use them anyway.
+    #+BEGIN_SRC emacs-lisp
+      (use-package expand-region
+        :bind (
+               ("<C-right>" . er/expand-region)
+               ("<C-left>" . er/contract-region)))
+    #+END_SRC
 ** =undo-tree=
    Emacs does almost everything well... except undos ! That's a nightmare
    compare to Vim.
