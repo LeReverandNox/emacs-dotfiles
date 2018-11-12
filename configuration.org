@@ -137,6 +137,8 @@ Insert with =C-c C-h=
         (setq evil-want-minibuffer t)
         ;; I need to unbind M-. to make goto-definition work when programming
         (define-key evil-normal-state-map (kbd "M-.") nil)
+        ;; Also need to unbind TAB (evil-jum-forward) for hideshow-org to works
+        (define-key evil-motion-state-map (kbd "TAB") nil)
         (evil-mode t)))
   #+END_SRC
 
@@ -562,6 +564,35 @@ Emacs often !
    Sentence end with a single space. Because I said it.
    #+BEGIN_SRC emacs-lisp
      (setq sentence-end-double-space nil)
+   #+END_SRC
+
+** Folding
+   See [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html#fnr.91][here]] and [[https://github.com/shanecelis/hideshow-org][here]] for the GitHub repo\\
+   I don't use folding much, but sometimes on big files, it can be very cool.
+   Especially when it works like in =org-mode= !\\
+   Apparently the autor manage to use TAB in a cleaver way, so it don't interfer
+   with basic functionality such as indenting.
+
+   When I hit =gg= (=evil-goto-first-line=), if the region is folded, I vant to
+   unfold it, so I can read what's at this line...
+   #+BEGIN_SRC emacs-lisp
+     (defadvice evil-goto-first-line (after expand-after-goto-line
+                                            activate compile)
+       "hideshow-expand affected block when using goto-line in a collapsed buffer"
+       (save-excursion
+         (hs-show-block)))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package hideshow-org
+       :diminish hs-minor-mode
+       :config
+       (progn
+         ;; Enable hs-minor-mode on every programming mode
+         (add-hook 'prog-mode-hook 'hs-org/minor-mode)
+         (setq hs-hide-comments-when-hiding-all t)
+         ;; Open the block when I search for something
+         (setq hs-isearch-open t)))
    #+END_SRC
 
 ** Selection
