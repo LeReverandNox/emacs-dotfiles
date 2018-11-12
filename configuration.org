@@ -9,7 +9,6 @@ recoding it myself :)
   (load "~/.emacs.d/config/sensible-defaults/sensible-defaults.el")
 
   (sensible-defaults/shorten-yes-or-no)
-  (sensible-defaults/show-matching-parens)
   (sensible-defaults/delete-trailing-whitespace)
   (sensible-defaults/make-scripts-executable)
   (sensible-defaults/overwrite-selected-text)
@@ -539,13 +538,19 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c q") 'auto-fill-mode)
    #+END_SRC
-** Matching pairs
-   Automatically write the closing quote, bracket, parenthesis... you know what
-   I mean.
-   #+BEGIN_SRC emacs-lisp
-     (electric-pair-mode t)
-   #+END_SRC
+** Parens
+   According to [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html#fnr.75][this]], =smartparens= ([[https://github.com/Fuco1/smartparens][here]]) is cooler than =paredit=, which I used so
+   far (only for lispy languages)
+   Let's give it a shot, it's always nice to have a good expression
+   management... and it works with other pairs too ! Quotes, brackets and stuff.
 
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+       :diminish smartparens-mode
+       :config
+       (progn
+         (smartparens-global-mode t)))
+   #+END_SRC
 ** Sentence delimitation
    Sentence end with a single space. Because I said it.
    #+BEGIN_SRC emacs-lisp
@@ -897,17 +902,6 @@ Emacs often !
      All you need to avoid killing yourself when working with SO MUCH parenthesis
      !
 
-     =paredit= is cool, even if I hate it when it prevents me to delete
-     parenthesis with backspace... Need to find out why someday
-     #+BEGIN_SRC emacs-lisp
-       (use-package paredit
-         :diminish paredit-mode
-         :config
-       ;; Disable bindings on M-down/up, to avoid conflict with move-text
-         (define-key paredit-mode-map (kbd "<M-down>") nil)
-         (define-key paredit-mode-map (kbd "<M-up>") nil))
-     #+END_SRC
-
      =rainbow-delimiters= colors each pair of paranthesis in a different color.
      It helps A LOT.
      #+BEGIN_SRC emacs-lisp
@@ -925,7 +919,6 @@ Emacs often !
        (dolist (hook lispy-mode-hooks)
          (add-hook hook (lambda ()
                           (setq show-paren-style 'expression)
-                          (paredit-mode)
                           (rainbow-delimiters-mode))))
      #+END_SRC
 *** Python
