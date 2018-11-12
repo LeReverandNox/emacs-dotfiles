@@ -549,6 +549,10 @@ Emacs often !
        :diminish smartparens-mode
        :config
        (progn
+         ;; Disable the highlight when spawning a pair, it doesn't go away
+         ;; until exiting Insert mode or hitting backspace...
+         (setq sp-highlight-pair-overlay nil)
+         (show-smartparens-global-mode t)
          (smartparens-global-mode t)))
    #+END_SRC
 ** Sentence delimitation
