@@ -129,17 +129,36 @@ Insert with =C-c C-h=
   #+BEGIN_SRC emacs-lisp
     (use-package evil
       :init
-      (setq evil-want-abbrev-expand-on-insert-exit nil)
-      :config
       (progn
+        ;; Don't expand the abbrev when going back to Normal state
+        (setq evil-want-abbrev-expand-on-insert-exit nil)
+        ;; Shift lines by 2 spaces
         (setq-default evil-shift-width 2)
         ;; Enable Evil bindings in the minibuffer
         (setq evil-want-minibuffer t)
+        ;; Don't use regex during search
+        (setq evil-regexp-search nil)
+        ;; Use much more smaller step for undo
+        (setq evil-want-fine-undo t)
+        ;; Disable keybindings, for evil-collection
+        (setq evil-want-keybinding nil))
+      :config
+      (progn
         ;; I need to unbind M-. to make goto-definition work when programming
         (define-key evil-normal-state-map (kbd "M-.") nil)
         ;; Also need to unbind TAB (evil-jum-forward) for hideshow-org to works
         (define-key evil-motion-state-map (kbd "TAB") nil)
         (evil-mode t)))
+  #+END_SRC
+
+  =evil-collection= adds a shitload of keybindings for a shitload of modes.
+  I don't know if it worth it, but I'm gonna give it a shot.
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil-collection
+      :after evil
+      :config
+      (progn
+        (evil-collection-init)))
   #+END_SRC
 
   Let's also add =evil-surround= and =evil-mc=, to have surrounding and
