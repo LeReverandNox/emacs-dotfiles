@@ -1011,7 +1011,9 @@ Emacs often !
          (setenv "WORKON_HOME" "~/.local/share/virtualenvs")
          (setq
           pipenv-projectile-after-switch-function
-          #'pipenv-projectile-after-switch-extended))
+          #'pipenv-projectile-after-switch-extended)
+         ;; Change the pipenv prefix, conflict with Projectile
+         (setq pipenv-keymap-prefix (kbd "C-c p")))
      #+END_SRC
 **** =company-jedi=
      A backend for =company= powered by =jedi=. Pretty cool.
@@ -1030,6 +1032,8 @@ Emacs often !
          :config
          (progn
            (elpy-enable)
+           ;; Unbind C-c C-p to avoid conflict with Projectile prefix
+           (define-key elpy-mode-map (kbd "C-c C-p") nil)
            ;; Disable elpy company-backend, conflict with jedi
            (remove-hook 'elpy-modules 'elpy-module-company)
            ;; Disable elpy-flymake, conflict with flycheck
