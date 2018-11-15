@@ -703,6 +703,17 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (winner-mode t)
    #+END_SRC
+** Kill all other buffers
+   From [[https://stackoverflow.com/a/14161165][here]].
+   A usefull function to do some cleanup when I star to have to many open
+   buffers and it would take too long to mark them in =C-x C-b= for closing...
+
+   TODO: Find a good binding for it :)
+   #+BEGIN_SRC emacs-lisp
+     (defun lrn/kill-other-buffers ()
+       (interactive)
+         (mapc 'kill-buffer (cdr (buffer-list (current-buffer)))))
+   #+END_SRC
 * =TRAMP=
   =TRAMP= is great to remote-edit files with Emacs !
   I need to use it way more.
