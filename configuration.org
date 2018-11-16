@@ -175,6 +175,7 @@ Insert with =C-c C-h=
       :bind (
        ("C->" . evil-mc-make-and-goto-next-match)
        ("C-<" . evil-mc-make-and-goto-prev-match)
+       ("C-x C->" . evil-mc-make-all-cursors)
        ("C-g" . evil-mc-undo-all-cursors))
       :config
       (global-evil-mc-mode 1))
