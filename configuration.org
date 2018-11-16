@@ -639,6 +639,23 @@ Emacs often !
                ("<C-right>" . er/expand-region)
                ("<C-left>" . er/contract-region)))
     #+END_SRC
+
+*** =ace-jump-mode=
+    I always loved Vim's =EasyMotion=, even though I never used it that much.
+    Basically, it allows me to jump to the desired occurence of a word in the
+    displayed content by just pressing a key.
+    I guess it's never too late :)
+
+    Just hit =C-c SPC=, hit the char you wanna search and enjoy !
+    (By default, it will search for words. If you want to search chars, you can
+    hit =C-u C-c SPC=, or even =C-u C-u C-c SPC= to search for lines)
+    #+BEGIN_SRC emacs-lisp
+      (use-package ace-jump-mode
+        :config
+        (progn
+          (define-key evil-normal-state-map (kbd "C-c SPC") 'ace-jump-mode)
+          (define-key evil-normal-state-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)))
+    #+END_SRC
 ** =undo-tree=
    Emacs does almost everything well... except undos ! That's a nightmare
    compare to Vim.
