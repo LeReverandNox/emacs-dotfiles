@@ -504,6 +504,14 @@ Emacs often !
              regexp-search-ring))
    #+END_SRC
 
+** =save-place=
+   =save-place-mode= saves the current point location when I close a
+   file or Emacs.
+   So when I come back, the point position is restored !
+   #+BEGIN_SRC emacs-lisp
+     (save-place-mode t)
+   #+END_SRC
+
 * Editing
   Some settings I didn't know where to put... not really Programming stuff, but
   kinda' quand meme.
