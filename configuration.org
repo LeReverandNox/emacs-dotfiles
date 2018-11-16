@@ -359,7 +359,8 @@ Insert with =C-c C-h=
      (use-package all-the-icons)
    #+END_SRC
 ** =neotree=
-   Similar to Vim's Nerdtree, such a cool package to browse the filesystem <3
+   Similar to Vim's Nerdtree, such a cool package to browse the filesystem in a
+   conveniant sidebar <3
 
    Thanks [[https://github.com/jaypei/emacs-neotree/issues/293][@stereoproxy]] for this function that allows me to close the parent
 directory of a node easily !
