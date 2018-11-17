@@ -147,8 +147,11 @@ Insert with =C-c C-h=
       (progn
         ;; I need to unbind M-. to make goto-definition work when programming
         (define-key evil-normal-state-map (kbd "M-.") nil)
-        ;; Also need to unbind TAB (evil-jum-forward) for hideshow-org to works
-        (define-key evil-motion-state-map (kbd "TAB") nil)
+        ;; Also need to unbind C-i (evil-jump-forward) for hideshow-org to works
+        ;; Since the keycode for TAB and C-i is the same, and I don't want to find a workaround for now...
+        (define-key evil-motion-state-map (kbd "C-i") nil)
+        ;; Rebind (evil-jump-forward) to C-S-o
+        (define-key evil-motion-state-map (kbd "C-S-o") 'evil-jump-forward)
         (evil-mode t)))
   #+END_SRC
 
