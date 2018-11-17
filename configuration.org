@@ -1234,3 +1234,36 @@ Emacs often !
        ;; (global-ede-mode t)
        ;; (ede-enable-generic-projects)
      #+END_SRC
+*** HTML
+    Because editing HTML markup is my FAVORITE thing ever in development... I
+    better have some cools packages to help me do it !
+
+**** =emmet-mode=
+     From [[https://github.com/smihica/emmet-mode][here]].
+     Big-up to Adrien !
+     Just kidding, =Emmet= is great for people like me who dislike writing HTML
+     and/or CSS.
+     Even just to write a base HTML 5 template... so much time saved !
+
+     In =web-mode=, hit =C-j= to expand =emmet= snippets
+     #+BEGIN_SRC emacs-lisp
+       (use-package emmet-mode
+         :config
+         (progn
+           (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
+           ))
+     #+END_SRC
+
+**** =web-mode=
+     From [[http://web-mode.org/][here]].
+     =web-mode= allows me to edit HTML templates with cool features.
+
+     TODO: Support all needed file types, Company.
+     #+BEGIN_SRC emacs-lisp
+       (use-package web-mode
+         :mode ("\\.html?\\'" "\\.tpl\\.php\\'")
+         :hook (emmet-mode rainbow-mode)
+         :config
+         (progn
+           (setq web-mode-markup-indent-offset 2)))
+     #+END_SRC
