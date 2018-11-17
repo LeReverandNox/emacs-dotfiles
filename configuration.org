@@ -10,6 +10,7 @@ recoding it myself :)
 
   (sensible-defaults/shorten-yes-or-no)
   (sensible-defaults/delete-trailing-whitespace)
+  (sensible-defaults/show-matching-parens)
   (sensible-defaults/make-scripts-executable)
   (sensible-defaults/overwrite-selected-text)
   (sensible-defaults/ensure-that-files-end-with-newline)
@@ -573,23 +574,12 @@ Emacs often !
      (global-set-key (kbd "C-c q") 'auto-fill-mode)
    #+END_SRC
 ** Parens
-   According to [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html#fnr.75][this]], =smartparens= ([[https://github.com/Fuco1/smartparens][here]]) is cooler than =paredit=, which I used so
-   far (only for lispy languages)
-   Let's give it a shot, it's always nice to have a good expression
-   management... and it works with other pairs too ! Quotes, brackets and stuff.
-
-   Maybe someday I'll get some ideas from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgdd725d2][here]] too :)
+   Automatically write the closing quote, bracket, parenthesis… you know what I
+   mean.
+   Don't forget to disable =electric-pair-mode= for lispy languages,
+   =smartparens= doest it instead.
    #+BEGIN_SRC emacs-lisp
-     (use-package smartparens
-       :diminish smartparens-mode
-       :config
-       (progn
-         ;; Disable the highlight when spawning a pair, it doesn't go away
-         ;; until exiting Insert mode or hitting backspace...
-         (setq sp-highlight-pair-overlay nil)
-         (require 'smartparens-config)
-         (show-smartparens-global-mode t)
-         (smartparens-global-mode t)))
+     (electric-pair-mode t)
    #+END_SRC
 ** Sentence delimitation
    Sentence end with a single space. Because I said it.
@@ -1011,6 +1001,25 @@ Emacs often !
     #+END_SRC
 *** Lisp
     Lisp, Emacs Lisp, Clojure... it's all the same for me ! I put eveything here.
+**** =smartparens=
+   According to [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html#fnr.75][this]], =smartparens= ([[https://github.com/Fuco1/smartparens][here]]) is cooler than =paredit=, which I used so
+   far (only for lispy languages)
+   Let's give it a shot, it's always nice to have a good expression
+   management... and it works with other pairs too ! Quotes, brackets and stuff.
+
+   Maybe someday I'll get some ideas from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgdd725d2][here]] too :)
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+       :diminish smartparens-mode
+       :config
+       (progn
+         (sp-use-smartparens-bindings)
+         ;; Disable the highlight when spawning a pair, it doesn't go away
+         ;; until exiting Insert mode or hitting backspace...
+         (setq sp-highlight-pair-overlay nil)
+         (require 'smartparens-config)))
+   #+END_SRC
+
 **** Parenthesis much ?
      All you need to avoid killing yourself when working with SO MUCH parenthesis
      !
@@ -1022,7 +1031,7 @@ Emacs often !
      #+END_SRC
 
      There's also a lot a mode for editings \*lisp\*, so we need to enable
-     =paredit= and =rainbow-delimiters= for everyone of them.
+     =smartparens= and =rainbow-delimiters= for everyone of them.
      #+BEGIN_SRC emacs-lisp
        (setq lispy-mode-hooks
              '(clojure-mode-hook
@@ -1032,6 +1041,10 @@ Emacs often !
        (dolist (hook lispy-mode-hooks)
          (add-hook hook (lambda ()
                           (setq show-paren-style 'expression)
+                          (electric-pair-mode nil)
+                          ;; (sp-use-smartparens-bindings)
+                          (smartparens-strict-mode)
+                          (show-smartparens-mode)
                           (rainbow-delimiters-mode))))
      #+END_SRC
 *** Python
