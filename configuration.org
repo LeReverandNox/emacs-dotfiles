@@ -1247,11 +1247,15 @@ Emacs often !
 
      In =web-mode=, hit =C-j= to expand =emmet= snippets
      #+BEGIN_SRC emacs-lisp
+       (defun my-emmet-mode-hook ()
+         (define-key web-mode-map (kbd "C-j") 'emmet-expand-line))
+     #+END_SRC
+
+     #+BEGIN_SRC emacs-lisp
        (use-package emmet-mode
          :config
          (progn
-           (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
-           ))
+           (add-hook 'emmet-mode-hook 'my-emmet-mode-hook)))
      #+END_SRC
 
 **** =web-mode=
@@ -1262,8 +1266,9 @@ Emacs often !
      #+BEGIN_SRC emacs-lisp
        (use-package web-mode
          :mode ("\\.html?\\'" "\\.tpl\\.php\\'")
-         :hook (emmet-mode rainbow-mode)
          :config
          (progn
+           (add-hook 'web-mode-hook 'emmet-mode)
+           (add-hook 'web-mode-hook 'rainbow-mode)
            (setq web-mode-markup-indent-offset 2)))
      #+END_SRC
