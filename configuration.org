@@ -158,6 +158,8 @@ Insert with =C-c C-h=
       :after evil
       :config
       (progn
+        ;; Disable outline bindings, conflict with TAB (org-cycle)
+        (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
         (evil-collection-init)))
   #+END_SRC
 
