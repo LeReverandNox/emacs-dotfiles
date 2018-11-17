@@ -425,7 +425,6 @@ directory of a node easily !
         ("C-x C-f" . helm-find-files)
         ("C-x y" . helm-show-kill-ring)
         ("C-x b" . helm-mini)
-        ("C-x C-b" . helm-mini)
         ("C-x c o" . helm-occur)
         ("C-h a" . helm-apropos)))
    #+END_SRC
@@ -747,8 +746,8 @@ Emacs often !
    #+END_SRC
 ** Kill all other buffers
    From [[https://stackoverflow.com/a/14161165][here]].
-   A usefull function to do some cleanup when I star to have to many open
-   buffers and it would take too long to mark them in =C-x C-b= for closing...
+   A usefull function to do some cleanup when I'm having t many open
+   buffers and that I'm too lazy to kill them in =C-x C-b= (=ibuffer=)
 
    TODO: Find a good binding for it :)
    #+BEGIN_SRC emacs-lisp
@@ -756,6 +755,17 @@ Emacs often !
        (interactive)
          (mapc 'kill-buffer (cdr (buffer-list (current-buffer)))))
    #+END_SRC
+** Manage buffers
+   I really like =helm-mini= to quickly find a buffer or re-open a recently
+   close file. But when it comes to manage multiple buffers at the same time...
+   I can't get used to it's shitty bindings.\\
+   I prefer =ibuffer=, who comes with =dired= like bindings.
+
+   So, let's keep =C-x b= to invoke =helm-mini=, and bind =C-x C-b= to =ibuffer= !
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-x C-b") 'ibuffer)
+   #+END_SRC
+
 * =TRAMP=
   =TRAMP= is great to remote-edit files with Emacs !
   I need to use it way more.
