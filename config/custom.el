@@ -23,5 +23,4 @@
  '(org-code ((t (:inherit org-meta-line))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
  '(org-hide ((t (:inherit org-meta-line))))
- '(org-inlinetask ((t (:inherit org-meta-line))))
- '(org-verbatim ((t (:foreground "#ff7b6c")))))
+ '(org-inlinetask ((t (:inherit org-meta-line)))))
