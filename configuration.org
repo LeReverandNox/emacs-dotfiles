@@ -212,17 +212,32 @@ Insert with =C-c C-h=
            (concat user-emacs-directory "themes"))
    #+END_SRC
 
-   Load my (current) favorite theme, earthsong
+   +Load my (current) favorite theme, earthsong+
    #+BEGIN_SRC emacs-lisp
-     (load-theme 'earthsong t)
+     ;; (load-theme 'earthsong t)
+   #+END_SRC
+
+   Okay, let's try one of my other favorite theme, One Dark from Atom.
+   #+BEGIN_SRC emacs-lisp
+     (use-package atom-one-dark-theme
+       :config
+       (progn
+         (load-theme 'atom-one-dark t)))
    #+END_SRC
 
    I love some transparency. Let's make it a bit transparent when active, and a
    bit more transparent when inactive
    #+BEGIN_SRC emacs-lisp
      ;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
-     (set-frame-parameter (selected-frame) 'alpha '(90 . 80))
-     (add-to-list 'default-frame-alist '(alpha . (90 . 80)))
+     (set-frame-parameter (selected-frame) 'alpha '(95 . 80))
+     (add-to-list 'default-frame-alist '(alpha . (95 . 80)))
+   #+END_SRC
+
+   I also like to have a more visible =verbatim= face in =org-mode=.
+   Not quite sur about the color, but it will do the trick.
+   #+BEGIN_SRC emacs-lisp
+     (set-face-attribute 'org-verbatim nil
+      :foreground (face-attribute 'warning :foreground))
    #+END_SRC
 
 ** Font
