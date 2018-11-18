@@ -1064,6 +1064,64 @@ Emacs often !
                           (show-smartparens-mode)
                           (rainbow-delimiters-mode))))
      #+END_SRC
+**** Eval
+     Evaluating lisp expressions to do stuff is great. I'm not sure if the
+     following content is at the right place, it could also be in =Editing=...
+     But it doesn't matter for now.
+
+***** Eval prefix
+      By default, there's only one content-evalutation binding, =C-x C-e= (=eval-last-sexp=)
+      I'd like to also have binding for =eval-buffer=, =eval-region= and
+      stuff.\\
+      So let's make =C-x C-e= a prefix, and redefine some binding, should we ?
+
+      First, let's unbind =C-x C-e=
+      #+BEGIN_SRC emacs-lisp
+        (define-key global-map (kbd "C-x C-e") nil)
+      #+END_SRC
+      Then, we create a new keymap
+      #+BEGIN_SRC emacs-lisp
+        (define-prefix-command 'lrn/eval-key-map)
+      #+END_SRC
+      Bind it to =C-x C-e=
+      #+BEGIN_SRC emacs-lisp
+        (define-key global-map (kbd "C-x C-e") 'lrn/eval-key-map)
+      #+END_SRC
+      And now we bind our eval functions !
+      #+BEGIN_SRC emacs-lisp
+        ;; C-x C-e e (eval-last-sexp)
+        (define-key lrn/eval-key-map (kbd "e") 'eval-last-sexp)
+        ;; C-x C-e b (eval-buffer)
+        (define-key lrn/eval-key-map (kbd "b") 'eval-buffer)
+        ;; C-x C-e r (eval-region)
+        (define-key lrn/eval-key-map (kbd "r") 'eval-region)
+        ;; C-x C-e p (eval-print-last-sexp)
+        (define-key lrn/eval-key-map (kbd "p") 'eval-print-last-sexp)
+        ;; C-x C-e d (eval-defun)
+        (define-key lrn/eval-key-map (kbd "d") 'eval-defun)
+      #+END_SRC
+
+***** Eval and replace
+      From [[https://emacsredux.com/blog/2013/06/21/eval-and-replace/][here]].\\
+      This is GREAT. This function allows me to evaluate some s-exp and insert the
+      output instead. Now I just need to learn some cool lisp stuff ^^'
+      #+BEGIN_SRC emacs-lisp
+        (defun lrn/eval-and-replace ()
+          "Replace the preceding sexp with its value."
+          (interactive)
+          (backward-kill-sexp)
+          (condition-case nil
+              (prin1 (eval (read (current-kill 0)))
+                     (current-buffer))
+            (error (message "Invalid expression")
+                   (insert (current-kill 0)))))
+      #+END_SRC
+
+      Let's bind this function on the =C-x C-e= map
+      #+BEGIN_SRC emacs-lisp
+        ;; C-x C-e s (eval-last-sexp)
+        (define-key lrn/eval-key-map (kbd "s") 'lrn/eval-and-replace)
+      #+END_SRC
 *** Python
     My Python setup, working smoothly but definitly not perfect. Based on [[https://realpython.com/emacs-the-best-python-editor/#pep8-compliance-autopep8][this]]
     article, but not only.
