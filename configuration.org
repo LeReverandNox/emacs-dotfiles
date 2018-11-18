@@ -457,9 +457,17 @@ directory of a node easily !
    Emacs can save and restore the current session. Convenient since I'm closing
 Emacs often !
 
+   Themes settings are also stored in the .desktop file... So if I change
+   settings with =customize-face= then exit Emacs, those settings are restored
+   the next time ! I don't like this behavior. Thanks to [[https://superuser.com/a/1155381][this]] post, there's a
+   worakoung that reloads the actual theme after restoring the .desktop
    #+BEGIN_SRC emacs-lisp
      (setq desktop-path (list (concat user-emacs-directory "tmp/sessions")))
-     (desktop-save-mode t)
+     (desktop-save-mode)
+     (add-to-list 'desktop-globals-to-save 'custom-enabled-themes)
+     (defun desktop-load-theme () "load custom theme" (interactive)
+       (dolist (th custom-enabled-themes) (load-theme th)))
+     (add-hook 'desktop-after-read-hook 'desktop-load-theme)
    #+END_SRC
 
 ** Custom-file
