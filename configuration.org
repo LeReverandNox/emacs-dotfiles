@@ -741,6 +741,48 @@ Emacs often !
        (interactive)
        (switch-to-buffer (make-temp-name "scratch-")))
    #+END_SRC
+
+   I want to be able to spawn scratch buffers in a new split-window, horizontal
+   or vertical.
+   Let's make a small keymap on =C-w C-n= (instead of =evil-window-new=), and
+   bind two custom functions to do what I want, A.K.A, spawning a horizontal-split
+   scratch buffer with =C-w C-n s=, and a vertical-split one with =C-w C-n v=
+
+   First, a function to spawn the scratch buffers
+   #+BEGIN_SRC emacs-lisp
+     (defun lrn/spawn-scratch-buffer (orientation)
+       "Spawn a scratch buffer in a new window. Orientation can be either 'horizontal' or 'vertical'"
+       (cond ((eq orientation 'horizontal) (hrs/split-window-below-and-switch))
+             ((eq orientation 'vertical) (hrs/split-window-right-and-switch)))
+       (hrs/generate-scratch-buffer))
+   #+END_SRC
+
+   And two other function to spawn vertically or horizontaly (At first, I tried
+   to make lambdas, it works great, but then =guide-key= displays ?? as the
+   function name...)
+   #+BEGIN_SRC emacs-lisp
+     (defun lrn/spawn-scratch-buffer-horizontal ()
+       (interactive)
+       (lrn/spawn-scratch-buffer 'horizontal))
+
+     (defun lrn/spawn-scratch-buffer-vertical ()
+       (interactive)
+       (lrn/spawn-scratch-buffer 'vertical))
+   #+END_SRC
+
+   Then, the map and the bindings
+   #+BEGIN_SRC emacs-lisp
+     ;; Unbind C-w C-n
+     (define-key evil-motion-state-map (kbd "C-w C-n") nil)
+     ;; Create a new map
+     (define-prefix-command 'lrn/scratchbuffer-key-map)
+     ;; Bind it to C-w C-n
+     (define-key evil-motion-state-map (kbd "C-w C-n") 'lrn/scratchbuffer-key-map)
+     ;; C-w C-n s to spawn a horizontal scratch buffer
+     (define-key lrn/scratchbuffer-key-map (kbd "s") 'lrn/spawn-scratch-buffer-horizontal)
+     ;; C-w C-n v to spawn a vertivcal scratch buffer
+     (define-key lrn/scratchbuffer-key-map (kbd "v") 'lrn/spawn-scratch-buffer-vertical)
+   #+END_SRC
 ** =winner-mode=
    Allow to switch back and forth between window configuration with =C-c <left>=
    and =C-c <right>=!
