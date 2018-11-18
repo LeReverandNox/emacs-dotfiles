@@ -483,6 +483,38 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (load custom-file)
    #+END_SRC
+** =Dired=
+   I want to use =dired-mode= more often, it seems really powerful !
+   Let's customize some settings
+
+   =dired-dwim-target= allows to 'auto-detect' the target for various operations
+   such as copy, delete, etc... (If there's a split window with a =Dired=
+   buffer, it'll assume that you want to target this directory)
+   #+BEGIN_SRC emacs-lisp
+     (setq dired-dwim-target t)
+   #+END_SRC
+
+   Always copy directory recursively without confirmation
+   #+BEGIN_SRC emacs-lisp
+     (setq dired-recursive-copies 'always)
+   #+END_SRC
+
+   The basic =ls= flags are quite limited (=-al=), let's add s'more, such as
+   human-readable sizes
+   #+BEGIN_SRC emacs-lisp
+     (setq dired-listing-switches "-lah")
+   #+END_SRC
+
+*** =dired+=
+   =dired+= is a package that provides additional features to the basic
+   =dired-mode=
+   However, I had to intall it manually, since it's not present on
+   =MELPA= anymore ='(
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'load-path (concat user-emacs-directory "config/dired+"))
+     (require 'dired+)
+   #+END_SRC
+
 * Persitency
 ** =backup= and =auto-save=
   I love to keep my backups and auto-saves neatly in separates directories.
