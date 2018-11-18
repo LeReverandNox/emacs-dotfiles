@@ -438,6 +438,7 @@ directory of a node easily !
    #+END_SRC
 
 ** =guide-key=
+   From [[https://github.com/kai2nenobu/guide-key][here]].
    =guide-key= is a cool little package that shows a popup with the possibles
    key-bindings when you start typing. Really useful to discover a lot of cool
    bindings !
@@ -447,6 +448,9 @@ directory of a node easily !
        :config
        (progn
          (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
+         (setq guide-key/popup-window-position 'bottom)
+         (setq guide-key/align-command-by-space-flag t)
+         (setq guide-key/idle-delay 0.3)
          (guide-key-mode 1)))
    #+END_SRC
 ** Sessions
