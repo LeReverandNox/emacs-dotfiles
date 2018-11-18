@@ -820,7 +820,7 @@ Emacs often !
      (define-key evil-motion-state-map (kbd "C-w C-n") 'lrn/scratchbuffer-key-map)
      ;; C-w C-n s to spawn a horizontal scratch buffer
      (define-key lrn/scratchbuffer-key-map (kbd "s") 'lrn/spawn-scratch-buffer-horizontal)
-     ;; C-w C-n v to spawn a vertivcal scratch buffer
+     ;; C-w C-n v to spawn a vertical scratch buffer
      (define-key lrn/scratchbuffer-key-map (kbd "v") 'lrn/spawn-scratch-buffer-vertical)
    #+END_SRC
 ** =winner-mode=
