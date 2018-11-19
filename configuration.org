@@ -1500,3 +1500,36 @@ Emacs often !
            (add-hook 'web-mode-hook 'rainbow-mode)
            (setq web-mode-markup-indent-offset 2)))
      #+END_SRC
+** Shell
+   I use my terminal A LOT. So if I can use it directly in Emacs and so some
+   cool tricks...
+
+*** =multi-term=
+    I'm not sure why I chose =multi-term=, but it looks like a popular option !
+    Thanks @[[https://github.com/hrs/dotfiles/blob/master/emacs/.emacs.d/configuration.org#terminal][HRS]]
+
+    Let's bind it to =C-t= (override =-pop-tag-mark=)
+    #+BEGIN_SRC emacs-lisp
+      (use-package multi-term
+        :config
+        (progn
+          (define-key evil-normal-state-map (kbd "C-t") 'multi-term)
+          ))
+    #+END_SRC
+
+    Let's customize some shit for the =term-mode-hook=
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'term-mode-hook
+                (lambda ()
+                  ;; Disable trailing whitespaces highlight
+                  (setq show-trailing-whitespace nil)))
+    #+END_SRC
+*** =shell-command=
+    By default, =shell-command= is bound on =M-!=. It may be fine for the rest
+    of the world, but for me, using Chunkwm on OSX, I use this binding to change
+    workspace...
+
+    Let's rebind =shell-command= on =C-S-t=
+    #+BEGIN_SRC emacs-lisp
+      (define-key evil-normal-state-map (kbd "C-S-t") 'shell-command)
+    #+END_SRC
