@@ -1032,7 +1032,13 @@ Emacs often !
       (use-package gist
         :bind (
         ("C-x C-g" . gist-list)))
+    #+END_SRC
 
+    I don't want to highlight trailing whitespaces in =gist-list-mode=
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'gist-list-mode-hook
+                (lambda ()
+                  (setq show-trailing-whitespace nil)))
     #+END_SRC
 *** =git-gutter=
     Another Sublime package that I really like, makes atomic commits and partial
