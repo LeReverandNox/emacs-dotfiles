@@ -631,6 +631,12 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (global-subword-mode 1)
    #+END_SRC
+** Cursor width
+   From [[http://pragmaticemacs.com/emacs/adaptive-cursor-width/][here]].
+   Make the cursor the full width of the underlying character (TAB, etc).
+   #+BEGIN_SRC emacs-lisp
+     (setq x-stretch-cursor t)
+   #+END_SRC
 ** Auto revert
    From [[http://pragmaticemacs.com/emacs/automatically-revert-buffers/][here]].
    Automatically update the buffer if the associated file on the disk has changed.
