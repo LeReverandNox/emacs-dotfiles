@@ -523,6 +523,11 @@ Emacs often !
      (setq dired-listing-switches "-lah")
    #+END_SRC
 
+   Auto-update the =dired= buffers if the content of a directory change.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'dired-mode-hook 'auto-revert-mode)
+   #+END_SRC
+
 *** =dired+=
    =dired+= is a package that provides additional features to the basic
    =dired-mode=
@@ -625,6 +630,13 @@ Emacs often !
    Treat lower/uppper CamelCase as separate words
    #+BEGIN_SRC emacs-lisp
      (global-subword-mode 1)
+   #+END_SRC
+** Auto revert
+   From [[http://pragmaticemacs.com/emacs/automatically-revert-buffers/][here]].
+   Automatically update the buffer if the associated file on the disk has changed.
+   If the buffer has unsaved changes, Emacs will prompt.
+   #+BEGIN_SRC emacs-lisp
+     (global-auto-revert-mode t)
    #+END_SRC
 ** =auto-fill-mode=
    Automatically activate =auto-fill-mode= for =text-mode= and =org-mode=
