@@ -936,6 +936,14 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (setq org-confirm-babel-evaluate nil)
    #+END_SRC
+
+   Disable the checkdock warnings for =emacs-lisp= code blocks.
+   It floods the =modeline=... See [[https://emacs.stackexchange.com/a/16770][here]].
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'org-src-mode-hook
+               (lambda ()
+                 (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc))))
+   #+END_SRC
 ** Bullets
    It's way cooler to have graphicals bullets instead of plains *, don't you
    think ?
