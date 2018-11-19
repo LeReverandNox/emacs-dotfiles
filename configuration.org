@@ -859,15 +859,40 @@ Emacs often !
          (mapc 'kill-buffer (cdr (buffer-list (current-buffer)))))
    #+END_SRC
 ** Manage buffers
-   I really like =helm-mini= to quickly find a buffer or re-open a recently
-   close file. But when it comes to manage multiple buffers at the same time...
-   I can't get used to it's shitty bindings.\\
-   I prefer =ibuffer=, who comes with =dired= like bindings.
+*** =ibuffer=
+    I really like =helm-mini= to quickly find a buffer or re-open a recently
+    close file. But when it comes to manage multiple buffers at the same time...
+    I can't get used to it's shitty bindings.\\
+    I prefer =ibuffer=, who comes with =dired= like bindings.
 
-   So, let's keep =C-x b= to invoke =helm-mini=, and bind =C-x C-b= to =ibuffer= !
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-x C-b") 'ibuffer)
-   #+END_SRC
+    So, let's keep =C-x b= to invoke =helm-mini=, and bind =C-x C-b= to =ibuffer= !
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-x C-b") 'ibuffer)
+    #+END_SRC
+
+    There's some cool tweaks to make =ibuffer= even cooler. See [[http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html][here]] !
+
+    Let's define some filters to group buffers !
+    #+BEGIN_SRC emacs-lisp
+      (setq ibuffer-saved-filter-groups
+            '(("basic"
+              ("Org" (mode . org-mode))
+              ("Magit" (name . "^magit:*"))
+              ("Helm" (name . "^\*helm*"))
+              )))
+    #+END_SRC
+    And load them when opening =ibuffer= (also enable auto-refresh)
+    #+BEGIN_SRC emacs-lisp
+            (add-hook 'ibuffer-hook
+                      (lambda ()
+                        (ibuffer-auto-mode t)
+                        (ibuffer-switch-to-saved-filter-groups "basic")))
+    #+END_SRC
+
+    Hide empty filter groups
+    #+BEGIN_SRC emacs-lisp
+      (setq ibuffer-show-empty-filter-groups nil)
+    #+END_SRC
 
 * =TRAMP=
   =TRAMP= is great to remote-edit files with Emacs !
