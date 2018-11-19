@@ -184,7 +184,8 @@ Insert with =C-c C-h=
        ("C->" . evil-mc-make-and-goto-next-match)
        ("C-<" . evil-mc-make-and-goto-prev-match)
        ("C-x C->" . evil-mc-make-all-cursors)
-       ("C-g" . evil-mc-undo-all-cursors))
+       ("C-g" . evil-mc-undo-all-cursors)
+       ("C-S-<mouse-1>" . evil-mc-toggle-cursor-on-click))
       :config
       (global-evil-mc-mode 1))
   #+END_SRC
