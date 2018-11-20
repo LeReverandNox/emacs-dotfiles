@@ -468,7 +468,7 @@ directory of a node easily !
          (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
          (setq guide-key/popup-window-position 'bottom)
          (setq guide-key/align-command-by-space-flag t)
-         (setq guide-key/idle-delay 0.3)
+         (setq guide-key/idle-delay 0.75)
          (guide-key-mode 1)))
    #+END_SRC
 ** Sessions
