@@ -877,6 +877,35 @@ Emacs often !
      ;; C-w C-n v to spawn a vertical scratch buffer
      (define-key lrn/scratchbuffer-key-map (kbd "v") 'lrn/spawn-scratch-buffer-vertical)
    #+END_SRC
+
+
+*** =persistent-scratch=
+    Thanks to [[https://github.com/Fanael/persistent-scratch][this]] package, I can have persistent scratch buffers. They are
+    automatically saved and restored with Emacs.\\
+    That's cool when I mess around with scratch buffers and I don't want to lose
+    them, since I have the tendency to close Emacs quite frequently.
+
+    By default, only the buffes named =*scratch*= are saved. I also want to save
+    the scratch buffer that I spawn.
+    Let's fix that.
+
+    Fist, define a custom check function to match all scratch buffers.
+    #+BEGIN_SRC emacs-lisp
+      (defun lrn/persistent-scratch-custom-scratch-buffer-p ()
+        "Return non-nil iff the current buffer's name is a scratch one"
+        (or
+         (string= (buffer-name) "*scratch*")
+         (string-match "^scratch-[A-Za-z0-9]\\{6\\}$" (buffer-name))))
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package persistent-scratch
+        :config
+        (progn
+          ;; Use my custom function to check buffers name to know what to save
+          (setq persistent-scratch-scratch-buffer-p-function 'lrn/persistent-scratch-custom-scratch-buffer-p)
+          (persistent-scratch-setup-default)))
+    #+END_SRC
 ** =winner-mode=
    Allow to switch back and forth between window configuration with =C-c <left>=
    and =C-c <right>=!
