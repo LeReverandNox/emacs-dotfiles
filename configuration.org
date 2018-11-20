@@ -774,6 +774,25 @@ Emacs often !
      (define-key lrn/transpose-map (kbd "s") 'transpose-sentences)
      (define-key lrn/transpose-map (kbd "r") 'transpose-regions)
    #+END_SRC
+** Align
+*** =ialign=
+    I often like to align stuff, like variables name, lists, numbers etc...
+    Emacs provides few functions to do alignment.\\
+    I found =ialign= ([[https://github.com/mkcms/interactive-align][here]]) to be a good alternative to =align-regexp=, as it has more functionalities.
+
+    Let's bind it to =C-x C-a=.\\
+    I like to apply the alignement on the whole line (i.e. align at each space).
+    To disable the repetition, hit =C-c C-r=
+    #+BEGIN_SRC emacs-lisp
+      (use-package ialign
+        :config
+        (progn
+          ;; Change the default regex to align by the first space
+          (setq ialign-initial-regexp "\\( \\)")
+          ;; I want to repeat the alignment throughout the lines
+          (setq ialign-initial-repeat t)
+          (define-key evil-normal-state-map (kbd "C-x C-a") 'ialign)))
+    #+END_SRC
 ** =undo-tree=
    Emacs does almost everything well... except undos ! That's a nightmare
    compare to Vim.
