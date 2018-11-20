@@ -750,6 +750,30 @@ Emacs often !
           (define-key evil-normal-state-map (kbd "C-c SPC") 'ace-jump-mode)
           (define-key evil-normal-state-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)))
     #+END_SRC
+** Transpose
+   Emacs has cool built-in feature to transpose stuff, such as
+   =transpose-words=, =transpose-chars=, =transpose-lines=...
+   Very usefull and kinda' new for a Vim guy.
+
+   By default, only =M-t= (=transpose-words=) and =C-x C-t= (=transpose-lines=)
+   are bound.
+
+   Let's create a custom map to access all of them, with =C-x C-t= as prefix.
+   I'll maybe have to type a few more keys, but since I don't use them that
+   often, I won't mind.
+
+   #+BEGIN_SRC emacs-lisp
+     (define-prefix-command 'lrn/transpose-map)
+     (define-key global-map (kbd "C-x C-t") 'lrn/transpose-map)
+
+     (define-key lrn/transpose-map (kbd "w") 'transpose-words)
+     (define-key lrn/transpose-map (kbd "c") 'transpose-chars)
+     (define-key lrn/transpose-map (kbd "l") 'transpose-lines)
+     (define-key lrn/transpose-map (kbd "p") 'transpose-paragraphs)
+     (define-key lrn/transpose-map (kbd "e") 'transpose-sexps)
+     (define-key lrn/transpose-map (kbd "s") 'transpose-sentences)
+     (define-key lrn/transpose-map (kbd "r") 'transpose-regions)
+   #+END_SRC
 ** =undo-tree=
    Emacs does almost everything well... except undos ! That's a nightmare
    compare to Vim.
