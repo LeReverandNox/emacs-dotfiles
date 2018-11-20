@@ -827,7 +827,10 @@ Emacs often !
      (define-key evil-window-map (kbd "C-S-s") 'hrs/split-window-below-and-switch)
    #+END_SRC
 ** Scratch buffers
-   A cool HRS function to generate new scratch buffers
+*** Mooooore !
+   A cool HRS function to generate new scratch buffers.
+   Can be used with =M-x hrs/generate-scratch-buffer= to create a scratch buffer
+   in the current pane.
    #+BEGIN_SRC emacs-lisp
      (defun hrs/generate-scratch-buffer ()
        "Create and switch to a temporary scratch buffer with a random
@@ -878,14 +881,13 @@ Emacs often !
      (define-key lrn/scratchbuffer-key-map (kbd "v") 'lrn/spawn-scratch-buffer-vertical)
    #+END_SRC
 
-
 *** =persistent-scratch=
     Thanks to [[https://github.com/Fanael/persistent-scratch][this]] package, I can have persistent scratch buffers. They are
     automatically saved and restored with Emacs.\\
     That's cool when I mess around with scratch buffers and I don't want to lose
     them, since I have the tendency to close Emacs quite frequently.
 
-    By default, only the buffes named =*scratch*= are saved. I also want to save
+    By default, only the buffers named =*scratch*= are saved. I also want to save
     the scratch buffer that I spawn.
     Let's fix that.
 
