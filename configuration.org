@@ -1512,8 +1512,10 @@ Emacs often !
            (setq rtags-use-helm t)
            ;; Needed to avoid Emacs freeze when calling find-symbol
            (setq rtags-rdm-process-use-pipe t)
-           ;; Start rdm
-           (rtags-start-process-unless-running)
+           ;; Start rdm process on entering C/CPP/ObjC modes
+           (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+           (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+           (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
            ;; Shutdown rdm when leaving emacs.
            (add-hook 'kill-emacs-hook 'rtags-quit-rdm)))
      #+END_SRC
