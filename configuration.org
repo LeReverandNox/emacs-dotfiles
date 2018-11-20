@@ -556,6 +556,11 @@ Emacs often !
           (evil-define-key 'normal dired-mode-map (kbd "C-s") 'dired-narrow)))
     #+END_SRC
 
+** Emacs server
+   Let's add a binding to kill the Emacs server.
+   #+BEGIN_SRC emacs-lisp
+     (define-key global-map (kbd "C-x C-S-c") 'kill-emacs)
+   #+END_SRC
 * Persitency
 ** =backup= and =auto-save=
   I love to keep my backups and auto-saves neatly in separates directories.
