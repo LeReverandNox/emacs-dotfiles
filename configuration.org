@@ -528,6 +528,11 @@ Emacs often !
      (add-hook 'dired-mode-hook 'auto-revert-mode)
    #+END_SRC
 
+   You now you can edit permissions directly from within =dired= ?
+   #+BEGIN_SRC emacs-lisp
+     (setq wdired-allow-to-change-permissions t)
+   #+END_SRC
+
 *** =dired+=
    =dired+= is a package that provides additional features to the basic
    =dired-mode=
@@ -537,6 +542,19 @@ Emacs often !
      (add-to-list 'load-path (concat user-emacs-directory "config/dired+"))
      (require 'dired+)
    #+END_SRC
+
+*** =dired-narrow=
+    A cool package that allows to filter files by name ! (See [[http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/][here]])
+
+    In a =dired= buffer, hit =C-s= to invok =dired-narrow= and type a string to
+    filter.\\
+    When done, hit =g r= (=revert-buffer=) to remove the filters.
+    #+BEGIN_SRC emacs-lisp
+      (use-package dired-narrow
+        :config
+        (progn
+          (evil-define-key 'normal dired-mode-map (kbd "C-s") 'dired-narrow)))
+    #+END_SRC
 
 * Persitency
 ** =backup= and =auto-save=
