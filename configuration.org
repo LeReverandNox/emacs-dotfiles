@@ -480,13 +480,20 @@ Emacs often !
    settings with =customize-face= then exit Emacs, those settings are restored
    the next time ! I don't like this behavior. Thanks to [[https://superuser.com/a/1155381][this]] post, there's a
    worakoung that reloads the actual theme after restoring the .desktop
+
+   EDIT: Since I start using =--daemon= / =emacsclient=, I had to fix
+   =desktop-save=mode= so I can restore frames in a new frame... But it seems to
+   have broken the up-mentioned workaround...  will (try) to-fix someday.
    #+BEGIN_SRC emacs-lisp
      (setq desktop-path (list (concat user-emacs-directory "tmp/sessions")))
      (desktop-save-mode)
-     (add-to-list 'desktop-globals-to-save 'custom-enabled-themes)
-     (defun desktop-load-theme () "load custom theme" (interactive)
-       (dolist (th custom-enabled-themes) (load-theme th)))
-     (add-hook 'desktop-after-read-hook 'desktop-load-theme)
+     (setq desktop-restore-forces-onscreen nil)
+     (setq desktop-load-locked-desktop t)
+
+     ;; (add-to-list 'desktop-globals-to-save 'custom-enabled-themes)
+     ;; (defun desktop-load-theme () "load custom theme" (interactive)
+       ;; (dolist (th custom-enabled-themes) (load-theme th)))
+     ;; (add-hook 'desktop-after-read-hook 'desktop-load-theme)
    #+END_SRC
 
 ** Custom-file
