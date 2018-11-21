@@ -48,9 +48,10 @@ Insert with =C-c C-h=
      (unless (assoc-default "melpa" package-archives)
        (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
      ;; (unless (assoc-default "melpa-stable" package-archives)
-       ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/")))
+     ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/")))
 
-     (package-initialize)
+     (when (< emacs-major-version 27)
+       (package-initialize))
    #+END_SRC
 
    Don't forget to run =M-x package-refresh-contents= to reload the package list
