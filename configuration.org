@@ -1248,6 +1248,9 @@ Emacs often !
          (setq company-echo-delay 0)                            ; remove annoying blinking
          (setq company-begin-commands '(self-insert-command)))) ; start autocompletion only after typing
    #+END_SRC
+** Snippets
+*** =yasnippet=
+    TODO: Setup =yasnippet= !
 ** Syntax checking
 *** =flycheck=
     A great realtime syntax checking extension that works with a lot of
