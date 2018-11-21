@@ -1308,7 +1308,7 @@ Emacs often !
      !
 
      =rainbow-delimiters= colors each pair of paranthesis in a different color.
-     It helps A LOT.
+     It helps A LOT with readability issues.
      #+BEGIN_SRC emacs-lisp
        (use-package rainbow-delimiters)
      #+END_SRC
