@@ -6,7 +6,7 @@ Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] by [[h
 recoding it myself :)
 
 #+BEGIN_SRC emacs-lisp
-  (load "~/.emacs.d/config/sensible-defaults/sensible-defaults.el")
+  (load (concat user-emacs-directory "config/sensible-defaults/sensible-defaults.el"))
 
   (sensible-defaults/shorten-yes-or-no)
   (sensible-defaults/delete-trailing-whitespace)
@@ -28,10 +28,10 @@ Use the official 42 headers in C/CPP files.
 Insert with =C-c C-h=
 
 #+BEGIN_SRC emacs-lisp
-  (load "~/.emacs.d/config/42/list.el")
-  (load "~/.emacs.d/config/42/string.el")
-  (load "~/.emacs.d/config/42/comments.el")
-  (load "~/.emacs.d/config/42/header.el")
+  (load (concat user-emacs-directory "config/42/list.el"))
+  (load (concat user-emacs-directory "config/42/string.el"))
+  (load (concat user-emacs-directory "config/42/comments.el"))
+  (load (concat user-emacs-directory "config/42/header.el"))
 #+END_SRC
 
 * Package management (=package=, =use-package= and =auto-compile=)
@@ -502,7 +502,7 @@ Emacs often !
 
    Let's configure it.
    #+BEGIN_SRC emacs-lisp
-     (setq custom-file "~/.emacs.d/config/custom.el")
+     (setq custom-file (concat user-emacs-directory "config/custom.el"))
    #+END_SRC
 
    And load it at startup.
@@ -599,7 +599,7 @@ Emacs often !
    when opening Emacs.
 
    #+BEGIN_SRC emacs-lisp
-     (setq savehist-file "~/.emacs.d/tmp/savehist")
+     (setq savehist-file (concat user-emacs-directory "tmp/savehist"))
      (savehist-mode +1)
      (setq savehist-save-minibuffer-history +1)
      (setq savehist-additional-variables
@@ -822,7 +822,7 @@ Emacs often !
        (progn
          (global-undo-tree-mode)
          ;; Set a cutom undo directory, and enable persistent undo
-         (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/tmp/undo")))
+         (setq undo-tree-history-directory-alist `(("." . ,(concat user-emacs-directory "tmp/undo"))))
          (setq undo-tree-auto-save-history t)
          (setq undo-tree-visualizer-timestamps t)
          (setq undo-tree-visualizer-diff t)))
