@@ -656,12 +656,9 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (use-package highlight-indent-guides
        :diminish highlight-indent-guides-mode
+       :hook ((prog-mode yaml-mode) . highlight-indent-guides-mode)
        :init
-       (setq highlight-indent-guides-method 'character)
-       :config
-       (progn
-         (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-         (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)))
+       (setq highlight-indent-guides-method 'character))
    #+END_SRC
 
 ** Case
@@ -727,13 +724,12 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (use-package hideshow-org
        :diminish hs-minor-mode
-       :config
-       (progn
-         ;; Enable hs-minor-mode on every programming mode
-         (add-hook 'prog-mode-hook 'hs-org/minor-mode)
-         (setq hs-hide-comments-when-hiding-all t)
-         ;; Open the block when I search for something
-         (setq hs-isearch-open t)))
+       ;; Enable hs-minor-mode on every programming mode
+       :hook (prog-mode . hs-org/minor-mode)
+       :init
+       (setq hs-hide-comments-when-hiding-all t)
+       ;; Open the block when I search for something
+       (setq hs-isearch-open t))
    #+END_SRC
 
 ** Selection
@@ -1083,8 +1079,7 @@ Emacs often !
    think ?
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
-       :config
-       (add-hook 'org-mode-hook #'org-bullets-mode))
+       :hook (org-mode . org-bullets-mode))
    #+END_SRC
 ** Exports
    One of the best feature of =Org-mode= is it's capability to export org-files
@@ -1151,13 +1146,13 @@ Emacs often !
     their moms house.
     Just hit =C-x g= (=magit-status=) and let the magic operate.
 
-    I also add =evil-magit=  to have =evil= bindings within =magit=
+    I also add =evil-magit= to have =evil= bindings within =magit=
     #+BEGIN_SRC emacs-lisp
       (use-package magit
+        :hook (with-editor-mode . evil-insert-state)
         :bind (
                ("C-x g" . magit-status))
         :config
-        (add-hook 'with-editor-mode-hook 'evil-insert-state)
         (use-package evil-magit))
     #+END_SRC
 *** =gist=
@@ -1434,11 +1429,11 @@ Emacs often !
      A backend for =company= powered by =jedi=. Pretty cool.
      #+BEGIN_SRC emacs-lisp
        (use-package company-jedi
+         :hook (python-mode . jedi:setup)
          :init
          (setq jedi:complete-on-dot t)
          :config
-         (add-to-list 'company-backends 'company-jedi)
-         (add-hook 'python-mode-hook 'jedi:setup)
+         (add-to-list 'company-backends 'company-jedi))
      #+END_SRC
 **** =elpy=
      =elpy= is THE Python IDE for Emacs. It can do a lot of stuff and I need to
@@ -1463,9 +1458,7 @@ Emacs often !
 
      #+BEGIN_SRC emacs-lisp
        (use-package py-autopep8
-         :config
-         (progn
-           (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)))
+         :hook (elpy-mode . py-autopep8-enable-on-save))
      #+END_SRC
 
 *** C / CPP
@@ -1493,6 +1486,9 @@ Emacs often !
      The core of this setup
      #+BEGIN_SRC emacs-lisp
        ;; (use-package irony
+       ;;   :hook (
+       ;;          ((c++-mode c-mode) . irony-mode)
+       ;;          (irony-mode . irony-cdb-autosetup-compile-options))
        ;;   :init
        ;;   ;; Use compilation database first, clang_complete as fallback.
        ;;   (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
@@ -1500,7 +1496,7 @@ Emacs often !
        ;;   :config
        ;;   (progn
        ;;     ;; If irony server was never installed, install it.
-       ;;     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)))
+       ;;     (unless (irony--find-server-executable) (call-interactively #'irony-install-server))))
      #+END_SRC
 
      =irony= based =company= backend, for completion
@@ -1514,17 +1510,13 @@ Emacs often !
      =irony= based =flycheck= backend, for syntax checking
      #+BEGIN_SRC emacs-lisp
        ;; (use-package flycheck-irony
-       ;;   :config
-       ;;   (progn
-       ;;     (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))))
+       ;;   :hook (flycheck-mode . flycheck-irony-setup))
      #+END_SRC
 
      =irony= based =eldoc= backend, for documentation
      #+BEGIN_SRC emacs-lisp
-       ; (use-package irony-eldoc
-       ;;   :config
-       ;;   (progn
-       ;;     (add-hook 'irony-mode-hook #'irony-eldoc)))
+       ;; (use-package irony-eldoc
+       ;;   :hook (irony-mode . irony-eldoc))
      #+END_SRC
 
 **** =rtags=
@@ -1532,6 +1524,11 @@ Emacs often !
 
      #+BEGIN_SRC emacs-lisp
        (use-package rtags
+         :hook (
+                ;; Start rdm process on entering C/CPP/ObjC modes
+                ((c-mode c++-mode objc-mode) . rtags-start-process-unless-running)
+                ;; Shutdown rdm when leaving emacs.
+                (kill-emacs . rtags-quit-rdm))
          :bind (
                 :map c-mode-base-map
                 ("M-." . rtags-find-symbol-at-point)
@@ -1546,31 +1543,25 @@ Emacs often !
            (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
            (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
            (rtags-enable-standard-keybindings)
-           ;; Start rdm process on entering C/CPP/ObjC modes
-           (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
-           (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
-           (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
-           ;; Shutdown rdm when leaving emacs.
-           (add-hook 'kill-emacs-hook 'rtags-quit-rdm)))
+           ))
      #+END_SRC
 
      =rtags= integration for =helm=, to search definitions, I guess.
      #+BEGIN_SRC emacs-lisp
        (use-package helm-rtags
-         :config
-         (progn
-           (setq rtags-display-result-backend 'helm)
-           ))
+         :init
+         (setq rtags-display-result-backend 'helm))
      #+END_SRC
 
      =rtags= =company= backend for completion
      #+BEGIN_SRC emacs-lisp
        (use-package company-rtags
+         :init
+         (setq rtags-autostart-diagnostics t)
+         (setq rtags-completions-enabled t)
          :config
          (progn
-           (setq rtags-autostart-diagnostics t)
            (rtags-diagnostics)
-           (setq rtags-completions-enabled t)
            (push 'company-rtags company-backends)
            ))
      #+END_SRC
@@ -1590,10 +1581,7 @@ Emacs often !
      =rtags= =flycheck= backend for syntax checking
      #+BEGIN_SRC emacs-lisp
        (use-package flycheck-rtags
-         :init
-         (progn
-           (add-hook 'c-mode-hook #'setup-flycheck-rtags)
-           (add-hook 'c++-mode-hook #'setup-flycheck-rtags)))
+         :hook ((c-mode c++-mode) . setup-flycheck-rtags))
      #+END_SRC
 
 **** Misc
@@ -1628,9 +1616,7 @@ Emacs often !
 
      #+BEGIN_SRC emacs-lisp
        (use-package emmet-mode
-         :config
-         (progn
-           (add-hook 'emmet-mode-hook 'my-emmet-mode-hook)))
+         :hook (emmet-mode . my-emmet-mode-hook))
      #+END_SRC
 
 **** =web-mode=
@@ -1641,11 +1627,11 @@ Emacs often !
      #+BEGIN_SRC emacs-lisp
        (use-package web-mode
          :mode ("\\.html?\\'" "\\.tpl\\.php\\'")
-         :config
-         (progn
-           (add-hook 'web-mode-hook 'emmet-mode)
-           (add-hook 'web-mode-hook 'rainbow-mode)
-           (setq web-mode-markup-indent-offset 2)))
+         :hook (
+                (web-mode . emmet-mode)
+                (web-mode . rainbow-mode))
+         :init
+         (setq web-mode-markup-indent-offset 2))
      #+END_SRC
 ** Shell
    I use my terminal A LOT. So if I can use it directly in Emacs and so some
