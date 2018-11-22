@@ -1608,15 +1608,13 @@ Emacs often !
      and/or CSS.
      Even just to write a base HTML 5 template... so much time saved !
 
-     In =web-mode=, hit =C-j= to expand =emmet= snippets
-     #+BEGIN_SRC emacs-lisp
-       (defun my-emmet-mode-hook ()
-         (define-key web-mode-map (kbd "C-j") 'emmet-expand-line))
-     #+END_SRC
-
+     In =web-mode=, hit =C-j= to expand =emmet= snippets\\
      #+BEGIN_SRC emacs-lisp
        (use-package emmet-mode
-         :hook (emmet-mode . my-emmet-mode-hook))
+         :after web-mode
+         :bind (
+                :map web-mode-map
+                ("C-j" . emmet-expand-line)))
      #+END_SRC
 
 **** =web-mode=
