@@ -1486,9 +1486,13 @@ Emacs often !
 
      #+BEGIN_SRC emacs-lisp
        (use-package company-jedi
-         :hook (python-mode . lrn/python-company-hook)
+         :hook ((python-mode . lrn/python-company-hook))
          :init
-         (setq jedi:complete-on-dot t))
+         (setq jedi:complete-on-dot t)
+         (setq pyvenv-post-activate-hooks (lambda ()
+                                            (elpy-rpc--disconnect)
+                                            (jedi:stop-server)
+                                            )))
      #+END_SRC
 **** =elpy=
      =elpy= is THE Python IDE for Emacs. It can do a lot of stuff and I need to
