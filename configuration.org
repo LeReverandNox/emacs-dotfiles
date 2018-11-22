@@ -1426,13 +1426,18 @@ Emacs often !
      #+END_SRC
 **** =company-jedi=
      A backend for =company= powered by =jedi=. Pretty cool.
+
+     #+BEGIN_SRC emacs-lisp
+       (defun lrn/python-company-hook ()
+         (jedi:setup)
+         (add-to-list 'company-backends 'company-jedi))
+     #+END_SRC
+
      #+BEGIN_SRC emacs-lisp
        (use-package company-jedi
-         :hook (python-mode . jedi:setup)
+         :hook (python-mode . lrn/python-company-hook)
          :init
-         (setq jedi:complete-on-dot t)
-         :config
-         (add-to-list 'company-backends 'company-jedi))
+         (setq jedi:complete-on-dot t))
      #+END_SRC
 **** =elpy=
      =elpy= is THE Python IDE for Emacs. It can do a lot of stuff and I need to
