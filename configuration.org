@@ -1465,6 +1465,8 @@ Emacs often !
      #+BEGIN_SRC emacs-lisp
        (use-package pipenv
          :hook (python-mode . pipenv-mode)
+         :bind (:map pipenv-command-map
+                ("w" . pyvenv-workon))
          :init
          (setenv "WORKON_HOME" "~/.local/share/virtualenvs")
          (setq
