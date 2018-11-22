@@ -993,35 +993,69 @@ Emacs often !
     I really like =helm-mini= to quickly find a buffer or re-open a recently
     close file. But when it comes to manage multiple buffers at the same time...
     I can't get used to it's shitty bindings.\\
-    I prefer =ibuffer=, who comes with =dired= like bindings.
-
-    So, let's keep =C-x b= to invoke =helm-mini=, and bind =C-x C-b= to =ibuffer= !
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-x C-b") 'ibuffer)
-    #+END_SRC
+    I prefer =ibuffer=, who comes with =dired= like bindings, group features and
+    so much more.
 
     There's some cool tweaks to make =ibuffer= even cooler. See [[http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html][here]] !
 
-    Let's define some filters to group buffers !
+    Here's a helper function stolen from @[[https://github.com/purcell/emacs.d/blob/master/lisp/init-ibuffer.el#L10][purcell]]'s conf (see [[https://github.com/purcell/emacs.d/blob/master/lisp/init-ibuffer.el#L10][here]]) to enable
+    =ibuffer-vc= filter groups.
     #+BEGIN_SRC emacs-lisp
-      (setq ibuffer-saved-filter-groups
-            '(("basic"
-              ("Org" (mode . org-mode))
-              ("Magit" (name . "^magit:*"))
-              ("Helm" (name . "^\*helm*"))
-              )))
-    #+END_SRC
-    And load them when opening =ibuffer= (also enable auto-refresh)
-    #+BEGIN_SRC emacs-lisp
-            (add-hook 'ibuffer-hook
-                      (lambda ()
-                        (ibuffer-auto-mode t)
-                        (ibuffer-switch-to-saved-filter-groups "basic")))
+      (defun lrn/ibuffer-set-up-preferred-filters ()
+        (interactive)
+        (ibuffer-vc-set-filter-groups-by-vc-root)
+        (unless (eq ibuffer-sorting-mode 'filename/process)
+          (ibuffer-do-sort-by-filename/process)))
     #+END_SRC
 
-    Hide empty filter groups
+    Let's configure =ibuffer=.\\
+    I also add =ibuffer-vc= (see [[https://github.com/purcell/ibuffer-vc][here]]) to group buffers by VC root. It's usefull
+    to easily know which buffer belongs to which project, without being in a
+    =Projectile= thing.
     #+BEGIN_SRC emacs-lisp
-      (setq ibuffer-show-empty-filter-groups nil)
+      (use-package ibuffer
+        :hook (
+               ;; Enable ibuffer-auto-mode to auto-refresh buffer if changes occur on the disk
+               (ibuffer . ibuffer-auto-mode)
+               ;; Enable ibuffer-vc filter groups when I open ibuffer
+               (ibuffer . lrn/ibuffer-set-up-preferred-filters))
+        :bind (("C-x C-b" . ibuffer))
+        :init
+        (use-package ibuffer-vc)
+        ;; Hide empty filter-groups
+        (setq ibuffer-show-empty-filter-groups nil)
+        ;; Here's a custom filter-group, in case I don't want ibuffer-vc filtering,
+        ;; but style have some groups I like.
+        (setq ibuffer-saved-filter-groups
+              '(("basic"
+                 ("Org" (mode . org-mode))
+                 ("Magit" (name . "^magit:*"))
+                 ("Helm" (name . "^\*helm*"))
+                 )))
+        :config
+        (progn
+          ;; Let's create a custom column with file size displayed in a human-redeable
+          ;; style...
+          (define-ibuffer-column size-h
+            (:name "Size" :inline t)
+            (cond
+             ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+             ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+             (t (format "%8d" (buffer-size)))))
+          ;; ... then apply it by redefining ibuffer-formats.
+          (setq ibuffer-formats
+                '((mark modified read-only " "
+                        (name 18 18 :left :elide)
+                        " "
+                        (size-h 9 -1 :right)
+                        " "
+                        (mode 16 16 :left :elide)
+                        " "
+                        filename-and-process)))
+          ;; I want to be able to switch back to ibuffer-vc filter-groups in ibuffer,
+          ;; if I disabled them.
+          (evil-define-key 'normal ibuffer-mode-map (kbd "s V") 'lrn/ibuffer-set-up-preferred-filters)
+          ))
     #+END_SRC
 
 * =TRAMP=
