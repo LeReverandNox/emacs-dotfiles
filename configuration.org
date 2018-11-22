@@ -849,6 +849,17 @@ Emacs often !
        (progn
          (rainbow-mode t)))
    #+END_SRC
+** Mark
+   By default, =set-mark-command= is bound on =C-@= and =C-SPC=.\\
+   =C-@= is totally unpractical, period.
+   However, I prefere to use =C-SPC= to invoke =company-complete=, like Intellisence in VSCode.
+
+   So, let's remap =set-mark-command=
+   on =C-c C-SPC=, to match his brother =C-x C-SPC= (=pop-global-mark)
+   #+BEGIN_SRC emacs-lisp
+     (define-key global-map (kbd "C-c C-SPC") 'set-mark-command)
+   #+END_SRC
+
 * Windows and buffers
 ** =C-x k=
    Kill current buffer and window without confirmation when hitting =C-x k=
