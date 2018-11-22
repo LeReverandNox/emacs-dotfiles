@@ -115,12 +115,13 @@ Insert with =C-c C-h=
 ** and finally, use =auto-compile= to always compile packages and use the latest version.
    #+BEGIN_SRC emacs-lisp
      (use-package auto-compile
+       :init
+       ;; Prevent outdated byte-code loading
+       (setq load-prefer-newer t)
        :config
        (progn
          ;; Auto-compile before loading if byte-code is outdated
-         (auto-compile-on-load-mode)
-         ;; Prevent outdated byte-code loading
-         (setq load-prefer-newer t)))
+         (auto-compile-on-load-mode)))
    #+END_SRC
 * =Evil=
   I love Emacs, but I can't live without Vim bindings...
@@ -164,12 +165,13 @@ Insert with =C-c C-h=
   #+BEGIN_SRC emacs-lisp
     (use-package evil-collection
       :after evil
+      :init
+      ;; Disable neotree bindings, I'm already happy with mine
+      (setq evil-collection-mode-list (remove 'neotree evil-collection-mode-list))
+      ;; Disable outline bindings, conflict with TAB (org-cycle)
+      (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
       :config
       (progn
-        ;; Disable neotree bindings, I'm already happy with mine
-        (setq evil-collection-mode-list (remove 'neotree evil-collection-mode-list))
-        ;; Disable outline bindings, conflict with TAB (org-cycle)
-        (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
         (evil-collection-init)))
   #+END_SRC
 
@@ -406,6 +408,9 @@ directory of a node easily !
    Let's install =neotree= and set the bindings
    #+BEGIN_SRC emacs-lisp
      (use-package neotree
+       :init
+       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+       (setq neo-window-fixed-size nil)
        :config
        (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
        (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -425,9 +430,7 @@ directory of a node easily !
        (evil-define-key 'normal neotree-mode-map (kbd "C-c C-y") 'neotree-copy-node)
        (evil-define-key 'normal neotree-mode-map (kbd "x") 'my/neotree-close-parent)
        (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
-       (define-key evil-motion-state-map (kbd "C-S-b") 'neotree-projectile-action)
-       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-       (setq neo-window-fixed-size nil))
+       (define-key evil-motion-state-map (kbd "C-S-b") 'neotree-projectile-action))
    #+END_SRC
 
 ** =helm= and friends
@@ -467,12 +470,13 @@ directory of a node easily !
    #+BEGIN_SRC emacs-lisp
      (use-package guide-key
        :diminish guide-key-mode
+       :init
+       (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
+       (setq guide-key/popup-window-position 'bottom)
+       (setq guide-key/align-command-by-space-flag t)
+       (setq guide-key/idle-delay 0.75)
        :config
        (progn
-         (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
-         (setq guide-key/popup-window-position 'bottom)
-         (setq guide-key/align-command-by-space-flag t)
-         (setq guide-key/idle-delay 0.75)
          (guide-key-mode 1)))
    #+END_SRC
 ** Sessions
@@ -804,12 +808,11 @@ Emacs often !
         :bind (
                :map evil-normal-state-map
                ("C-x C-a" . ialign))
-        :config
-        (progn
-          ;; Change the default regex to align by the first space
-          (setq ialign-initial-regexp "\\( \\)")
-          ;; I want to repeat the alignment throughout the lines
-          (setq ialign-initial-repeat t)))
+        :init
+        ;; Change the default regex to align by the first space
+        (setq ialign-initial-regexp "\\( \\)")
+        ;; I want to repeat the alignment throughout the lines
+        (setq ialign-initial-repeat t))
     #+END_SRC
 ** =undo-tree=
    Emacs does almost everything well... except undos ! That's a nightmare
@@ -823,14 +826,15 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (use-package undo-tree
        :diminish undo-tree-mode
+       :init
+       ;; Set a cutom undo directory, and enable persistent undo
+       (setq undo-tree-history-directory-alist `(("." . ,(concat user-emacs-directory "tmp/undo"))))
+       (setq undo-tree-auto-save-history t)
+       (setq undo-tree-visualizer-timestamps t)
+       (setq undo-tree-visualizer-diff t)
        :config
        (progn
-         (global-undo-tree-mode)
-         ;; Set a cutom undo directory, and enable persistent undo
-         (setq undo-tree-history-directory-alist `(("." . ,(concat user-emacs-directory "tmp/undo"))))
-         (setq undo-tree-auto-save-history t)
-         (setq undo-tree-visualizer-timestamps t)
-         (setq undo-tree-visualizer-diff t)))
+         (global-undo-tree-mode)))
    #+END_SRC
 ** =move-text=
    =move-text= allows to text up and down with =<M-up>= / =<M-down>=, like in VSCode
@@ -963,10 +967,11 @@ Emacs often !
 
     #+BEGIN_SRC emacs-lisp
       (use-package persistent-scratch
+        :init
+        ;; Use my custom function to check buffers name to know what to save
+        (setq persistent-scratch-scratch-buffer-p-function 'lrn/persistent-scratch-custom-scratch-buffer-p)
         :config
         (progn
-          ;; Use my custom function to check buffers name to know what to save
-          (setq persistent-scratch-scratch-buffer-p-function 'lrn/persistent-scratch-custom-scratch-buffer-p)
           (persistent-scratch-setup-default)))
     #+END_SRC
 ** =winner-mode=
@@ -1036,7 +1041,7 @@ Emacs often !
    Let's install the latest =org= package and set some stuff.
    #+BEGIN_SRC emacs-lisp
      (use-package org
-       :config
+       :init
        ;; Syntax highlight src blocks in org-mode
        (setq org-src-fontify-natively t)
        ;; Make tab work like in a code buffer for src blocks
@@ -1429,10 +1434,11 @@ Emacs often !
      A backend for =company= powered by =jedi=. Pretty cool.
      #+BEGIN_SRC emacs-lisp
        (use-package company-jedi
+         :init
+         (setq jedi:complete-on-dot t)
          :config
          (add-to-list 'company-backends 'company-jedi)
          (add-hook 'python-mode-hook 'jedi:setup)
-         (setq jedi:complete-on-dot t))
      #+END_SRC
 **** =elpy=
      =elpy= is THE Python IDE for Emacs. It can do a lot of stuff and I need to
@@ -1487,15 +1493,13 @@ Emacs often !
      The core of this setup
      #+BEGIN_SRC emacs-lisp
        ;; (use-package irony
+       ;;   :init
+       ;;   ;; Use compilation database first, clang_complete as fallback.
+       ;;   (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
+       ;;                                                     irony-cdb-clang-complete))
        ;;   :config
        ;;   (progn
        ;;     ;; If irony server was never installed, install it.
-       ;;     (unless (irony--find-server-executable) (call-interactively #'irony-install-server))
-       ;;     (add-hook 'c++-mode-hook 'irony-mode)
-       ;;     (add-hook 'c-mode-hook 'irony-mode)
-       ;;     ;; Use compilation database first, clang_complete as fallback.
-       ;;     (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
-       ;;                                                     irony-cdb-clang-complete))
        ;;     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)))
      #+END_SRC
 
@@ -1533,14 +1537,15 @@ Emacs often !
                 ("M-." . rtags-find-symbol-at-point)
                 ("M-," . rtags-find-references-at-point)
                 ("M-?" . rtags-display-summary))
+         :init
+         (setq rtags-use-helm t)
+         ;; Needed to avoid Emacs freeze when calling find-symbol
+         (setq rtags-rdm-process-use-pipe t)
          :config
          (progn
            (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
            (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
            (rtags-enable-standard-keybindings)
-           (setq rtags-use-helm t)
-           ;; Needed to avoid Emacs freeze when calling find-symbol
-           (setq rtags-rdm-process-use-pipe t)
            ;; Start rdm process on entering C/CPP/ObjC modes
            (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
            (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
