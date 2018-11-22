@@ -1297,18 +1297,22 @@ Emacs often !
     I need to configure the popup style, because for now it looks like Windows
     95... but it works great !
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package company
-       :diminish company-mode
-       :init
-       (setq company-tooltip-limit 30)                        ; bigger popup window
-       (setq company-idle-delay .15)                          ; decrease delay before autocompletion popup shows
-       (setq company-echo-delay 0)                            ; remove annoying blinking
-       (setq company-begin-commands '(self-insert-command))   ; start autocompletion only after typing
-       :config
-       (progn
-         (global-company-mode)))
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (use-package company
+        :diminish company-mode
+        :bind (
+               ("C-SPC" . company-complete)
+               :map company-active-map
+               ("?" . company-show-doc-buffer))
+        :init
+        (setq company-tooltip-limit 30)                        ; bigger popup window
+        (setq company-idle-delay .15)                          ; decrease delay before autocompletion popup shows
+        (setq company-echo-delay 0)                            ; remove annoying blinking
+        (setq company-begin-commands '(self-insert-command))   ; start autocompletion only after typing
+        :config
+        (progn
+          (global-company-mode)))
+    #+END_SRC
 ** Snippets
 *** =yasnippet=
     TODO: Setup =yasnippet= !
