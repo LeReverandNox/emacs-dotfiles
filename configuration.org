@@ -1256,14 +1256,13 @@ Emacs often !
      (use-package company
        :diminish company-mode
        :init
-       (progn
-         (global-company-mode))
+       (setq company-tooltip-limit 30)                        ; bigger popup window
+       (setq company-idle-delay .15)                          ; decrease delay before autocompletion popup shows
+       (setq company-echo-delay 0)                            ; remove annoying blinking
+       (setq company-begin-commands '(self-insert-command))   ; start autocompletion only after typing
        :config
        (progn
-         (setq company-tooltip-limit 30)                        ; bigger popup window
-         (setq company-idle-delay .15)                          ; decrease delay before autocompletion popup shows
-         (setq company-echo-delay 0)                            ; remove annoying blinking
-         (setq company-begin-commands '(self-insert-command)))) ; start autocompletion only after typing
+         (global-company-mode)))
    #+END_SRC
 ** Snippets
 *** =yasnippet=
