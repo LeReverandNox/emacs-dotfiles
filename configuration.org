@@ -1511,6 +1511,22 @@ Emacs often !
            ;; Disable elpy-flymake, conflict with flycheck
            (remove-hook 'elpy-modules 'elpy-module-flymake)))
      #+END_SRC
+
+    TODO: As of today, when I want to run a Python script with
+    =elpy-shell-send-region-or-buffer=, I get the following error :
+    #+BEGIN_QUOTE
+    Warning (python): Your ‘python-shell-interpreter’ doesn’t seem to support
+    readline, yet ‘python-shell-completion-native-enable’ was t and "python" is not
+    part of the ‘python-shell-completion-native-disabled-interpreters’ list.  Native
+    completions have been disabled locally.
+    #+END_QUOTE
+    According to [[https://github.com/jorgenschaefer/elpy/issues/887][this]], it seems to be a well known bug. And there's no solution
+    yet.
+    So, to avoid being spammed by warning, let's disable the native completion
+    for python.
+    #+BEGIN_SRC emacs-lisp
+      (setq python-shell-completion-native-disabled-interpreters '("python"))
+    #+END_SRC
 **** =autopep8=
      Automatic format and correction of PEP8 errors at save.
      Not 100% convince, but I keep it for now.
