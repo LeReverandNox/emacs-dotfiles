@@ -1303,15 +1303,34 @@ Emacs often !
         :bind (
                ("C-SPC" . company-complete)
                :map company-active-map
-               ("?" . company-show-doc-buffer))
+               ("?" . company-show-doc-buffer)
+               ("<down>" . company-complete-common-or-cycle)
+               ("M-n" . company-complete-common-or-cycle)
+               ("M-j" . company-complete-common-or-cycle)
+               ("C-n" . company-complete-common-or-cycle)
+               ("C-j" . company-complete-common-or-cycle)
+               ("<escape>" . company-abort)
+               ("<tab>" . company-complete-selection))
         :init
         (setq company-tooltip-limit 30)                        ; bigger popup window
-        (setq company-idle-delay .15)                          ; decrease delay before autocompletion popup shows
+        (setq company-idle-delay 0)                          ; decrease delay before autocompletion popup shows
         (setq company-echo-delay 0)                            ; remove annoying blinking
         (setq company-begin-commands '(self-insert-command))   ; start autocompletion only after typing
+        (setq company-minimum-prefix-length 1)
         :config
         (progn
           (global-company-mode)))
+    #+END_SRC
+*** =company-quickhelp=
+    It's nice to have small popups with the documentation of the candidates in
+    =company= :)
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-quickhelp
+        :init
+        (setq company-quickhelp-delay 0.5)
+        (setq company-quickhelp-use-propertized-text t)
+        :config
+        (company-quickhelp-mode))
     #+END_SRC
 ** Snippets
 *** =yasnippet=
