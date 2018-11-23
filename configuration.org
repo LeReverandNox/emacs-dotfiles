@@ -1354,6 +1354,12 @@ Emacs often !
     #+BEGIN_SRC emacs-lisp
       (use-package yaml-mode)
     #+END_SRC
+*** JSON
+    Here's a major-mode ([[https://github.com/joshwnj/json-mode][here]]) to edit JSON, with syntax highlithing, indentation,
+    linting etc :)
+    #+BEGIN_SRC emacs-lisp
+      (use-package json-mode)
+    #+END_SRC
 *** CMake
     A major mode for CMake files
     #+BEGIN_SRC emacs-lisp
