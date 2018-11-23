@@ -85,8 +85,10 @@ Insert with =C-c C-h=
                 "Status: " '("new" "installed" "dependency" "obsolete"))))
         (package-menu-filter (concat "status:" status)))
 
-      (define-key package-menu-mode-map "s" #'package-menu-filter-by-status)
-      (define-key package-menu-mode-map "a" #'package-menu-find-marks)
+      (with-eval-after-load 'evil
+        (evil-define-key 'normal package-menu-mode-map (kbd "s") 'package-menu-filter-by-status)
+        (evil-define-key 'normal package-menu-mode-map (kbd "a") 'package-menu-find-marks)
+        )
     #+END_SRC
 
 ** then, setup =use-package=, our beloved package-manager...
