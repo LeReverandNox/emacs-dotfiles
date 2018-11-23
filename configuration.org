@@ -165,13 +165,12 @@ Insert with =C-c C-h=
   #+BEGIN_SRC emacs-lisp
     (use-package evil-collection
       :after evil
-      :init
-      ;; Disable neotree bindings, I'm already happy with mine
-      (setq evil-collection-mode-list (remove 'neotree evil-collection-mode-list))
-      ;; Disable outline bindings, conflict with TAB (org-cycle)
-      (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
       :config
       (progn
+        ;; Disable neotree bindings, I'm already happy with mine
+        (setq evil-collection-mode-list (remove 'neotree evil-collection-mode-list))
+        ;; Disable outline bindings, conflict with TAB (org-cycle)
+        (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
         (evil-collection-init)))
   #+END_SRC
 
