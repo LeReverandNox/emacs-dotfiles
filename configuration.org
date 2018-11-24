@@ -87,11 +87,11 @@ Insert with =C-c C-h=
 
       (with-eval-after-load 'evil
         (evil-define-key 'normal package-menu-mode-map (kbd "s") 'package-menu-filter-by-status)
-        (evil-define-key 'normal package-menu-mode-map (kbd "a") 'package-menu-find-marks)
-        )
+        (evil-define-key 'normal package-menu-mode-map (kbd "a") 'package-menu-find-marks))
     #+END_SRC
 
 ** then, setup =use-package=, our beloved package-manager...
+   See [[https://github.com/jwiegley/use-package][here]].
    #+BEGIN_SRC emacs-lisp
      (unless (package-installed-p 'use-package)
        (package-refresh-contents)
