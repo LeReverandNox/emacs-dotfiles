@@ -699,7 +699,7 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (global-auto-revert-mode t)
    #+END_SRC
-** =auto-fill-mode=
+** Line-wrapping
    Activate =auto-fill-mode= for =text-mode=.
    It automatically wraps the lines at =fill-column= length.
    #+BEGIN_SRC emacs-lisp
