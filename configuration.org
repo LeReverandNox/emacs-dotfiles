@@ -460,23 +460,42 @@ directory of a node easily !
               ("C-h w" . helm-descbinds)))
    #+END_SRC
 
-** =guide-key=
+** Keybindings help
+*** =guide-key=
    From [[https://github.com/kai2nenobu/guide-key][here]].
+
    =guide-key= is a cool little package that shows a popup with the possibles
    key-bindings when you start typing. Really useful to discover a lot of cool
    bindings !
    #+BEGIN_SRC emacs-lisp
-     (use-package guide-key
-       :diminish guide-key-mode
-       :init
-       (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
-       (setq guide-key/popup-window-position 'bottom)
-       (setq guide-key/align-command-by-space-flag t)
-       (setq guide-key/idle-delay 0.75)
-       :config
-       (progn
-         (guide-key-mode 1)))
+     ;; (use-package guide-key
+     ;;   :diminish guide-key-mode
+     ;;   :init
+     ;;   (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
+     ;;   (setq guide-key/popup-window-position 'bottom)
+     ;;   (setq guide-key/align-command-by-space-flag t)
+     ;;   (setq guide-key/idle-delay 0.75)
+     ;;   :config
+     ;;   (progn
+     ;;     (guide-key-mode 1)))
    #+END_SRC
+*** =which-key=
+    From [[https://github.com/justbur/emacs-which-key][here]].
+
+    Based on =guide-key=, it was developped for [[https://www.google.com/search?client=firefox-b-ab&q=github+spcemacs][Spacemacs]]. It does the same
+    things, but... in a cooler way. Maybe.
+
+    Let's give it a shot and see what it worth.
+    #+BEGIN_SRC emacs-lisp
+      (use-package which-key
+        :diminish which-key-mode
+        :init
+        (setq which-key-popup-type 'side-window)
+        (setq which-key-idle-delay 0.75)
+        :config
+        (which-key-mode t))
+    #+END_SRC
+
 ** Sessions
    Emacs can save and restore the current session. Convenient since I'm closing
 Emacs often !
