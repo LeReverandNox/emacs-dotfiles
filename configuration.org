@@ -381,8 +381,7 @@ Insert with =C-c C-h=
         (diminish-major-mode 'sh-mode-hook "Sh")
         (diminish-minor-mode 'simple 'auto-fill-function)
         (diminish-minor-mode 'subword 'subword-mode)
-        (diminish-minor-mode 'abbrev 'abbrev-mode)
-        (diminish-minor-mode 'eldoc 'eldoc-mode))
+        (diminish-minor-mode 'abbrev 'abbrev-mode))
     #+END_SRC
 ** Icons
    Because it's always nice to have cool icons instead of plain text
@@ -1336,6 +1335,20 @@ Emacs often !
 ** Snippets
 *** =yasnippet=
     TODO: Setup =yasnippet= !
+** Documentation
+*** =eldoc=
+    =eldoc= shows the prototype of the function at point in the echo area.
+    By default it only works for Lisp, but you can plug additional backends to
+    support other languages. It's really nifty.
+
+    Let's enable it globally
+    #+BEGIN_SRC emacs-lisp
+      (use-package eldoc
+        :diminish (eldoc-mode "eldoc")
+        :config
+        (global-eldoc-mode t)
+        )
+    #+END_SRC
 ** Syntax checking
 *** =flycheck=
     A great realtime syntax checking extension that works with a lot of
