@@ -379,8 +379,6 @@ Insert with =C-c C-h=
         (diminish-major-mode 'python-mode-hook "Py")
         (diminish-major-mode 'js-mode-hook "JS")
         (diminish-major-mode 'sh-mode-hook "Sh")
-        (diminish-minor-mode 'simple 'auto-fill-function)
-        (diminish-minor-mode 'subword 'subword-mode)
         (diminish-minor-mode 'abbrev 'abbrev-mode))
     #+END_SRC
 ** Icons
@@ -664,7 +662,10 @@ Emacs often !
 ** Case
    Treat lower/uppper CamelCase as separate words
    #+BEGIN_SRC emacs-lisp
-     (global-subword-mode 1)
+     (use-package subword
+       :diminish subword-mode
+       :config
+       (global-subword-mode 1))
    #+END_SRC
 ** Cursor width
    From [[http://pragmaticemacs.com/emacs/adaptive-cursor-width/][here]].
@@ -680,10 +681,10 @@ Emacs often !
      (global-auto-revert-mode t)
    #+END_SRC
 ** =auto-fill-mode=
-   Automatically activate =auto-fill-mode= for =text-mode= and =org-mode=
+   Activate =auto-fill-mode= for =text-mode=.
+   It automatically wraps the lines at =fill-column= length.
    #+BEGIN_SRC emacs-lisp
      (add-hook 'text-mode-hook 'turn-on-auto-fill)
-     (add-hook 'org-mode-hook 'turn-on-auto-fill)
    #+END_SRC
 
    Add a shortcut to disable =auto-fill-mode=... BUT WHY ?
@@ -1082,6 +1083,7 @@ Emacs often !
    Let's install the latest =org= package and set some stuff.
    #+BEGIN_SRC emacs-lisp
      (use-package org
+       :hook (org-mode . auto-fill-mode)
        :init
        ;; Syntax highlight src blocks in org-mode
        (setq org-src-fontify-natively t)
@@ -1347,8 +1349,7 @@ Emacs often !
       (use-package eldoc
         :diminish (eldoc-mode "eldoc")
         :config
-        (global-eldoc-mode t)
-        )
+        (global-eldoc-mode t))
     #+END_SRC
 ** Syntax checking
 *** =flycheck=
