@@ -1299,7 +1299,7 @@ Emacs often !
 
     #+BEGIN_SRC emacs-lisp
       (use-package company
-        :diminish company-mode
+        :diminish (company-mode "Company")
         :bind (
                ("C-SPC" . company-complete)
                :map company-active-map
@@ -1317,6 +1317,7 @@ Emacs often !
         (setq company-echo-delay 0)                            ; remove annoying blinking
         (setq company-begin-commands '(self-insert-command))   ; start autocompletion only after typing
         (setq company-minimum-prefix-length 1)
+        (setq company-tooltip-align-annotations t)
         :config
         (progn
           (global-company-mode)))
