@@ -1395,6 +1395,11 @@ Emacs often !
       (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat)
       (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance)
     #+END_SRC
+
+    Show the match count.
+    #+BEGIN_SRC emacs-lisp
+      (setq isearch-lazy-count t)
+    #+END_SRC
 ** Project management
 *** =projectile=
     =projectile= is another awesome package, allowing us to work with projects
