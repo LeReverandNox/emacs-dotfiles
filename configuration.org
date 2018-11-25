@@ -1176,11 +1176,24 @@ Emacs often !
 
    #+BEGIN_SRC emacs-lisp
      (use-package eyebrowse
+       :bind (
+              ;; That's stupid, I need to include the prefix in the binding... bug ?
+              :map eyebrowse-mode-map
+              ("C-c C-w <left>" . eyebrowse-prev-window-config)
+              ("C-c C-w <right>" . eyebrowse-next-window-config))
        :init
        ;; This is a custom face, so the active workspace is more visible in the mode-line.
        (set-face-attribute 'eyebrowse-mode-line-active nil
                            :inherit font-lock-builtin-face
                            :weight 'bold)
+       ;; Circle through the workspaces.
+       (setq eyebrowse-wrap-around t)
+       ;; Create a scratch buffer in a new workspace.
+       (setq eyebrowse-new-workspace 'hrs/generate-scratch-buffer)
+       ;; Set the prefix to access eyebrowse-keymap
+       (setq eyebrowse-keymap-prefix (kbd "C-c C-w"))
+       ;; Always show the mode-line indicator, even if there's only one workspace
+       (setq eyebrowse-mode-line-style t)
        :config
        (eyebrowse-mode t))
    #+END_SRC
