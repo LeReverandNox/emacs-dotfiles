@@ -15,6 +15,7 @@ irony/
 compile_commands.json
 bookmarks
 configuration.el
+configuration.html
 .persistent-scratch
 eshell/
 places
