@@ -1551,7 +1551,9 @@ Emacs often !
     #+END_SRC
 ** Snippets
 *** =yasnippet=
+    From [[https://github.com/joaotavora/yasnippet][here]]. Ressouces [[https://www.emacswiki.org/emacs/Yasnippet][here]], [[http://ergoemacs.org/emacs/emacs_templates.html][here]], [[http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/][here]], [[http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/][here]].
     TODO: Setup =yasnippet= !
+
 ** Documentation
 *** =eldoc=
     =eldoc= shows the prototype of the function at point in the echo area.
