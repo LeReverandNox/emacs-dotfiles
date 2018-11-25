@@ -779,6 +779,14 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (electric-pair-mode t)
    #+END_SRC
+
+   Support a few more pairs. (See [[http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html][here]])
+   #+BEGIN_SRC emacs-lisp
+     (setq electric-pair-pairs
+           '(
+             (?' . ?')
+             (?` . ?`)))
+   #+END_SRC
 ** Sentence delimitation
    Sentence end with a single space. Because I said it.
    #+BEGIN_SRC emacs-lisp
@@ -1555,7 +1563,7 @@ Emacs often !
        (dolist (hook lispy-mode-hooks)
          (add-hook hook (lambda ()
                           (setq show-paren-style 'expression)
-                          (electric-pair-mode nil)
+                          (electric-pair-local-mode -1)
                           (smartparens-strict-mode)
                           (show-smartparens-mode)
                           (rainbow-delimiters-mode))))
