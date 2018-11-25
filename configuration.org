@@ -2,60 +2,60 @@
 #+AUTHOR: LeReverandNox
 
 * Use sensible-defaults.el
-Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] by [[https://github.com/hrs/sensible-defaults.el][@HRS]] to setup basic and usefull stuff without
-recoding it myself :)
+  Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] by [[https://github.com/hrs/sensible-defaults.el][@HRS]] to setup basic and usefull stuff without
+  recoding it myself :)
 
-#+BEGIN_SRC emacs-lisp
-  (load (concat user-emacs-directory "config/sensible-defaults/sensible-defaults.el"))
+  #+BEGIN_SRC emacs-lisp
+    (load (concat user-emacs-directory "config/sensible-defaults/sensible-defaults.el"))
 
-  (sensible-defaults/shorten-yes-or-no)
-  (sensible-defaults/delete-trailing-whitespace)
-  (sensible-defaults/show-matching-parens)
-  (sensible-defaults/make-scripts-executable)
-  (sensible-defaults/overwrite-selected-text)
-  (sensible-defaults/ensure-that-files-end-with-newline)
-  (sensible-defaults/confirm-closing-emacs)
-  (sensible-defaults/quiet-startup)
-  (sensible-defaults/always-highlight-code)
-  (sensible-defaults/refresh-buffers-when-files-change)
-  (sensible-defaults/bind-commenting-and-uncommenting)
-  (sensible-defaults/set-default-line-length-to 80)
-  (sensible-defaults/flash-screen-instead-of-ringing-bell)
-#+END_SRC
+    (sensible-defaults/shorten-yes-or-no)
+    (sensible-defaults/delete-trailing-whitespace)
+    (sensible-defaults/show-matching-parens)
+    (sensible-defaults/make-scripts-executable)
+    (sensible-defaults/overwrite-selected-text)
+    (sensible-defaults/ensure-that-files-end-with-newline)
+    (sensible-defaults/confirm-closing-emacs)
+    (sensible-defaults/quiet-startup)
+    (sensible-defaults/always-highlight-code)
+    (sensible-defaults/refresh-buffers-when-files-change)
+    (sensible-defaults/bind-commenting-and-uncommenting)
+    (sensible-defaults/set-default-line-length-to 80)
+    (sensible-defaults/flash-screen-instead-of-ringing-bell)
+  #+END_SRC
 
 * 42 Headers
-Use the official 42 headers in C/CPP files.
-Insert with =C-c C-h=
+  Use the official 42 headers in C/CPP files.
+  Insert with =C-c C-h=
 
-#+BEGIN_SRC emacs-lisp
-  (load (concat user-emacs-directory "config/42/list.el"))
-  (load (concat user-emacs-directory "config/42/string.el"))
-  (load (concat user-emacs-directory "config/42/comments.el"))
-  (load (concat user-emacs-directory "config/42/header.el"))
-#+END_SRC
+  #+BEGIN_SRC emacs-lisp
+    (load (concat user-emacs-directory "config/42/list.el"))
+    (load (concat user-emacs-directory "config/42/string.el"))
+    (load (concat user-emacs-directory "config/42/comments.el"))
+    (load (concat user-emacs-directory "config/42/header.el"))
+  #+END_SRC
 
 * Package management (=package=, =use-package= and =auto-compile=)
 ** Setup =package= and it' s sources...
 *** Setup
     Note to myself: I need to try [[https://emacs.stackexchange.com/a/2989][that]] sometime, to achieve source
     prioritization. For now, let's disable =melpa-stable=
-   #+BEGIN_SRC emacs-lisp
-     (require 'package)
-     (setq package-enable-at-startup nil)
+    #+BEGIN_SRC emacs-lisp
+      (require 'package)
+      (setq package-enable-at-startup nil)
 
-     (unless (assoc-default "org" package-archives)
-       (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/")))
-     (unless (assoc-default "melpa" package-archives)
-       (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
-     ;; (unless (assoc-default "melpa-stable" package-archives)
-     ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/")))
+      (unless (assoc-default "org" package-archives)
+        (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/")))
+      (unless (assoc-default "melpa" package-archives)
+        (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
+      ;; (unless (assoc-default "melpa-stable" package-archives)
+      ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/")))
 
-     (when (< emacs-major-version 27)
-       (package-initialize))
-   #+END_SRC
+      (when (< emacs-major-version 27)
+        (package-initialize))
+    #+END_SRC
 
-   Don't forget to run =M-x package-refresh-contents= to reload the package list
-   when you add a new source or if you can't find a package.
+    Don't forget to run =M-x package-refresh-contents= to reload the package list
+    when you add a new source or if you can't find a package.
 
 *** Upgrade
     From [[https://emacs.stackexchange.com/a/31874][this]] post.
@@ -247,77 +247,77 @@ Insert with =C-c C-h=
    Not quite sur about the color, but it will do the trick.
    #+BEGIN_SRC emacs-lisp
      (set-face-attribute 'org-verbatim nil
-      :foreground (face-attribute 'warning :foreground))
+                         :foreground (face-attribute 'warning :foreground))
    #+END_SRC
 
 ** Font
    Thanks again to @HRS for those really helpful functions !
 
 *** Setup
-   Let's set =RobotoMono Nerd Font= as the default font
-   #+BEGIN_SRC emacs-lisp
-     (setq hrs/default-font "RobotoMono Nerd Font")
-   #+END_SRC
+    Let's set =RobotoMono Nerd Font= as the default font
+    #+BEGIN_SRC emacs-lisp
+      (setq hrs/default-font "RobotoMono Nerd Font")
+    #+END_SRC
 
-   With a default size of 11
-   #+BEGIN_SRC emacs-lisp
-     (setq hrs/default-font-size 11)
-   #+END_SRC
+    With a default size of 11
+    #+BEGIN_SRC emacs-lisp
+      (setq hrs/default-font-size 11)
+    #+END_SRC
 
 *** Resizing
-   Really cool fonctions :)
-   #+BEGIN_SRC emacs-lisp
-     (defun hrs/font-code ()
-       "Return a string representing the current font (like \"Inconsolata-14\")."
-       (concat hrs/default-font "-" (number-to-string hrs/current-font-size)))
+    Really cool fonctions :)
+    #+BEGIN_SRC emacs-lisp
+      (defun hrs/font-code ()
+        "Return a string representing the current font (like \"Inconsolata-14\")."
+        (concat hrs/default-font "-" (number-to-string hrs/current-font-size)))
 
-     (defun hrs/set-font-size ()
-       "Set the font to `hrs/default-font' at `hrs/current-font-size'.
-        Set that for the current frame, and also make it the default for
-        other, future frames."
-       (let ((font-code (hrs/font-code)))
-         (add-to-list 'default-frame-alist (cons 'font font-code))
-         (set-frame-font font-code)))
+      (defun hrs/set-font-size ()
+        "Set the font to `hrs/default-font' at `hrs/current-font-size'.
+         Set that for the current frame, and also make it the default for
+         other, future frames."
+        (let ((font-code (hrs/font-code)))
+          (add-to-list 'default-frame-alist (cons 'font font-code))
+          (set-frame-font font-code)))
 
-     (defun hrs/reset-font-size ()
-       "Change font size back to `hrs/default-font-size'."
-       (interactive)
-       (setq hrs/current-font-size hrs/default-font-size)
-       (hrs/set-font-size))
+      (defun hrs/reset-font-size ()
+        "Change font size back to `hrs/default-font-size'."
+        (interactive)
+        (setq hrs/current-font-size hrs/default-font-size)
+        (hrs/set-font-size))
 
-     (defun hrs/increase-font-size ()
-       "Increase current font size by a factor of `hrs/font-change-increment'."
-       (interactive)
-       (setq hrs/current-font-size
-             (ceiling (* hrs/current-font-size hrs/font-change-increment)))
-       (hrs/set-font-size))
+      (defun hrs/increase-font-size ()
+        "Increase current font size by a factor of `hrs/font-change-increment'."
+        (interactive)
+        (setq hrs/current-font-size
+              (ceiling (* hrs/current-font-size hrs/font-change-increment)))
+        (hrs/set-font-size))
 
-     (defun hrs/decrease-font-size ()
-       "Decrease current font size by a factor of `hrs/font-change-increment', down to a minimum size of 1."
-       (interactive)
-       (setq hrs/current-font-size
-             (max 1
-                  (floor (/ hrs/current-font-size hrs/font-change-increment))))
-       (hrs/set-font-size))
-   #+END_SRC
+      (defun hrs/decrease-font-size ()
+        "Decrease current font size by a factor of `hrs/font-change-increment', down to a minimum size of 1."
+        (interactive)
+        (setq hrs/current-font-size
+              (max 1
+                   (floor (/ hrs/current-font-size hrs/font-change-increment))))
+        (hrs/set-font-size))
+    #+END_SRC
 
-   Increment font by 0.5%
-   #+BEGIN_SRC emacs-lisp
-     (setq hrs/font-change-increment 1.05)
-   #+END_SRC
+    Increment font by 0.5%
+    #+BEGIN_SRC emacs-lisp
+      (setq hrs/font-change-increment 1.05)
+    #+END_SRC
 
-   Globally bind font resizing to =C-+=, =C--= and =C-==, so I can resize
-   ANYWHERE <3
-   #+BEGIN_SRC emacs-lisp
-     (define-key global-map (kbd "C-=") 'hrs/reset-font-size)
-     (define-key global-map (kbd "C-+") 'hrs/increase-font-size)
-     (define-key global-map (kbd "C--") 'hrs/decrease-font-size)
-   #+END_SRC
+    Globally bind font resizing to =C-+=, =C--= and =C-==, so I can resize
+    ANYWHERE <3
+    #+BEGIN_SRC emacs-lisp
+      (define-key global-map (kbd "C-=") 'hrs/reset-font-size)
+      (define-key global-map (kbd "C-+") 'hrs/increase-font-size)
+      (define-key global-map (kbd "C--") 'hrs/decrease-font-size)
+    #+END_SRC
 
-   Reset the font size at startup
-   #+BEGIN_SRC emacs-lisp
-     (hrs/reset-font-size)
-   #+END_SRC
+    Reset the font size at startup
+    #+BEGIN_SRC emacs-lisp
+      (hrs/reset-font-size)
+    #+END_SRC
 ** Modeline
 *** =powerline=
     I love Vim's powerline, so when I heard there's an Emacs version...
@@ -333,58 +333,58 @@ Insert with =C-c C-h=
         mode-line-misc-info displayed."
         (interactive)
         (setq-default mode-line-format
-              '("%e"
-                (:eval
-                 (let* ((active (powerline-selected-window-active))
-                        (mode-line (if active 'mode-line 'mode-line-inactive))
-                        (face1 (if active 'powerline-active1 'powerline-inactive1))
-                        (face2 (if active 'powerline-active2 'powerline-inactive2))
-                        (separator-left (intern (format "powerline-%s-%s"
-                                                        (powerline-current-separator)
-                                                        (car powerline-default-separator-dir))))
-                        (separator-right (intern (format "powerline-%s-%s"
-                                                         (powerline-current-separator)
-                                                         (cdr powerline-default-separator-dir))))
-                        (lhs (list (powerline-raw "%*" nil 'l)
-                                   (powerline-buffer-size nil 'l)
-                                   (powerline-buffer-id nil 'l)
-                                   (powerline-raw " ")
-                                   (funcall separator-left mode-line face1)
-                                   (powerline-narrow face1 'l)
-                                   (powerline-vc face1)))
-                        (rhs (list (powerline-raw global-mode-string face1 'r)
-                                   (powerline-raw "%4l" face1 'r)
-                                   (powerline-raw ":" face1)
-                                   (powerline-raw "%3c" face1 'r)
-                                   (funcall separator-right face1 mode-line)
-                                   (powerline-raw " ")
-                                   (powerline-raw "%6p" nil 'r)
-                                   (powerline-hud face2 face1)
-                                   (powerline-raw mode-line-misc-info face2 'r)))
-                        (center (append (list (powerline-raw " " face1)
-                                              (funcall separator-left face1 face2)
-                                              (when (boundp 'erc-modified-channels-object)
-                                                (powerline-raw erc-modified-channels-object face2 'l))
-                                              (powerline-major-mode face2 'l)
-                                              (powerline-process face2)
-                                              (powerline-raw " " face2))
-                                        (let ((evil-face (powerline-evil-face)))
-                                          (if (split-string (format-mode-line minor-mode-alist))
-                                              (append (if evil-mode
-                                                          (list (funcall separator-right face2 evil-face)
-                                                                (powerline-raw (powerline-evil-tag) evil-face 'l)
-                                                                (powerline-raw " " evil-face)
-                                                                (funcall separator-left evil-face face2)))
-                                                      (list (powerline-minor-modes face2 'l)
-                                                            (powerline-raw " " face2)
-                                                            (funcall separator-right face2 face1)))
-                                            (list (powerline-raw (powerline-evil-tag) evil-face)
-                                                  (funcall separator-right evil-face face1)))))))
-                   (concat (powerline-render lhs)
-                           (powerline-fill-center face1 (/ (powerline-width center) 2.0))
-                           (powerline-render center)
-                           (powerline-fill face1 (powerline-width rhs))
-                           (powerline-render rhs)))))))
+                      '("%e"
+                        (:eval
+                         (let* ((active (powerline-selected-window-active))
+                                (mode-line (if active 'mode-line 'mode-line-inactive))
+                                (face1 (if active 'powerline-active1 'powerline-inactive1))
+                                (face2 (if active 'powerline-active2 'powerline-inactive2))
+                                (separator-left (intern (format "powerline-%s-%s"
+                                                                (powerline-current-separator)
+                                                                (car powerline-default-separator-dir))))
+                                (separator-right (intern (format "powerline-%s-%s"
+                                                                 (powerline-current-separator)
+                                                                 (cdr powerline-default-separator-dir))))
+                                (lhs (list (powerline-raw "%*" nil 'l)
+                                           (powerline-buffer-size nil 'l)
+                                           (powerline-buffer-id nil 'l)
+                                           (powerline-raw " ")
+                                           (funcall separator-left mode-line face1)
+                                           (powerline-narrow face1 'l)
+                                           (powerline-vc face1)))
+                                (rhs (list (powerline-raw global-mode-string face1 'r)
+                                           (powerline-raw "%4l" face1 'r)
+                                           (powerline-raw ":" face1)
+                                           (powerline-raw "%3c" face1 'r)
+                                           (funcall separator-right face1 mode-line)
+                                           (powerline-raw " ")
+                                           (powerline-raw "%6p" nil 'r)
+                                           (powerline-hud face2 face1)
+                                           (powerline-raw mode-line-misc-info face2 'r)))
+                                (center (append (list (powerline-raw " " face1)
+                                                      (funcall separator-left face1 face2)
+                                                      (when (boundp 'erc-modified-channels-object)
+                                                        (powerline-raw erc-modified-channels-object face2 'l))
+                                                      (powerline-major-mode face2 'l)
+                                                      (powerline-process face2)
+                                                      (powerline-raw " " face2))
+                                                (let ((evil-face (powerline-evil-face)))
+                                                  (if (split-string (format-mode-line minor-mode-alist))
+                                                      (append (if evil-mode
+                                                                  (list (funcall separator-right face2 evil-face)
+                                                                        (powerline-raw (powerline-evil-tag) evil-face 'l)
+                                                                        (powerline-raw " " evil-face)
+                                                                        (funcall separator-left evil-face face2)))
+                                                              (list (powerline-minor-modes face2 'l)
+                                                                    (powerline-raw " " face2)
+                                                                    (funcall separator-right face2 face1)))
+                                                    (list (powerline-raw (powerline-evil-tag) evil-face)
+                                                          (funcall separator-right evil-face face1)))))))
+                           (concat (powerline-render lhs)
+                                   (powerline-fill-center face1 (/ (powerline-width center) 2.0))
+                                   (powerline-render center)
+                                   (powerline-fill face1 (powerline-width rhs))
+                                   (powerline-render rhs)))))))
     #+END_SRC
 
     #+BEGIN_SRC emacs-lisp
@@ -447,7 +447,7 @@ Insert with =C-c C-h=
    conveniant sidebar <3
 
    Thanks [[https://github.com/jaypei/emacs-neotree/issues/293][@stereoproxy]] for this function that allows me to close the parent
-directory of a node easily !
+   directory of a node easily !
    #+BEGIN_SRC emacs-lisp
      (defun my/neotree-close-parent ()
        "Close parent directory of current node."
@@ -455,8 +455,8 @@ directory of a node easily !
        (neotree-select-up-node)
        (let* ((btn-full-path (neo-buffer--get-filename-current-line))
               (path (if btn-full-path btn-full-path neo-buffer--start-node)))
-             (when (file-name-directory path)
-               (if (neo-buffer--expanded-node-p path) (neotree-enter)))))
+         (when (file-name-directory path)
+           (if (neo-buffer--expanded-node-p path) (neotree-enter)))))
    #+END_SRC
 
    Let's install =neotree= and set the bindings
@@ -572,23 +572,23 @@ directory of a node easily !
 
 ** Keybindings help
 *** =guide-key=
-   From [[https://github.com/kai2nenobu/guide-key][here]].
+    From [[https://github.com/kai2nenobu/guide-key][here]].
 
-   =guide-key= is a cool little package that shows a popup with the possibles
-   key-bindings when you start typing. Really useful to discover a lot of cool
-   bindings !
-   #+BEGIN_SRC emacs-lisp
-     ;; (use-package guide-key
-     ;;   :diminish guide-key-mode
-     ;;   :init
-     ;;   (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
-     ;;   (setq guide-key/popup-window-position 'bottom)
-     ;;   (setq guide-key/align-command-by-space-flag t)
-     ;;   (setq guide-key/idle-delay 0.75)
-     ;;   :config
-     ;;   (progn
-     ;;     (guide-key-mode 1)))
-   #+END_SRC
+    =guide-key= is a cool little package that shows a popup with the possibles
+    key-bindings when you start typing. Really useful to discover a lot of cool
+    bindings !
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package guide-key
+      ;;   :diminish guide-key-mode
+      ;;   :init
+      ;;   (setq guide-key/guide-key-sequence t) ; Trigger the guide for any binding
+      ;;   (setq guide-key/popup-window-position 'bottom)
+      ;;   (setq guide-key/align-command-by-space-flag t)
+      ;;   (setq guide-key/idle-delay 0.75)
+      ;;   :config
+      ;;   (progn
+      ;;     (guide-key-mode 1)))
+    #+END_SRC
 *** =which-key=
     From [[https://github.com/justbur/emacs-which-key][here]].
 
@@ -608,7 +608,7 @@ directory of a node easily !
 
 ** Sessions
    Emacs can save and restore the current session. Convenient since I'm closing
-Emacs often !
+   Emacs often !
 
    Themes settings are also stored in the .desktop file... So if I change
    settings with =customize-face= then exit Emacs, those settings are restored
@@ -626,7 +626,7 @@ Emacs often !
 
      ;; (add-to-list 'desktop-globals-to-save 'custom-enabled-themes)
      ;; (defun desktop-load-theme () "load custom theme" (interactive)
-       ;; (dolist (th custom-enabled-themes) (load-theme th)))
+     ;; (dolist (th custom-enabled-themes) (load-theme th)))
      ;; (add-hook 'desktop-after-read-hook 'desktop-load-theme)
    #+END_SRC
 
@@ -676,14 +676,14 @@ Emacs often !
    #+END_SRC
 
 *** =dired+=
-   =dired+= is a package that provides additional features to the basic
-   =dired-mode=
-   However, I had to intall it manually, since it's not present on
-   =MELPA= anymore ='(
-   #+BEGIN_SRC emacs-lisp
-     (add-to-list 'load-path (concat user-emacs-directory "config/dired+"))
-     (require 'dired+)
-   #+END_SRC
+    =dired+= is a package that provides additional features to the basic
+    =dired-mode=
+    However, I had to intall it manually, since it's not present on
+    =MELPA= anymore ='(
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'load-path (concat user-emacs-directory "config/dired+"))
+      (require 'dired+)
+    #+END_SRC
 
 *** =dired-narrow=
     A cool package that allows to filter files by name ! (See [[http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/][here]])
@@ -718,27 +718,27 @@ Emacs often !
    #+END_SRC
 * Persitency
 ** =backup= and =auto-save=
-  I love to keep my backups and auto-saves neatly in separates directories.
-  This is the first settings I used when I start using Emacs in 2016, I should
-  review them someday.
-  #+BEGIN_SRC emacs-lisp
-    (let ((backup-dir (concat user-emacs-directory "tmp/backups"))
-          (auto-saves-dir (concat user-emacs-directory "tmp/auto-saves")))
-      (dolist (dir (list backup-dir auto-saves-dir))
-        (when (not (file-directory-p dir))
-          (make-directory dir t)))
-      (setq backup-directory-alist `(("." . ,backup-dir))
-        auto-save-file-name-transforms `((".*" ,auto-saves-dir t))
-        auto-save-list-file-prefix (concat auto-saves-dir ".saves-")
-        tramp-backup-directory-alist `((".*" . ,backup-dir))
-        tramp-auto-save-directory auto-saves-dir))
+   I love to keep my backups and auto-saves neatly in separates directories.
+   This is the first settings I used when I start using Emacs in 2016, I should
+   review them someday.
+   #+BEGIN_SRC emacs-lisp
+     (let ((backup-dir (concat user-emacs-directory "tmp/backups"))
+           (auto-saves-dir (concat user-emacs-directory "tmp/auto-saves")))
+       (dolist (dir (list backup-dir auto-saves-dir))
+         (when (not (file-directory-p dir))
+           (make-directory dir t)))
+       (setq backup-directory-alist `(("." . ,backup-dir))
+             auto-save-file-name-transforms `((".*" ,auto-saves-dir t))
+             auto-save-list-file-prefix (concat auto-saves-dir ".saves-")
+             tramp-backup-directory-alist `((".*" . ,backup-dir))
+             tramp-auto-save-directory auto-saves-dir))
 
-    (setq backup-by-copying t    ; Don't delink hardlinks
-          delete-old-versions t  ; Clean up the backups
-          version-control t      ; Use version numbers on backups,
-          kept-new-versions 5    ; keep some new versions
-          kept-old-versions 2)   ; and some old ones, too
-  #+END_SRC
+     (setq backup-by-copying t    ; Don't delink hardlinks
+           delete-old-versions t  ; Clean up the backups
+           version-control t      ; Use version numbers on backups,
+           kept-new-versions 5    ; keep some new versions
+           kept-old-versions 2)   ; and some old ones, too
+   #+END_SRC
 
 ** History
    From [[http://pages.sachachua.com/.emacs.d/Sacha.html#org40a3abb][here]] (and from [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html][here]] too)
@@ -1051,58 +1051,58 @@ Emacs often !
    #+END_SRC
 ** Scratch buffers
 *** Mooooore !
-   A cool HRS function to generate new scratch buffers.
-   Can be used with =M-x hrs/generate-scratch-buffer= to create a scratch buffer
-   in the current pane.
-   #+BEGIN_SRC emacs-lisp
-     (defun hrs/generate-scratch-buffer ()
-       "Create and switch to a temporary scratch buffer with a random
-            name."
-       (interactive)
-       (switch-to-buffer (make-temp-name "scratch-")))
-   #+END_SRC
+    A cool HRS function to generate new scratch buffers.
+    Can be used with =M-x hrs/generate-scratch-buffer= to create a scratch buffer
+    in the current pane.
+    #+BEGIN_SRC emacs-lisp
+      (defun hrs/generate-scratch-buffer ()
+        "Create and switch to a temporary scratch buffer with a random
+             name."
+        (interactive)
+        (switch-to-buffer (make-temp-name "scratch-")))
+    #+END_SRC
 
-   I want to be able to spawn scratch buffers in a new split-window, horizontal
-   or vertical.
-   Let's make a small keymap on =C-w C-n= (instead of =evil-window-new=), and
-   bind two custom functions to do what I want, A.K.A, spawning a horizontal-split
-   scratch buffer with =C-w C-n s=, and a vertical-split one with =C-w C-n v=
+    I want to be able to spawn scratch buffers in a new split-window, horizontal
+    or vertical.
+    Let's make a small keymap on =C-w C-n= (instead of =evil-window-new=), and
+    bind two custom functions to do what I want, A.K.A, spawning a horizontal-split
+    scratch buffer with =C-w C-n s=, and a vertical-split one with =C-w C-n v=
 
-   First, a function to spawn the scratch buffers
-   #+BEGIN_SRC emacs-lisp
-     (defun lrn/spawn-scratch-buffer (orientation)
-       "Spawn a scratch buffer in a new window. Orientation can be either 'horizontal' or 'vertical'"
-       (cond ((eq orientation 'horizontal) (hrs/split-window-below-and-switch))
-             ((eq orientation 'vertical) (hrs/split-window-right-and-switch)))
-       (hrs/generate-scratch-buffer))
-   #+END_SRC
+    First, a function to spawn the scratch buffers
+    #+BEGIN_SRC emacs-lisp
+      (defun lrn/spawn-scratch-buffer (orientation)
+        "Spawn a scratch buffer in a new window. Orientation can be either 'horizontal' or 'vertical'"
+        (cond ((eq orientation 'horizontal) (hrs/split-window-below-and-switch))
+              ((eq orientation 'vertical) (hrs/split-window-right-and-switch)))
+        (hrs/generate-scratch-buffer))
+    #+END_SRC
 
-   And two other function to spawn vertically or horizontaly (At first, I tried
-   to make lambdas, it works great, but then =guide-key= displays ?? as the
-   function name...)
-   #+BEGIN_SRC emacs-lisp
-     (defun lrn/spawn-scratch-buffer-horizontal ()
-       (interactive)
-       (lrn/spawn-scratch-buffer 'horizontal))
+    And two other function to spawn vertically or horizontaly (At first, I tried
+    to make lambdas, it works great, but then =guide-key= displays ?? as the
+    function name...)
+    #+BEGIN_SRC emacs-lisp
+      (defun lrn/spawn-scratch-buffer-horizontal ()
+        (interactive)
+        (lrn/spawn-scratch-buffer 'horizontal))
 
-     (defun lrn/spawn-scratch-buffer-vertical ()
-       (interactive)
-       (lrn/spawn-scratch-buffer 'vertical))
-   #+END_SRC
+      (defun lrn/spawn-scratch-buffer-vertical ()
+        (interactive)
+        (lrn/spawn-scratch-buffer 'vertical))
+    #+END_SRC
 
-   Then, the map and the bindings
-   #+BEGIN_SRC emacs-lisp
-     ;; Unbind C-w C-n
-     (define-key evil-motion-state-map (kbd "C-w C-n") nil)
-     ;; Create a new map
-     (define-prefix-command 'lrn/scratchbuffer-key-map)
-     ;; Bind it to C-w C-n
-     (define-key evil-motion-state-map (kbd "C-w C-n") 'lrn/scratchbuffer-key-map)
-     ;; C-w C-n s to spawn a horizontal scratch buffer
-     (define-key lrn/scratchbuffer-key-map (kbd "s") 'lrn/spawn-scratch-buffer-horizontal)
-     ;; C-w C-n v to spawn a vertical scratch buffer
-     (define-key lrn/scratchbuffer-key-map (kbd "v") 'lrn/spawn-scratch-buffer-vertical)
-   #+END_SRC
+    Then, the map and the bindings
+    #+BEGIN_SRC emacs-lisp
+      ;; Unbind C-w C-n
+      (define-key evil-motion-state-map (kbd "C-w C-n") nil)
+      ;; Create a new map
+      (define-prefix-command 'lrn/scratchbuffer-key-map)
+      ;; Bind it to C-w C-n
+      (define-key evil-motion-state-map (kbd "C-w C-n") 'lrn/scratchbuffer-key-map)
+      ;; C-w C-n s to spawn a horizontal scratch buffer
+      (define-key lrn/scratchbuffer-key-map (kbd "s") 'lrn/spawn-scratch-buffer-horizontal)
+      ;; C-w C-n v to spawn a vertical scratch buffer
+      (define-key lrn/scratchbuffer-key-map (kbd "v") 'lrn/spawn-scratch-buffer-vertical)
+    #+END_SRC
 
 *** =persistent-scratch=
     Thanks to [[https://github.com/Fanael/persistent-scratch][this]] package, I can have persistent scratch buffers. They are
@@ -1148,7 +1148,7 @@ Emacs often !
    #+BEGIN_SRC emacs-lisp
      (defun lrn/kill-other-buffers ()
        (interactive)
-         (mapc 'kill-buffer (cdr (buffer-list (current-buffer)))))
+       (mapc 'kill-buffer (cdr (buffer-list (current-buffer)))))
    #+END_SRC
 ** Manage buffers
 *** =ibuffer=
@@ -1613,23 +1613,23 @@ Emacs often !
 *** Lisp
     Lisp, Emacs Lisp, Clojure... it's all the same for me ! I put eveything here.
 **** =smartparens=
-   According to [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html#fnr.75][this]], =smartparens= ([[https://github.com/Fuco1/smartparens][here]]) is cooler than =paredit=, which I used so
-   far (only for lispy languages)
-   Let's give it a shot, it's always nice to have a good expression
-   management... and it works with other pairs too ! Quotes, brackets and stuff.
+     According to [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html#fnr.75][this]], =smartparens= ([[https://github.com/Fuco1/smartparens][here]]) is cooler than =paredit=, which I used so
+     far (only for lispy languages)
+     Let's give it a shot, it's always nice to have a good expression
+     management... and it works with other pairs too ! Quotes, brackets and stuff.
 
-   Maybe someday I'll get some ideas from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgdd725d2][here]] too :)
-   #+BEGIN_SRC emacs-lisp
-     (use-package smartparens
-       :diminish smartparens-mode
-       :config
-       (progn
-         (sp-use-smartparens-bindings)
-         ;; Disable the highlight when spawning a pair, it doesn't go away
-         ;; until exiting Insert mode or hitting backspace...
-         (setq sp-highlight-pair-overlay nil)
-         (require 'smartparens-config)))
-   #+END_SRC
+     Maybe someday I'll get some ideas from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgdd725d2][here]] too :)
+     #+BEGIN_SRC emacs-lisp
+       (use-package smartparens
+         :diminish smartparens-mode
+         :config
+         (progn
+           (sp-use-smartparens-bindings)
+           ;; Disable the highlight when spawning a pair, it doesn't go away
+           ;; until exiting Insert mode or hitting backspace...
+           (setq sp-highlight-pair-overlay nil)
+           (require 'smartparens-config)))
+     #+END_SRC
 
 **** Parenthesis much ?
      All you need to avoid killing yourself when working with SO MUCH parenthesis
@@ -1736,7 +1736,8 @@ Emacs often !
      #+BEGIN_SRC emacs-lisp
        (use-package pipenv
          :hook (python-mode . pipenv-mode)
-         :bind (:map pipenv-command-map
+         :bind (
+                :map pipenv-command-map
                 ("w" . pyvenv-workon))
          :init
          (setenv "WORKON_HOME" "~/.local/share/virtualenvs")
@@ -1783,21 +1784,21 @@ Emacs often !
            (remove-hook 'elpy-modules 'elpy-module-flymake)))
      #+END_SRC
 
-    TODO: As of today, when I want to run a Python script with
-    =elpy-shell-send-region-or-buffer=, I get the following error :
-    #+BEGIN_QUOTE
-    Warning (python): Your ‘python-shell-interpreter’ doesn’t seem to support
-    readline, yet ‘python-shell-completion-native-enable’ was t and "python" is not
-    part of the ‘python-shell-completion-native-disabled-interpreters’ list.  Native
-    completions have been disabled locally.
-    #+END_QUOTE
-    According to [[https://github.com/jorgenschaefer/elpy/issues/887][this]], it seems to be a well known bug. And there's no solution
-    yet.
-    So, to avoid being spammed by warning, let's disable the native completion
-    for python.
-    #+BEGIN_SRC emacs-lisp
-      (setq python-shell-completion-native-disabled-interpreters '("python"))
-    #+END_SRC
+     TODO: As of today, when I want to run a Python script with
+     =elpy-shell-send-region-or-buffer=, I get the following error :
+     #+BEGIN_QUOTE
+     Warning (python): Your ‘python-shell-interpreter’ doesn’t seem to support
+     readline, yet ‘python-shell-completion-native-enable’ was t and "python" is not
+     part of the ‘python-shell-completion-native-disabled-interpreters’ list.  Native
+     completions have been disabled locally.
+     #+END_QUOTE
+     According to [[https://github.com/jorgenschaefer/elpy/issues/887][this]], it seems to be a well known bug. And there's no solution
+     yet.
+     So, to avoid being spammed by warning, let's disable the native completion
+     for python.
+     #+BEGIN_SRC emacs-lisp
+       (setq python-shell-completion-native-disabled-interpreters '("python"))
+     #+END_SRC
 **** =autopep8=
      Automatic format and correction of PEP8 errors at save.
      Not 100% convince, but I keep it for now.
@@ -1848,9 +1849,9 @@ Emacs often !
      =irony= based =company= backend, for completion
      #+BEGIN_SRC emacs-lisp
        ;; (use-package company-irony
-         ;; :config
-         ;; (progn
-           ;; (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
+       ;; :config
+       ;; (progn
+       ;; (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
      #+END_SRC
 
      =irony= based =flycheck= backend, for syntax checking
