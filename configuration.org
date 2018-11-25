@@ -698,6 +698,19 @@ Emacs often !
           (evil-define-key 'normal dired-mode-map (kbd "C-s") 'dired-narrow)))
     #+END_SRC
 
+*** =dired-quick-sort=
+    See [[https://gitlab.com/xuhdev/dired-quick-sort][here]].
+    Add a cool sorting menu to =dired=, to sort by name, time, size, extension,
+    you name it...
+
+    WARNING: Doesn't work on Mac OS, since =ls= doesn't support =--dired= option.
+    #+BEGIN_SRC emacs-lisp
+      (unless (string-equal system-type "darwin")
+        (use-package dired-quick-sort
+          :config
+          (dired-quick-sort-setup))
+        )
+    #+END_SRC
 ** Emacs server
    Let's add a binding to kill the Emacs server.
    #+BEGIN_SRC emacs-lisp
