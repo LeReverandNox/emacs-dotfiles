@@ -1148,6 +1148,38 @@ Emacs often !
           ))
     #+END_SRC
 
+* Workspaces
+  I just discovered that I can have workspaces in Emacs, just like in i3WM.\\
+  I have to try this ! However I'm not sure what package to chooose, between
+  =perspective.el=, =persp-mode= and =eyebrowse=...
+
+  I also don't know how they interact with =projectile=.
+  Let's try them all and see !
+
+** =eyebrowse=
+   From [[https://github.com/wasamasa/eyebrowse][here]]. Ressources [[http://pragmaticemacs.com/emacs/easily-manage-emacs-workspaces-with-eyebrowse/][here]],
+
+   This package workspaces to Emacs, just like a TWM.
+   Hit =C-c C-w=, then you can choose a workspace (0-9).\\
+   Each workspace keeps a different window configuration, and it's saved by
+   =desktop-save-mode=. Pretty cool.
+
+   Apparently, it can work with =perspective=, with some additional code (see
+   [[https://www.reddit.com/r/emacs/comments/6sffrd/am_i_misunderstanding_eyebrowse/dlcfhwk][here)]], so you can have multiple workspaces with 10 sub-workspaces in each
+   one... Sounds great, but I don't find the proper way to do it.
+
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package eyebrowse
+       :init
+       ;; This is a custom face, so the active workspace is more visible in the mode-line.
+       (set-face-attribute 'eyebrowse-mode-line-active nil
+                           :inherit font-lock-builtin-face
+                           :weight 'bold)
+       :config
+       (eyebrowse-mode t))
+   #+END_SRC
+
 * =TRAMP=
   =TRAMP= is great to remote-edit files with Emacs !
   I need to use it way more.
