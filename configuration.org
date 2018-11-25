@@ -2039,3 +2039,26 @@ Emacs often !
     #+BEGIN_SRC emacs-lisp
       (define-key evil-normal-state-map (kbd "C-S-t") 'shell-command)
     #+END_SRC
+** Docker
+   See [[http://manuel-uberti.github.io/emacs/2017/10/19/docker/][here]].\\
+   Praise the blue whale \o/
+
+   TODO: Check [[https://github.com/Silex/docker.el][this]].
+*** =dockerfile-mode=
+    See [[https://github.com/spotify/dockerfile-mode][here]].\\
+    This package adds syntax highlighting for =Dockerfile=s and =docker build= feature to Emacs.
+    What's not to love ?
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package dockerfile-mode
+        :mode ("Dockerfile\\'"))
+    #+END_SRC
+
+*** =docker-compose-mode=
+    See [[https://github.com/meqif/docker-compose-mode][here]].\\
+    This packages adds completion for =docker-compose.yml= files.
+    Simple, basique !
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package docker-compose-mode)
+    #+END_SRC
