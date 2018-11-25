@@ -1857,6 +1857,138 @@ Emacs often !
          :init
          (setq web-mode-markup-indent-offset 2))
      #+END_SRC
+*** JavaScript
+    Aaaaah JavaScript <3 My old best friend... You'll always have a special
+    place in my heart.
+
+    Let's configure a decent IDE for you, you deserve it !\\
+    I'm (mostly) using [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html][this]] guide. (See also [[https://blog.onionstudio.com.tw/emacs-for-javascript/][here]])
+
+**** =js2-mode=
+     From [[http://elpa.gnu.org/packages/js2-mode.html][here]].\\
+     This is THE JavaScript major mode.
+
+     Let's install it and use it for *.js files.
+     #+BEGIN_SRC emacs-lisp
+       (use-package js2-mode
+         :mode ("\\.js\\'")
+         :init
+         (setq-default js2-basic-offset 2))
+     #+END_SRC
+**** =xref2-js=
+     From [[https://github.com/NicolasPetton/xref-js2][here]].\\
+     This package provide a =xref= backend to easily jump to definitions in js
+     files. It uses =ag=
+
+     #+BEGIN_SRC emacs-lisp
+       ;; (use-package xref-js2
+       ;;   :bind (
+       ;;          ;; Unbind M-. from js-mode-map, conflict with xref
+       ;;          :map js-mode-map
+       ;;          ("M-." . nil))
+       ;;   ;; Add xref-js2 backend to xref-backends in js2-mode
+       ;;   :hook (js2-mode . (lambda ()
+       ;;                       (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+     #+END_SRC
+**** =js2-refactor=
+     This package (see [[https://github.com/magnars/js2-refactor.el][here]]) adds cool refactoring features !
+
+     Map it to =C-c C-r= and enabled it automatically for js files.
+     #+BEGIN_SRC emacs-lisp
+       (use-package js2-refactor
+         :hook (js2-mode . js2-refactor-mode)
+         :config
+         (js2r-add-keybindings-with-prefix "C-c C-r"))
+     #+END_SRC
+**** =company-tern=
+     See [[https://github.com/proofit404/company-tern][here]].\\
+     A =company= backend based on [[https://github.com/ternjs/tern][tern]], to have a nice auto-completion for
+     JavaScript.
+
+     It requires to have =tern= installed on the system. Let's do it globally by
+     running the following command :
+     #+BEGIN_SRC sh
+       npm install -g tern
+     #+END_SRC
+     TODO: I need to find a way to make my =NVM= lazy-loading works with
+     Emacs.\\
+     For now, I disabled it and source the =nvm.sh= script by default.
+
+     You need to have a =~/.tern-config= and/or a =.tern-projectile= file at the
+     root of your project. See [[http://ternjs.net/doc/manual.html][here]] for the documentation.
+
+     =tern= doesn't do live-reload of =.tern-project= files, you need to restart
+     the server to do so.\\
+     Since there's no built-in function in =tern.el= to kill or restart the
+     server gracefully, I wrote my own function (inspired by [[https://truongtx.me/2014/04/20/emacs-javascript-completion-and-refactoring][this]]) to kill all
+     the =tern= server processes.\\
+     That way, =company-tern= will launch a new server with the up-to-date
+     configuration the next time I call company.
+
+     That's kind of hackish, but it's the simplest solution I found, since I'm
+     very bad at elisp.
+     #+BEGIN_SRC emacs-lisp
+       ;; (defun lrn/kill-tern-servers ()
+       ;;   "Kill all the Tern server processes"
+       ;;   (interactive)
+       ;;   (dolist (process (process-list))
+       ;;     (let ((pname (process-name process)))
+       ;;       (if (string-match "Tern" pname)
+       ;;           (kill-process pname))))
+       ;;   (print "All the Tern server processes were killed."))
+     #+END_SRC
+
+     #+BEGIN_SRC emacs-lisp
+       ;; (use-package company-tern
+       ;;   :after company
+       ;;   :hook (js2-mode . (lambda ()
+       ;;                       (add-to-list 'company-backends 'company-tern)
+       ;;                       (tern-mode)))
+       ;;   :bind (:map tern-mode-keymap
+       ;;          ("M-." . nil)
+       ;;          ("M-," . nil)
+       ;;          :map js2-mode-map
+       ;;          ("C-c k" . lrn/kill-tern-servers)))
+     #+END_SRC
+
+**** =tide=
+     =tide= (see [[https://github.com/ananthakumaran/tide][here]]) is another JavaScript/TypeScript IDE, built on
+     =tsserver=.\\
+     It seems to offer a lot a cool features, including completion, doc,
+     refactoring, linting, jump to definition and stuff.
+
+     Let's try it to see if it can supplant =tern=, =xref2-js=, =js2-refactor=...
+     #+BEGIN_SRC emacs-lisp
+       (defun lrn/tide-setup-hook ()
+         (company-mode t)
+         (flycheck-mode t)
+         (tide-setup)
+         (tide-hl-identifier-mode)
+         (add-hook 'before-save-hook 'tide-format-before-save t 'make-it-local))
+
+       (use-package tide
+         :hook ((js2-mode . lrn/tide-setup-hook)
+                (typescript-mode . lrn/tide-setup-hook)))
+     #+END_SRC
+
+     =tide=, needs you to have at least on =jsconfig.json= or =tsconfig.json= at
+     the root of your project (since it works with =tsserver=, just like
+     VSCode). See [[https://code.visualstudio.com/docs/languages/jsconfig][here]] for the syntax.
+
+     Conclusion: It does a wonderful job, giving me all the features of the 2
+     up-mentioned packages in one.\\
+     The refactoring is very light compared to =js2-refactor=, so I'll keep it.\\
+     However, it doesn't come with a keymap. I need to map a lot of stuff myself.
+
+     It also seems that =tide= doesn't work for a javascript buffer not
+     associated to a file... Need to find more info about that.
+**** Stuff to try !
+     [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#install_emacs_packages][ESLint]] - Tide is suppose to do linting, but I don't know if it's JSHint
+     like js-mode... EDIT: eslint is shipped with =js2-mode=, however, I'll read
+     the blog post.
+     [[https://github.com/NicolasPetton/Indium][Indium]] or [[https://github.com/skeeto/skewer-mode][Skewer]] - Both are environment to do live dev. Apparently Indium
+     can do more (evaluating JS, scratch buffer, REPL, debugging). I never
+     really used this kind of features, but it could be fun to try.
 ** Shell
    I use my terminal A LOT. So if I can use it directly in Emacs and so some
    cool tricks...
