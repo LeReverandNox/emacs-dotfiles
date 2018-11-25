@@ -522,9 +522,7 @@ directory of a node easily !
     #+END_SRC
 
 *** =ivy= and friends
-    TODO: =Ivy= sounds great too, waaaaay ligther than =helm=. I need to try it
-    someday.\\
-    To read: [[https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/][that]], [[https://adamsimpson.net/writing/helm-to-ivy][this]], [[http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html][that]], [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][this]].
+    Ressources: [[https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/][that]], [[https://adamsimpson.net/writing/helm-to-ivy][this]], [[http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html][that]], [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][this]].
 
 **** =ivy=
      From [[https://github.com/abo-abo/swiper][here]]. See [[https://oremacs.com/swiper/][here]].\\
@@ -2132,7 +2130,7 @@ Emacs often !
    See [[http://manuel-uberti.github.io/emacs/2017/10/19/docker/][here]].\\
    Praise the blue whale \o/
 
-   TODO: Check [[https://github.com/Silex/docker.el][this]].
+   TODO: Check [[https://github.com/Silex/docker.el][this]] package.
 *** =dockerfile-mode=
     See [[https://github.com/spotify/dockerfile-mode][here]].\\
     This package adds syntax highlighting for =Dockerfile=s and =docker build= feature to Emacs.
