@@ -1391,7 +1391,9 @@ Emacs often !
     I also add =evil-magit= to have =evil= bindings within =magit=
     #+BEGIN_SRC emacs-lisp
       (use-package magit
-        :hook (with-editor-mode . evil-insert-state)
+        :hook (
+               (with-editor-mode . evil-insert-state)
+               (magit-popup-mode . (lambda () (setq show-trailing-whitespace nil))))
         :bind (
                ("C-x g" . magit-status))
         :config
