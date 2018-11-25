@@ -487,39 +487,90 @@ directory of a node easily !
        (define-key evil-motion-state-map (kbd "C-S-b") 'neotree-projectile-action))
    #+END_SRC
 
-** =helm= and friends
-   =helm= is just AWESOME ! It saves so much time, allowing to find anything in
-   a few keystrokes.
+** Completion
+*** =helm= and friends
+    From [[https://github.com/emacs-helm/helm][here]].\\
+    See [[https://emacs-helm.github.io/helm/][here]] and [[http://tuhdo.github.io/helm-intro.html][here]].
 
-   TODO: =Ivy= sounds great too, waaaaay ligther than =helm=. I need to try it
-   someday.\\
-   To read: [[https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/][that]], [[https://adamsimpson.net/writing/helm-to-ivy][this]], [[http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html][that]], [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][this]].
+    =helm= is just AWESOME ! It saves so much time, allowing to find anything in
+    a few keystrokes.
 
+    First, there is =helm= itself
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package helm
+      ;;   :diminish helm-mode
+      ;;   :bind  (
+      ;;          ("M-x" . helm-M-x)
+      ;;          ("C-x C-f" . helm-find-files)
+      ;;          ("C-x y" . helm-show-kill-ring)
+      ;;          ("C-x b" . helm-mini)
+      ;;          ("C-X c o" . helm-occur)
+      ;;          ("C-h a" . helm-apropos))
+      ;;   :init
+      ;;   (setq projectile-completion-system 'helm)
+      ;;   (setq helm-apropos-fuzzy-match t)
+      ;;   :config
+      ;;   (helm-mode t))
+    #+END_SRC
 
-   First, there is =helm= itself
-   #+BEGIN_SRC emacs-lisp
-     (use-package helm
-       :diminish helm-mode
-       :bind (
-              ("M-x" . helm-M-x)
-              ("C-x C-f" . helm-find-files)
-              ("C-x y" . helm-show-kill-ring)
-              ("C-x b" . helm-mini)
-              ("C-x c o" . helm-occur)
-              ("C-h a" . helm-apropos))
-       :init
-       (progn
-         (setq helm-apropos-fuzzy-match t)
-         (helm-mode t)))
-   #+END_SRC
+    then, there's =helm-descbinds=, for searching bindings
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package helm-descbinds
+      ;;   :bind (
+      ;;          ("C-h b" . helm-descbinds)
+      ;;          ("C-h w" . helm-descbinds)))
+    #+END_SRC
 
-   then, there's =helm-descbinds=, for searching bindings
-   #+BEGIN_SRC emacs-lisp
-     (use-package helm-descbinds
-       :bind (
-              ("C-h b" . helm-descbinds)
-              ("C-h w" . helm-descbinds)))
-   #+END_SRC
+*** =ivy= and friends
+    TODO: =Ivy= sounds great too, waaaaay ligther than =helm=. I need to try it
+    someday.\\
+    To read: [[https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/][that]], [[https://adamsimpson.net/writing/helm-to-ivy][this]], [[http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html][that]], [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][this]].
+
+**** =ivy=
+     From [[https://github.com/abo-abo/swiper][here]]. See [[https://oremacs.com/swiper/][here]].\\
+     The completion framework itself. Waaay way smaller than =helm=, with less
+     functionalities. But since I was using about 5% of =helm=, it doesn't matter
+
+     =ivy-historian= persists the =ivy= candidates in a file.
+     #+BEGIN_SRC emacs-lisp
+       (use-package ivy-historian)
+     #+END_SRC
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package ivy
+         :diminish ivy-mode
+         :bind (
+                ("C-x b" . ivy-switch-buffer))
+         :init
+         ;; Add recent files and bookmarks to ivy-switch-buffer
+         (setq ivy-use-virtual-buffers t)
+         ;; Show the fullpath for the recent files in ivy-switch-buffer
+         (setq ivy-virtual-abbreviate 'fullpath)
+         ;; Use ivy as completion system for projectile
+         (setq projectile-completion-system 'ivy)
+         ;; Require to type ~/ to go home, instead of just ~
+         (setq ivy-magic-tilde nil)
+         ;; Allow minibuffer commands in minibuffer... MINIBUFFERCEPTION \o/
+         (setq enable-recursive-minibuffers t)
+         :config
+         (ivy-historian-mode t)
+         (ivy-mode t))
+     #+END_SRC
+**** =counsel=
+     =counsel= is a collection of replacement functions for various Emacs
+     commands, infused with =ivy=.
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package counsel
+         :diminish counsel-mode
+         :bind (
+                ("C-x y" . counsel-yank-pop))
+         :init
+         ;; Override the binding descriptions with counsel stuff
+         (setq counsel-mode-override-describe-bindings t)
+         :config
+         (counsel-mode t))
+     #+END_SRC
 
 ** Keybindings help
 *** =guide-key=
@@ -1361,23 +1412,34 @@ Emacs often !
     #+END_SRC
 ** Fuzzy-finding and search
 *** =helm-swoop=
-   =helm-swoop=, to do search in the buffers !
-   #+BEGIN_SRC emacs-lisp
-     (use-package helm-swoop
-       :bind (
-              ("M-i" . helm-swoop)
-              ("M-I" . helm-swoop-back-to-last-point)
-              ("C-c M-i" . helm-multi-swoop)
-              ("C-x M-i" . helm-multi-swoop-all)
-              :map isearch-mode-map
-              ("M-i" . helm-swoop-from-isearch)
-              :map helm-swoop-map
-              ("M-i" . helm-multi-swoop-all-from-helm-swoop))
-       :config
-       (progn
-         (setq helm-swoop-split-with-multiple-windows t)
-         (setq helm-swoop-split-direction 'split-window-horizontally)))
-   #+END_SRC
+    From [[https://github.com/ShingoFukuyama/helm-swoop][here]].
+    =helm-swoop=, to do search in the buffers !
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package helm-swoop
+      ;;   :bind (
+      ;;          ("M-i" . helm-swoop)
+      ;;          ("M-I" . helm-swoop-back-to-last-point)
+      ;;          ("C-c M-i" . helm-multi-swoop)
+      ;;          ("C-x M-i" . helm-multi-swoop-all)
+      ;;          :map isearch-mode-map
+      ;;          ("M-i" . helm-swoop-from-isearch)
+      ;;          :map helm-swoop-map
+      ;;          ("M-i" . helm-multi-swoop-all-from-helm-swoop))
+      ;;   :config
+      ;;   (progn
+      ;;     (setq helm-swoop-split-with-multiple-windows t)
+      ;;     (setq helm-swoop-split-direction 'split-window-horizontally)))
+    #+END_SRC
+*** =swiper=
+    From [[https://oremacs.com/swiper/][here]].\\
+    The fuzzy-finder based on =ivy=
+
+    To search for the symbol-at-point, hit =M-n= after entering =swiper=.
+    #+BEGIN_SRC emacs-lisp
+      (use-package swiper
+        :bind (
+               ("M-i" . swiper)))
+    #+END_SRC
 *** =ag=
     =ag=, AKA The Silver Searcher, is great to find stuff in files. Specially
     with =projectile=, tu search in a whole project.
@@ -1430,13 +1492,19 @@ Emacs often !
         :config
         (progn
           (setq projectile-switch-project-action 'neotree-projectile-action)
-          (setq projectile-completion-system 'helm)
           (projectile-mode t)))
     #+END_SRC
 
-    Speaking of =helm=, don't forget =helm-projectile=
+    +Speaking of =helm=, don't forget =helm-projectile= ([[https://github.com/bbatsov/helm-projectile][here]]). See [[http://tuhdo.github.io/helm-projectile.html][here]].+
     #+BEGIN_SRC emacs-lisp
-      (use-package helm-projectile)
+      ;; (use-package helm-projectile)
+    #+END_SRC
+
+    From [[https://github.com/ericdanan/counsel-projectile][here]]. Integrate =ivy=/=counsel= stuff into =projectile=
+    #+BEGIN_SRC emacs-lisp
+      (use-package counsel-projectile
+        :config
+        (counsel-projectile-mode))
     #+END_SRC
 ** Completion
 *** =company=
@@ -1797,7 +1865,7 @@ Emacs often !
                 ("M-," . rtags-find-references-at-point)
                 ("M-?" . rtags-display-summary))
          :init
-         (setq rtags-use-helm t)
+         ;; (setq rtags-use-helm t)
          ;; Needed to avoid Emacs freeze when calling find-symbol
          (setq rtags-rdm-process-use-pipe t)
          :config
@@ -1810,9 +1878,9 @@ Emacs often !
 
      =rtags= integration for =helm=, to search definitions, I guess.
      #+BEGIN_SRC emacs-lisp
-       (use-package helm-rtags
-         :init
-         (setq rtags-display-result-backend 'helm))
+       ;; (use-package helm-rtags
+       ;;   :init
+       ;;   (setq rtags-display-result-backend 'helm))
      #+END_SRC
 
      =rtags= =company= backend for completion
