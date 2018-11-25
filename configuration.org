@@ -1379,6 +1379,14 @@ Emacs often !
     #+BEGIN_SRC emacs-lisp
       (use-package ag)
     #+END_SRC
+*** =isearch=
+    I want to be able to navigate in =isearch-ring= to quickly use a previous
+    pattern again, using =<up>= and =down=. See [[https://emacs.stackexchange.com/a/31336][here]].
+
+    #+BEGIN_SRC emacs-lisp
+      (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat)
+      (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance)
+    #+END_SRC
 ** Project management
 *** =projectile=
     =projectile= is another awesome package, allowing us to work with projects
