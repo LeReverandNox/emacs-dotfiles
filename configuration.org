@@ -1492,6 +1492,7 @@ Emacs often !
         :config
         (progn
           (setq projectile-switch-project-action 'neotree-projectile-action)
+          (setq projectile-keymap-prefix (kbd "C-c C-p"))
           (projectile-mode t)))
     #+END_SRC
 
