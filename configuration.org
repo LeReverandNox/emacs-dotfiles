@@ -82,7 +82,7 @@
         "Filter the *Packages* buffer by status."
         (interactive
          (list (completing-read
-                "Status: " '("new" "installed" "dependency" "obsolete"))))
+                "Status: " '("available" "new" "installed" "dependency" "obsolete"))))
         (package-menu-filter (concat "status:" status)))
 
       (with-eval-after-load 'evil
