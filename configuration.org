@@ -856,33 +856,41 @@
    #+END_SRC
 
 ** Folding
-   See [[https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html#fnr.91][here]] and [[https://github.com/shanecelis/hideshow-org][here]] for the GitHub repo\\
-   I don't use folding much, but sometimes on big files, it can be very cool.
-   Especially when it works like in =org-mode= !\\
-   Apparently the autor manage to use TAB in a cleaver way, so it don't interfer
-   with basic functionality such as indenting.
+*** =hideshow=
+    Emacs requires a mode to handle folding.
+    Let's run with =hideshow=, which is built-in and really efficient.
 
-   When I hit =gg= (=evil-goto-first-line=), if the region is folded, I vant to
-   unfold it, so I can read what's at this line...
-   #+BEGIN_SRC emacs-lisp
-     (defadvice evil-goto-first-line (after expand-after-goto-line
-                                            activate compile)
-       "hideshow-expand affected block when using goto-line in a collapsed buffer"
-       (save-excursion
-         (hs-show-block)))
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (use-package hideshow
+        :diminish hs-minor-mode
+        :config
+        (hs-minor-mode t))
+    #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package hideshow-org
-       :diminish hs-minor-mode
-       ;; Enable hs-minor-mode on every programming mode
-       :hook (prog-mode . hs-org/minor-mode)
-       :init
-       (setq hs-hide-comments-when-hiding-all t)
-       ;; Open the block when I search for something
-       (setq hs-isearch-open t))
-   #+END_SRC
+*** =vimish-fold=
+    From [[https://github.com/mrkkrp/vimish-fold][here]].\\
+    This package provide Vim-like folds. That's pretty cool, I can do what I
+    want, the folds are even persistent... but it's a bit less intuitive than
+    =hideshow=. Since I don't fold much, I prefer =hideshow=.
 
+    However, I'll keep the configuration, in case I want to give it a shot someday.
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package vimish-fold
+      ;;   :init
+      ;;   (setq vimish-fold-dir (concat user-emacs-directory "vimish-fold"))
+      ;;   (setq vimish-fold-persist-on-saving t)
+      ;;   :config
+      ;;   (vimish-fold-global-mode t))
+    #+END_SRC
+
+    From [[https://github.com/alexmurray/evil-vimish-fold][here]].\\
+    This package adds =evil= bindings for =vimish-fold=
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package evil-vimish-fold
+      ;;   :defer t
+      ;;   :config
+      ;;   (evil-vimish-fold-mode t))
+    #+END_SRC
 ** Selection
 *** =expand-region=
     =expand-region= ([[https://github.com/magnars/expand-region.el][here]]) allows to expand the selection by semantic units...
