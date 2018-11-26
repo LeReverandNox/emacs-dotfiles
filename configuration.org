@@ -863,8 +863,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package hideshow
         :diminish hs-minor-mode
-        :config
-        (hs-minor-mode t))
+        :hook (prog-mode . hs-minor-mode))
     #+END_SRC
 
 *** =vimish-fold=
@@ -1004,9 +1003,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package rainbow-mode
        :diminish rainbow-mode
-       :config
-       (progn
-         (rainbow-mode t)))
+       :hook (prog-mode . rainbow-mode))
    #+END_SRC
 ** Mark
    By default, =set-mark-command= is bound on =C-@= and =C-SPC=.\\
@@ -2002,7 +1999,7 @@
        (use-package js2-mode
          :mode ("\\.js\\'")
          :init
-         (setq-default js2-basic-offset 2))
+         (setq js-indent-level 2))
      #+END_SRC
 **** =xref2-js=
      From [[https://github.com/NicolasPetton/xref-js2][here]].\\
