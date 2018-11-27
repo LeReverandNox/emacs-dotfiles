@@ -822,17 +822,6 @@
    #+BEGIN_SRC emacs-lisp
      (global-auto-revert-mode t)
    #+END_SRC
-** Line-wrapping
-   Activate =auto-fill-mode= for =text-mode=.
-   It automatically wraps the lines at =fill-column= length.
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'text-mode-hook 'turn-on-auto-fill)
-   #+END_SRC
-
-   Add a shortcut to disable =auto-fill-mode=... BUT WHY ?
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-c q") 'auto-fill-mode)
-   #+END_SRC
 ** Parens
    Automatically write the closing quote, bracket, parenthesis… you know what I
    mean.
@@ -1016,6 +1005,26 @@
      (define-key global-map (kbd "C-c C-SPC") 'set-mark-command)
    #+END_SRC
 
+** Default mode
+   I prefer =text-mode= over =fundamental-mode= as default =major-mode=.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq-default major-mode 'text-mode)
+   #+END_SRC
+** Text
+*** =refill-mode=
+    I like to have a nice formatting to write text.\\
+    =refill-mode= does a pretty good job to keep text wrapped, making nice
+    paragraphs, by auto-filling at =fill-column= length.
+
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'text-mode-hook 'refill-mode)
+    #+END_SRC
+
+    Let's add a shortcut to disable =refill-mode=, just in case.
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-c q") 'refill-mode)
+    #+END_SRC
 * Windows and buffers
 ** =C-x k=
    Kill current buffer and window without confirmation when hitting =C-x k=
