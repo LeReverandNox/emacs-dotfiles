@@ -2188,3 +2188,14 @@
     #+BEGIN_SRC emacs-lisp
       (use-package docker-compose-mode)
     #+END_SRC
+* Miscellaneous
+** =speed-type=
+   From [[https://github.com/hagleitn/speed-type][here]].
+
+   Considering the time I spent on [[https://10fastfingers.com/][10FastFingers]], it's obvious that I need a
+   similar mode in Emacs :D And there's one <3
+
+   Run it with =M-x speed-type-text=
+   #+BEGIN_SRC emacs-lisp
+     (use-package speed-type)
+   #+END_SRC
