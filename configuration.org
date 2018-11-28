@@ -2199,3 +2199,30 @@
    #+BEGIN_SRC emacs-lisp
      (use-package speed-type)
    #+END_SRC
+** =sx=
+   From [[https://github.com/vermiculus/sx.el][here]].
+
+   What ? A mode to browse Stack Exchange websites from within Emacs ? REALLY ?
+
+   TODO: I want to switch to =evil-insert-state= when I enter
+   =sx-question-list-mode=,  but the hook doesn't seems to work =/
+   #+BEGIN_SRC emacs-lisp
+     (use-package sx
+       ;; Disable trailing whitespaces highlighting for sx-questions
+       :hook ((sx-question-mode . (lambda () (setq-local show-trailing-whitespace nil))))
+       :init
+       (setq sx-default-site 'stackoverflow)
+       ;; This is my workaround to replicate the sx-default-site feature using Ivy
+       (add-to-list 'ivy-initial-inputs-alist '(sx-search . "^stackoverflow"))
+       (add-to-list 'ivy-initial-inputs-alist '(sx-tab-all-questions . "^stackoverflow"))
+       :config
+       (bind-keys :prefix "C-c s"
+                  :prefix-map my-sx-map
+                  :prefix-docstring "Global keymap for SX."
+                  ("q" . sx-tab-all-questions)
+                  ("i" . sx-inbox)
+                  ("o" . sx-open-link)
+                  ("u" . sx-tab-unanswered-my-tags)
+                  ("a" . sx-ask)
+                  ("s" . sx-search)))
+   #+END_SRC
