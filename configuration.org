@@ -1292,14 +1292,17 @@
    Let's install the latest =org= package and set some stuff.
    #+BEGIN_SRC emacs-lisp
      (use-package org
-       :hook (org-mode . auto-fill-mode)
+       :hook (
+              (org-mode . (lambda ()
+                            (refill-mode -1)
+                            (auto-fill-mode t))))
        :init
        ;; Syntax highlight src blocks in org-mode
        (setq org-src-fontify-natively t)
        ;; Make tab work like in a code buffer for src blocks
        (setq org-src-tab-acts-natively t)
-       ;; Use current window when editing a code snippet
-       (setq org-src-window-setup 'current-window)
+       ;; Use anothr window when editing a code snippet
+       (setq org-src-window-setup 'other-window)
        ;; Log the date when a TODO is DONE
        (setq org-log-done 'time)
        ;; Remove footer when exporting in HTML mode
