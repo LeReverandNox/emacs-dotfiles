@@ -1251,7 +1251,7 @@
    =desktop-save-mode=. Pretty cool.
 
    Apparently, it can work with =perspective=, with some additional code (see
-   [[https://www.reddit.com/r/emacs/comments/6sffrd/am_i_misunderstanding_eyebrowse/dlcfhwk][here)]], so you can have multiple workspaces with 10 sub-workspaces in each
+   [[https://www.reddit.com/r/emacs/comments/6sffrd/am_i_misunderstanding_eyebrowse/dlcfhwk][here]]), so you can have multiple workspaces with 10 sub-workspaces in each
    one... Sounds great, but I don't find the proper way to do it.
 
 
