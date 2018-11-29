@@ -796,15 +796,29 @@
      (setq-default tab-width 2)
    #+END_SRC
 
-   =highlight-indent-guide= makes indentation easier to understand with some
-   sweet highlighting.
-   #+BEGIN_SRC emacs-lisp
-     (use-package highlight-indent-guides
-       :diminish highlight-indent-guides-mode
-       :hook ((prog-mode yaml-mode) . highlight-indent-guides-mode)
-       :init
-       (setq highlight-indent-guides-method 'character))
-   #+END_SRC
+*** =highlight-indent-guide=
+    From [[https://github.com/DarthFennec/highlight-indent-guides][here]].
+
+    =highlight-indent-guide= makes indentation easier to understand with some
+    sweet highlighting.
+    #+BEGIN_SRC emacs-lisp
+      (use-package highlight-indent-guides
+        :diminish highlight-indent-guides-mode
+        :hook ((prog-mode yaml-mode) . highlight-indent-guides-mode)
+        :init
+        (setq highlight-indent-guides-method 'character))
+    #+END_SRC
+
+*** =aggressive-indent=
+    From [[https://github.com/Malabarba/aggressive-indent-mode][here]].
+
+    This package is suppose to do a great job with code indentation, even during
+    shitfing, transposing, slurping etc.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package aggressive-indent
+        :hook (prog-mode . aggressive-indent-mode))
+    #+END_SRC
 
 ** Case
    Treat lower/uppper CamelCase as separate words
