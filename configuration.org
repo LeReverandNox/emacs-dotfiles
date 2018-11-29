@@ -1548,9 +1548,8 @@
       (use-package projectile
         :diminish projectile-mode
         :bind (
-               ("C-c v" . projectile-ag)
-               ("C-c C-v" . hrs/search-project-for-symbol-at-point)
                :map projectile-mode-map
+               ("C-c C-p s v" . hrs/search-project-for-symbol-at-point)
                ("C-c C-p" . projectile-command-map))
         :init
         (setq projectile-require-project-root nil)
