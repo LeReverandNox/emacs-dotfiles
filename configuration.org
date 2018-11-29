@@ -945,16 +945,16 @@
    often, I won't mind.
 
    #+BEGIN_SRC emacs-lisp
-     (define-prefix-command 'lrn/transpose-map)
-     (define-key global-map (kbd "C-x C-t") 'lrn/transpose-map)
-
-     (define-key lrn/transpose-map (kbd "w") 'transpose-words)
-     (define-key lrn/transpose-map (kbd "c") 'transpose-chars)
-     (define-key lrn/transpose-map (kbd "l") 'transpose-lines)
-     (define-key lrn/transpose-map (kbd "p") 'transpose-paragraphs)
-     (define-key lrn/transpose-map (kbd "e") 'transpose-sexps)
-     (define-key lrn/transpose-map (kbd "s") 'transpose-sentences)
-     (define-key lrn/transpose-map (kbd "r") 'transpose-regions)
+     (bind-keys :prefix "C-x C-t"
+                :prefix-map lrn/transpose-map
+                :prefix-docstring "Keymap for transpose commands"
+                ("w" . transpose-words)
+                ("c" . transpose-chars)
+                ("l" . transpose-lines)
+                ("p" . transpose-paragraphs)
+                ("e" . transpose-sexps)
+                ("s" . transpose-sentences)
+                ("r" . transpose-regions))
    #+END_SRC
 ** Align
 *** =ialign=
@@ -1141,16 +1141,15 @@
 
     Then, the map and the bindings
     #+BEGIN_SRC emacs-lisp
-      ;; Unbind C-w C-n
+      ;; Unbind C-w C-n (evil-new-window)
       (define-key evil-motion-state-map (kbd "C-w C-n") nil)
-      ;; Create a new map
-      (define-prefix-command 'lrn/scratchbuffer-key-map)
-      ;; Bind it to C-w C-n
-      (define-key evil-motion-state-map (kbd "C-w C-n") 'lrn/scratchbuffer-key-map)
-      ;; C-w C-n s to spawn a horizontal scratch buffer
-      (define-key lrn/scratchbuffer-key-map (kbd "s") 'lrn/spawn-scratch-buffer-horizontal)
-      ;; C-w C-n v to spawn a vertical scratch buffer
-      (define-key lrn/scratchbuffer-key-map (kbd "v") 'lrn/spawn-scratch-buffer-vertical)
+
+      (bind-keys :map evil-window-map
+                 :prefix "C-n"
+                 :prefix-map lrn/scratchbuffer-map
+                 :prefix-docstring "Keymap for splitted scratchbuffers."
+                 ("s" . lrn/spawn-scratch-buffer-horizontal)
+                 ("v" . lrn/spawn-scratch-buffer-vertical))
     #+END_SRC
 
 *** =persistent-scratch=
@@ -1415,7 +1414,7 @@
 
    Let's make =org-open-at-point= globally available
    #+BEGIN_SRC emacs-lisp
-     (bind-key "C-c C-o" 'org-open-at-point-global)
+     (define-key global-map (kbd "C-c C-o") 'org-open-at-point-global)
    #+END_SRC
 * Programming
   I will put a lot of stuff in this section, sometimes not justified at all !
@@ -1719,30 +1718,15 @@
       stuff.\\
       So let's make =C-x C-e= a prefix, and redefine some binding, should we ?
 
-      First, let's unbind =C-x C-e=
       #+BEGIN_SRC emacs-lisp
-        (define-key global-map (kbd "C-x C-e") nil)
-      #+END_SRC
-      Then, we create a new keymap
-      #+BEGIN_SRC emacs-lisp
-        (define-prefix-command 'lrn/eval-key-map)
-      #+END_SRC
-      Bind it to =C-x C-e=
-      #+BEGIN_SRC emacs-lisp
-        (define-key global-map (kbd "C-x C-e") 'lrn/eval-key-map)
-      #+END_SRC
-      And now we bind our eval functions !
-      #+BEGIN_SRC emacs-lisp
-        ;; C-x C-e e (eval-last-sexp)
-        (define-key lrn/eval-key-map (kbd "e") 'eval-last-sexp)
-        ;; C-x C-e b (eval-buffer)
-        (define-key lrn/eval-key-map (kbd "b") 'eval-buffer)
-        ;; C-x C-e r (eval-region)
-        (define-key lrn/eval-key-map (kbd "r") 'eval-region)
-        ;; C-x C-e p (eval-print-last-sexp)
-        (define-key lrn/eval-key-map (kbd "p") 'eval-print-last-sexp)
-        ;; C-x C-e d (eval-defun)
-        (define-key lrn/eval-key-map (kbd "d") 'eval-defun)
+        (bind-keys :prefix "C-x C-e"
+                   :prefix-map lrn/eval-map
+                   :prefix-docstring "Keymap for evaluation commands"
+                   ("e" . eval-last-sexp)
+                   ("b" . eval-buffer)
+                   ("r" . eval-region)
+                   ("p" . eva-print-last-sexp)
+                   ("d" . eval-defun))
       #+END_SRC
 
 ***** Eval and replace
@@ -1764,7 +1748,7 @@
       Let's bind this function on the =C-x C-e= map
       #+BEGIN_SRC emacs-lisp
         ;; C-x C-e s (eval-last-sexp)
-        (define-key lrn/eval-key-map (kbd "s") 'lrn/eval-and-replace)
+        (define-key lrn/eval-map (kbd "s") 'lrn/eval-and-replace)
       #+END_SRC
 *** Python
     My Python setup, working smoothly but definitly not perfect. Based on [[https://realpython.com/emacs-the-best-python-editor/#pep8-compliance-autopep8][this]]
