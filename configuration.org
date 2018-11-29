@@ -534,7 +534,10 @@
        (use-package ivy-historian)
      #+END_SRC
 
-     =ivy-hydra= adds an =hydra= to =ivy= minibuffers. (=C-o= / =M-o=)
+     =ivy-hydra= transforms =ivy-dispatching-done= into
+     =ivy-dispatching-done-hdyra= and adds an =hydra= to =ivy= minibuffers.\\
+     (It's suppose to be bound on =C-o=, but this binding his conflicting with
+     =evil-jump-backward=, so instead I chose =C-M-o=)
      #+BEGIN_SRC emacs-lisp
        (use-package ivy-hydra)
      #+END_SRC
@@ -543,7 +546,10 @@
        (use-package ivy
          :diminish ivy-mode
          :bind (
-                ("C-x b" . ivy-switch-buffer))
+                ("C-x b" . ivy-switch-buffer)
+                :map ivy-minibuffer-map
+                ("C-M-o" . hydra-ivy/body)
+                )
          :init
          ;; Add recent files and bookmarks to ivy-switch-buffer
          (setq ivy-use-virtual-buffers t)
