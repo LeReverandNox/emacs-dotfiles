@@ -1,3 +1,6 @@
 [submodule "config/sensible-defaults"]
 	path = config/sensible-defaults
 	url = git@github.com:hrs/sensible-defaults.el.git
+[submodule "config/goflymake"]
+	path = config/goflymake
+	url = git@github.com:dougm/goflymake.git
