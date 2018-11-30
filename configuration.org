@@ -1917,22 +1917,20 @@
                 ("M-," . rtags-find-references-at-point)
                 ("M-?" . rtags-display-summary))
          :init
-         ;; (setq rtags-use-helm t)
          ;; Needed to avoid Emacs freeze when calling find-symbol
          (setq rtags-rdm-process-use-pipe t)
          :config
          (progn
            (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
            (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
-           (rtags-enable-standard-keybindings)
-           ))
+           (rtags-enable-standard-keybindings)))
      #+END_SRC
 
-     =rtags= integration for =helm=, to search definitions, I guess.
+-     =rtags= integration for =ivy=, to search definitions, I guess.
      #+BEGIN_SRC emacs-lisp
-       ;; (use-package helm-rtags
-       ;;   :init
-       ;;   (setq rtags-display-result-backend 'helm))
+       (use-package ivy-rtags
+         :init
+         (setq rtags-display-result-backend 'ivy))
      #+END_SRC
 
      =rtags= =company= backend for completion
@@ -1944,8 +1942,7 @@
          :config
          (progn
            (rtags-diagnostics)
-           (push 'company-rtags company-backends)
-           ))
+           (push 'company-rtags company-backends)))
      #+END_SRC
 
      helper function to setup =flycheck-rtags=, apparently needed to ensure that
