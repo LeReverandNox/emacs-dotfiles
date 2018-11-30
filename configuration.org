@@ -2097,7 +2097,7 @@
        ;;     (let ((pname (process-name process)))
        ;;       (if (string-match "Tern" pname)
        ;;           (kill-process pname))))
-       ;;   (print "All the Tern server processes were killed."))
+       ;;   (message "All the Tern server processes were killed."))
      #+END_SRC
 
      #+BEGIN_SRC emacs-lisp
