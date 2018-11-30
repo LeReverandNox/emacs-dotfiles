@@ -859,9 +859,7 @@
    Support a few more pairs. (See [[http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html][here]])
    #+BEGIN_SRC emacs-lisp
      (setq electric-pair-pairs
-           '(
-             (?' . ?')
-             (?` . ?`)))
+           '((?` . ?`)))
    #+END_SRC
 ** Sentence delimitation
    Sentence end with a single space. Because I said it.
