@@ -910,9 +910,6 @@
     sentence, the block, etc... Sounds great.
     I probably can do the same with =visual= state of =evil=...
 
-    I know that I override the bindings for =right-word= and =left-word=, but I
-    don't use them anyway.\\
-    TODO: Those bindings conflict with =smartparens=... need to figure it out.
     #+BEGIN_SRC emacs-lisp
       (use-package expand-region
         :bind (
