@@ -785,10 +785,10 @@
    #+END_SRC
 
 ** Trailing whitespaces
-   Always highlight trailing whitespaces, even though they are automatically
-   deleted on save
+   Always highlight trailing whitespaces for =prog-mode=, even though they are
+   automatically deleted on save.
    #+BEGIN_SRC emacs-lisp
-     (setq-default show-trailing-whitespace t)
+     (add-hook 'prog-mode-hook '(lambda () (setq show-trailing-whitespace t)))
    #+END_SRC
 
 ** Indentation
@@ -1334,6 +1334,7 @@
      (use-package org
        :hook (
               (org-mode . (lambda ()
+                            (setq show-trailing-whitespace t)
                             (refill-mode -1)
                             (auto-fill-mode t))))
        :init
@@ -1449,8 +1450,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package magit
         :hook (
-               (with-editor-mode . evil-insert-state)
-               (magit-popup-mode . (lambda () (setq show-trailing-whitespace nil))))
+               (with-editor-mode . evil-insert-state))
         :bind (
                ("C-x g" . magit-status))
         :config
@@ -1464,12 +1464,6 @@
                ("C-x C-g" . gist-list)))
     #+END_SRC
 
-    I don't want to highlight trailing whitespaces in =gist-list-mode=
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'gist-list-mode-hook
-                (lambda ()
-                  (setq show-trailing-whitespace nil)))
-    #+END_SRC
 *** =git-gutter=
     Another Sublime package that I really like, makes atomic commits and partial
     staging so much easier.
@@ -2173,13 +2167,6 @@
                ("C-t" . multi-term)))
     #+END_SRC
 
-    Let's customize some shit for the =term-mode-hook=
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'term-mode-hook
-                (lambda ()
-                  ;; Disable trailing whitespaces highlight
-                  (setq show-trailing-whitespace nil)))
-    #+END_SRC
 *** =shell-command=
     By default, =shell-command= is bound on =M-!=. It may be fine for the rest
     of the world, but for me, using Chunkwm on OSX, I use this binding to change
@@ -2232,8 +2219,6 @@
    =sx-question-list-mode=,  but the hook doesn't seems to work =/
    #+BEGIN_SRC emacs-lisp
      (use-package sx
-       ;; Disable trailing whitespaces highlighting for sx-questions
-       :hook ((sx-question-mode . (lambda () (setq-local show-trailing-whitespace nil))))
        :init
        (setq sx-default-site 'stackoverflow)
        ;; This is my workaround to replicate the sx-default-site feature using Ivy
