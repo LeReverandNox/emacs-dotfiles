@@ -2138,8 +2138,59 @@
      can do more (evaluating JS, scratch buffer, REPL, debugging). I never
      really used this kind of features, but it could be fun to try.
 *** Go
-    Coming soon...
-    TODO: Check [[https://github.com/dominikh/go-mode.el][this]], [[http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/][this]], [[https://johnsogg.github.io/emacs-golang][this]], [[https://www.reddit.com/r/emacs/comments/5t6rnt/recommended_configpackages_for_golang/][this]], [[http://yousefourabi.com/blog/2014/05/emacs-for-go/][this]] and [[http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/][that]].
+    Check [[https://github.com/dominikh/go-mode.el][this]], [[http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/][this]], [[https://johnsogg.github.io/emacs-golang][this]], [[https://www.reddit.com/r/emacs/comments/5t6rnt/recommended_configpackages_for_golang/][this]], [[http://yousefourabi.com/blog/2014/05/emacs-for-go/][this]] and [[http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/][that]].
+
+**** =go-mode=
+     From [[https://github.com/dominikh/go-mode.el][here]].
+
+     A major-mode for Golang !
+     #+BEGIN_SRC emacs-lisp
+       (use-package go-mode
+         :mode ("\\.go\\'")
+         :hook ((go-mode . (lambda () (add-hook 'before-save-hook 'gofmt-before-save nil 'local))))
+         :bind (
+                :map go-mode-map
+                ("M-." . godef-jump)))
+     #+END_SRC
+
+**** =company-go=
+     From [[https://github.com/nsf/gocode][here]]. Doc for =company= [[https://github.com/nsf/gocode/tree/master/emacs-company][here]].
+
+     An autocompletion backend for golang that integrates with =company=\\
+     It requires =godoc= binary to work. Install it with:
+     #+BEGIN_SRC sh
+       go get -u github.com/nsf/gocode
+     #+END_SRC
+
+     TODO: Apparently, it's deprecated... but it works great for now.
+     #+BEGIN_SRC emacs-lisp
+       (use-package company-go
+         :hook (company-mode . (lambda () (add-to-list 'company-backends 'company-go))))
+     #+END_SRC
+
+**** =go-eldoc=
+     From [[https://github.com/syohex/emacs-go-eldoc][here]].
+
+     This package provided =eldoc= integration for golang. Just like
+     =company-go=, it requires =godoc= in order to work.
+     #+BEGIN_SRC emacs-lisp
+       (use-package go-eldoc
+         :hook (go-mode . (lambda () (go-eldoc-setup))))
+     #+END_SRC
+**** =goflymake=
+     From [[https://github.com/dougm/goflymake][here]].
+
+     A package that provide a golang checker for =flycheck=.
+     It requires the =goflymake= binary to work. Install it with:
+     #+BEGIN_SRC sh
+       go get -u github.com/dougm/goflymake
+     #+END_SRC
+
+     It's not on MELPA, so I get it as a submodule.
+     #+BEGIN_SRC emacs-lisp
+       (add-to-list 'load-path (concat user-emacs-directory "config/goflymake"))
+       (require 'go-flycheck)
+     #+END_SRC
 *** PHP
     Coming soon...
     TODO: Check [[https://www.philnewton.net/guides/emacs-as-a-php-editor/][this]], [[http://irreal.org/blog/?p=5499][this]], [[http://www.blogbyben.com/2016/08/emacs-php-modern-and-far-more-complete.html][this]], [[https://www.drupal.org/docs/develop/development-tools/emacs][this]] and [[https://github.com/emacs-php/php-suite][that]].
