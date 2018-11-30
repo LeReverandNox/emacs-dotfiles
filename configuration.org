@@ -916,8 +916,8 @@
     #+BEGIN_SRC emacs-lisp
       (use-package expand-region
         :bind (
-               ("<C-right>" . er/expand-region)
-               ("<C-left>" . er/contract-region)))
+               ("C-M-=" . er/expand-region)
+               ("C-M--" . er/contract-region)))
     #+END_SRC
 
 *** =ace-jump-mode=
