@@ -19,3 +19,7 @@ configuration.html
 .persistent-scratch
 eshell/
 places
+speed-type/
+persp-confs/
+.sx/
+.historian
