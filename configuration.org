@@ -1659,6 +1659,14 @@
         (progn
           (global-flycheck-mode)))
     #+END_SRC
+*** =ivy-yasnippet=
+    From [[https://github.com/mkcms/ivy-yasnippet][here]].\\
+    This package provides snippet preview using =ivy=.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package ivy-yasnippet
+        :bind ("C-c & i" . ivy-yasnippet))
+    #+END_SRC
 ** Languages
 *** YAML
     A major mode to edit YAML files :) Pretty good, with syntax highlighting,
