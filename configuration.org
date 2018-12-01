@@ -2138,7 +2138,13 @@
      can do more (evaluating JS, scratch buffer, REPL, debugging). I never
      really used this kind of features, but it could be fun to try.
 *** Go
-    Check [[https://github.com/dominikh/go-mode.el][this]], [[http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/][this]], [[https://johnsogg.github.io/emacs-golang][this]], [[https://www.reddit.com/r/emacs/comments/5t6rnt/recommended_configpackages_for_golang/][this]], [[http://yousefourabi.com/blog/2014/05/emacs-for-go/][this]] and [[http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/][that]].
+    Check [[http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/][this]], [[https://johnsogg.github.io/emacs-golang][this]], [[https://www.reddit.com/r/emacs/comments/5t6rnt/recommended_configpackages_for_golang/][this]], [[http://yousefourabi.com/blog/2014/05/emacs-for-go/][this]] and [[http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/][that]].
+
+    Almost all of the following packages requires the golang tools.
+    They can all be installed at once by running:
+    #+BEGIN_SRC sh
+      go get -u golang.org/x/tools/cmd/...
+    #+END_SRC
 
 **** =go-mode=
      From [[https://github.com/dominikh/go-mode.el][here]].
@@ -2230,6 +2236,7 @@
        (add-to-list 'load-path (concat user-emacs-directory "config/goflymake"))
        (require 'go-flycheck)
      #+END_SRC
+
 *** PHP
     Coming soon...
     TODO: Check [[https://www.philnewton.net/guides/emacs-as-a-php-editor/][this]], [[http://irreal.org/blog/?p=5499][this]], [[http://www.blogbyben.com/2016/08/emacs-php-modern-and-far-more-complete.html][this]], [[https://www.drupal.org/docs/develop/development-tools/emacs][this]] and [[https://github.com/emacs-php/php-suite][that]].
