@@ -2151,6 +2151,24 @@
          :bind (
                 :map go-mode-map
                 ("M-." . godef-jump)))
+**** =go-guru=
+     =go-guru= is a great tool that provides code-analysis features. (Find the
+     implementations, the callees, the callers etc...)
+
+     It requires the =guru= binary to work. It should alreay be installed, but
+     just in case:
+     #+BEGIN_SRC sh
+       go get -u golang.org/x/tools/cmd/guru
+     #+END_SRC
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package go-guru
+         :hook (go-mode . go-guru-hl-identifier-mode)
+         :bind (
+                ;; I need to explicitly map it, since I already use C-c C-o system-wide for org-open-at-point-global
+                :map go-mode-map
+                ("C-c C-o" . go-guru-map)))
+     #+END_SRC
 **** =goimports=
      From [[https://godoc.org/golang.org/x/tools/cmd/goimports][here]].\\
      This golang command manages imports for you !
