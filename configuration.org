@@ -1468,7 +1468,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package gist
         :bind (
-               ("C-x C-g" . gist-list)))
+               ("C-x G" . gist-list)))
     #+END_SRC
 
 *** =git-gutter=
@@ -2191,7 +2191,7 @@
                 ("M-." . godef-jump)
                 ("M-," . pop-tag-mark)
                 ("C-c C-r" . go-remove-unused-imports)
-                ("C-c C-g" . gofmt)
+                ("C-c g" . gofmt)
                 ("C-c C-k" . godoc)
                 ("C-c k" . godoc-at-point)))
      #+END_SRC
