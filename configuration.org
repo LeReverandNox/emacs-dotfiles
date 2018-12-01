@@ -2143,14 +2143,23 @@
 **** =go-mode=
      From [[https://github.com/dominikh/go-mode.el][here]].
 
-     A major-mode for Golang !
+     A major-mode for Golang ! Provides a lot of features, such as =gofmt=,
+     =godef= or =godoc= integration.
+
      #+BEGIN_SRC emacs-lisp
        (use-package go-mode
          :mode ("\\.go\\'")
          :hook ((go-mode . (lambda () (add-hook 'before-save-hook 'gofmt-before-save nil 'local))))
          :bind (
                 :map go-mode-map
-                ("M-." . godef-jump)))
+                ("M-." . godef-jump)
+                ("M-," . pop-tag-mark)
+                ("C-c C-r" . go-remove-unused-imports)
+                ("C-c C-g" . gofmt)
+                ("C-c C-k" . godoc)
+                ("C-c k" . godoc-at-point)))
+     #+END_SRC
+
 **** =go-guru=
      =go-guru= is a great tool that provides code-analysis features. (Find the
      implementations, the callees, the callers etc...)
