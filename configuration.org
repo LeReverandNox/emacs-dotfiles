@@ -1611,8 +1611,18 @@
 ** Snippets
 *** =yasnippet=
     From [[https://github.com/joaotavora/yasnippet][here]]. Ressouces [[https://www.emacswiki.org/emacs/Yasnippet][here]], [[http://ergoemacs.org/emacs/emacs_templates.html][here]], [[http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/][here]], [[http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/][here]].
-    TODO: Setup =yasnippet= !
 
+    TextMate-like snippets in Emacs ! I usually don't use a lot of snippets, but
+    for very-repetitive stuff like control-structures, I have to admit, it's
+    usefull.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package yasnippet
+        :init
+        (setq yas-snippet-dirs `(,(concat user-emacs-directory "snippets")))
+        :config
+        (yas-global-mode t))
+    #+END_SRC
 ** Documentation
 *** =eldoc=
     =eldoc= shows the prototype of the function at point in the echo area.
