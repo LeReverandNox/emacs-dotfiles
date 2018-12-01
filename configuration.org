@@ -617,6 +617,18 @@
         (which-key-mode t))
     #+END_SRC
 
+*** =free-keys=
+    From [[https://github.com/Fuco1/free-keys][here]].\\
+    This cool package shows the free bindings available for the current buffer.
+
+    Used with =describe-personal-bindings= (from =bind-key=), it helps a lot to
+    define bindings that will not conflict with existing ones.
+    #+BEGIN_SRC emacs-lisp
+      (use-package free-keys
+        :config
+        (dolist (modifier '("C-S" "M-S"))
+          (add-to-list 'free-keys-modifiers modifier)))
+    #+END_SRC
 ** Sessions
    Emacs can save and restore the current session. Convenient since I'm closing
    Emacs often !
