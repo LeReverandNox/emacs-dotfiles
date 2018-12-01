@@ -2151,6 +2151,18 @@
          :bind (
                 :map go-mode-map
                 ("M-." . godef-jump)))
+**** =goimports=
+     From [[https://godoc.org/golang.org/x/tools/cmd/goimports][here]].\\
+     This golang command manages imports for you !
+
+     You need to install the =goimports= binary first.
+     #+BEGIN_SRC sh
+       go get -u golang.org/x/tools/cmd/goimports
+     #+END_SRC
+
+     Then set it as =gofmt-command=
+     #+BEGIN_SRC emacs-lisp
+       (setq gofmt-command "goimports")
      #+END_SRC
 
 **** =company-go=
