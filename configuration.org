@@ -2177,10 +2177,11 @@
      #+END_SRC
 
 **** =go-guru=
+     From [[https://github.com/dominikh/go-mode.el][here]] too.\\
      =go-guru= is a great tool that provides code-analysis features. (Find the
      implementations, the callees, the callers etc...)
 
-     It requires the =guru= binary to work. It should alreay be installed, but
+     It requires the =guru= binary to work. It should already be installed, but
      just in case:
      #+BEGIN_SRC sh
        go get -u golang.org/x/tools/cmd/guru
@@ -2194,6 +2195,7 @@
                 :map go-mode-map
                 ("C-c C-o" . go-guru-map)))
      #+END_SRC
+
 **** =goimports=
      From [[https://godoc.org/golang.org/x/tools/cmd/goimports][here]].\\
      This golang command manages imports for you !
