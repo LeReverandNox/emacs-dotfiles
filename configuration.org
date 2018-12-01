@@ -692,7 +692,7 @@
     However, I had to intall it manually, since it's not present on
     =MELPA= anymore ='(
     #+BEGIN_SRC emacs-lisp
-      (add-to-list 'load-path (concat user-emacs-directory "config/dired+"))
+      (add-to-list 'load-path (concat user-emacs-directory "config/dired-plus"))
       (require 'dired+)
     #+END_SRC
 

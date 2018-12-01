@@ -4,3 +4,6 @@
 [submodule "config/goflymake"]
 	path = config/goflymake
 	url = git@github.com:dougm/goflymake.git
+[submodule "config/dired-plus"]
+	path = config/dired-plus
+	url = https://github.com/emacsmirror/dired-plus
