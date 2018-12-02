@@ -114,6 +114,32 @@
          ;; Auto-compile before loading if byte-code is outdated
          (auto-compile-on-load-mode)))
    #+END_SRC
+* Custom map
+  After some research, I found [[https://karl-voit.at/2018/07/08/emacs-key-bindings/][this]] interesting article about how to deal with
+  custom keybindings in order to avoid messing with the default Emacs and
+  package bindings.
+
+  Idealy, I wish I could have used only =hydra= to achieve this, but for now,
+  you can't add heads to an exhisting =hydra=, you need to declare all at
+  once, in a same spot...\\
+  I can't do that, I want to keep my config 'orgagnized' by logical section, each one
+  having it's own set of related bindings.
+
+  So I decided to create my personal map here, and then, add as many =hydra= I
+  need in it.
+
+  I also didn't knew what keybinding to choose for my map. After a bit of
+  research ([[https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html][this]] ressource was really helpful) and some trial and error, =C-c c=
+  seems like a decent choice.
+  It didn't seems to be used (for now) by any of the packages that I use.
+
+
+  #+BEGIN_SRC emacs-lisp
+    (bind-keys :prefix "C-c c"
+               :prefix-map lrn/custom-map
+               :prefix-docstring "My very own custom map to hold a lotta stuff")
+  #+END_SRC
+
 * 42 Headers
   Use the official 42 headers in C/CPP files.
 
