@@ -625,9 +625,8 @@
     define bindings that will not conflict with existing ones.
     #+BEGIN_SRC emacs-lisp
       (use-package free-keys
-        :config
-        (dolist (modifier '("C-S" "M-S"))
-          (add-to-list 'free-keys-modifiers modifier)))
+        :init
+        (setq free-keys-modifiers '("" "C" "M" "C-M" "M-S")))
     #+END_SRC
 ** Sessions
    Emacs can save and restore the current session. Convenient since I'm closing
