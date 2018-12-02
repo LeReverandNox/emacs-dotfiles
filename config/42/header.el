@@ -28,7 +28,7 @@
 
 
 
-(global-set-key (kbd "C-c C-h") 'header-insert)
+;; (global-set-key (kbd "C-c C-h") 'header-insert)
 (setq write-file-hooks (cons 'header-update write-file-hooks))
 
 

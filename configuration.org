@@ -23,17 +23,6 @@
     (sensible-defaults/flash-screen-instead-of-ringing-bell)
   #+END_SRC
 
-* 42 Headers
-  Use the official 42 headers in C/CPP files.
-  Insert with =C-c C-h=
-
-  #+BEGIN_SRC emacs-lisp
-    (load (concat user-emacs-directory "config/42/list.el"))
-    (load (concat user-emacs-directory "config/42/string.el"))
-    (load (concat user-emacs-directory "config/42/comments.el"))
-    (load (concat user-emacs-directory "config/42/header.el"))
-  #+END_SRC
-
 * Package management (=package=, =use-package= and =auto-compile=)
 ** Setup =package= and it' s sources...
 *** Setup
@@ -125,6 +114,18 @@
          ;; Auto-compile before loading if byte-code is outdated
          (auto-compile-on-load-mode)))
    #+END_SRC
+* 42 Headers
+  Use the official 42 headers in C/CPP files.
+
+  #+BEGIN_SRC emacs-lisp
+    (load (concat user-emacs-directory "config/42/list.el"))
+    (load (concat user-emacs-directory "config/42/string.el"))
+    (load (concat user-emacs-directory "config/42/comments.el"))
+    (load (concat user-emacs-directory "config/42/header.el"))
+
+    (bind-key "h" 'header-insert lrn/custom-map)
+  #+END_SRC
+
 * =Evil=
   I love Emacs, but I can't live without Vim bindings...
   Ever since I watched [[https://www.youtube.com/watch?v=JWD1Fpdd4Pc][this]] video, I knew it was only a matter of time until I
