@@ -333,12 +333,15 @@
       (setq hrs/font-change-increment 1.05)
     #+END_SRC
 
-    Globally bind font resizing to =C-+=, =C--= and =C-==, so I can resize
-    ANYWHERE <3
+    Let's create an =hydra= to resize the font and bind it on my custom map.
     #+BEGIN_SRC emacs-lisp
-      (define-key global-map (kbd "C-=") 'hrs/reset-font-size)
-      (define-key global-map (kbd "C-+") 'hrs/increase-font-size)
-      (define-key global-map (kbd "C--") 'hrs/decrease-font-size)
+      (defhydra lrn/hydra-font-size ()
+        "Resize the font"
+        ("=" hrs/increase-font-size "bigger")
+        ("-" hrs/decrease-font-size "smaller")
+        ("0" hrs/reset-font-size "reset")
+        ("q" nil "quit"))
+      (bind-key "=" 'lrn/hydra-font-size/body lrn/custom-map)
     #+END_SRC
 
     Reset the font size at startup
