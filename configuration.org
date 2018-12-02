@@ -214,14 +214,42 @@
   #+BEGIN_SRC emacs-lisp
     (use-package evil-mc
       :diminish evil-mc-mode
-      :bind (
-             ("C->" . evil-mc-make-and-goto-next-match)
-             ("C-<" . evil-mc-make-and-goto-prev-match)
-             ("C-x C->" . evil-mc-make-all-cursors)
-             ("C-g" . evil-mc-undo-all-cursors)
-             ("C-S-<mouse-1>" . evil-mc-toggle-cursor-on-click))
       :config
       (global-evil-mc-mode 1))
+  #+END_SRC
+
+  Let's make an =hydra= to bind =evil-mc= commands on my custom map
+  #+BEGIN_SRC emacs-lisp
+    (defhydra lrn/hydra-evil-mc (
+                                 :color pink
+                                 :hint nil)
+      "
+              ^Up^                        ^Down^                     ^Other^
+    -----------------------------------------------------------------------------------
+    [_k_]   Make & prev line    [_j_]   Make & next line    [_<mouse-1>_] Make at click
+    [_p_]   Make & prev match   [_n_]   Make & next match   [_a_]         Make all
+    [_C-p_] Make & prev curs.   [_C-n_] Make & netxt curs.  [_u_]         Undo all
+    [_P_]   Skip & prev match   [_N_]   Skip & next match   [_q_]         Quit
+    [_C-P_] Skip & prev curs.   [_C-N_] Skip & prev curs.
+    "
+      ("k" evil-mc-make-cursor-move-prev-line)
+      ("p" evil-mc-make-and-goto-prev-match)
+      ("C-p" evil-mc-make-and-goto-prev-cursor)
+      ("P" evil-mc-skip-and-goto-prev-match)
+      ("C-P" evil-mc-skip-and-goto-prev-cursor)
+      ("j" evil-mc-make-cursor-move-next-line)
+      ("n" evil-mc-make-and-goto-next-match)
+      ("C-n" evil-mc-make-and-goto-next-cursor)
+      ("N" evil-mc-skip-and-goto-next-match)
+      ("C-N" evil-mc-skip-and-goto-next-cursor)
+      ("<mouse-1>" evil-mc-toggle-cursor-on-click)
+      ("a" evil-mc-make-all-cursors :color blue)
+      ("u" evil-mc-undo-all-cursors :color blue)
+      ("<down-mouse-1>" ignore :hint nil)
+      ("<drag-mouse-1>" ignore :hint nil)
+      ("q" nil)
+      ("C-g" nil))
+    (bind-key "m" 'lrn/hydra-evil-mc/body lrn/custom-map)
   #+END_SRC
 * UI / UX
 ** Tweak UI
