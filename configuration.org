@@ -1549,7 +1549,77 @@
     #+BEGIN_SRC emacs-lisp
       (use-package gist
         :bind (
-               ("C-x G" . gist-list)))
+               :map gist-list-menu-mode-map
+               ("s" . gist-list-starred)
+               ("u" . gist-list-user)
+               ("t" . gist-list-push-tag-limit)
+               ("p" . gist-list-push-visibility-limit)
+               ("x" . gist-list-pop-limit)))
+    #+END_SRC
+
+    Let's make an =hydra= to have convenient bindings for all this cool =gist=
+    commands !
+    #+BEGIN_SRC emacs-lisp
+      (defhydra lrn/hydra-make-gist (
+                                     :hint nil
+                                     :color blue
+                                     :foreign-keys run)
+        "
+       ^Create private^  |  ^Create public^  |     ^List^    |    ^Other^
+      ^^^^^^--------------------------------------------------------------
+        [_r_] Region     |  [_R_] Region     | [_l_] All     |  [_q_] Quit
+        [_b_] Buffer     |  [_B_] Buffer     | [_s_] Starred |
+        ^^^^                                 | [_u_] User    |
+      "
+        ("r" gist-region-private)
+        ("b" gist-buffer-private)
+        ("R" gist-region)
+        ("B" gist-buffer)
+        ("l" gist-list)
+        ("s" gist-list-starred)
+        ("u" gist-list-user)
+        ("q" nil))
+      (bind-key "g" 'lrn/hydra-make-gist/body lrn/custom-map)
+    #+END_SRC
+
+    #+RESULTS:
+    : lrn/hydra-make-gist/body
+
+    I also need an hydra to help me remember all the =gist-list-mode= bindings.
+    #+BEGIN_SRC emacs-lisp
+      (defhydra lrn/hydra-gist-list-mode (
+                                          :hint nil
+                                          :color blue
+                                          :foreign-keys run)
+        "
+            ^Edit^      |      ^Url^     |     ^Star^^^   |   ^Limit^     |   ^Other^
+      ^^^^^^^^^^------------------------------------------------------------------------------------
+      [_+_] Add buffer  | [_y_] Copy url | [_*_]^^ Star   | [_s_] Starred | [_RET_] Fetch (focus)
+      [_-_] Remove file | [_b_] Browse   | [_\\^_] Unstar | [_u_] User    | [_TAB_] Fetch (no focus)
+      [_e_] Edit desc.  |                           ^^^^^^| [_t_] Tag     | [_f_]   Fork
+      [_k_] Kill        |                           ^^^^^^| [_p_] Public  | [_g_]   Reload
+                                                  ^^^^^^^^| [_x_] Pop     | [_q_]   Quit
+      "
+        ("+" gist-add-buffer)
+        ("-" gist-remove-file)
+        ("e" gist-edit-current-description)
+        ("k" gist-kill-current)
+        ("y" gist-print-current-url)
+        ("b" gist-browse-current-url)
+        ("*" gist-star)
+        ("^" gist-unstar)
+        ("s" gist-list-starred)
+        ("u" gist-list-user)
+        ("t" gist-list-push-tag-limit)
+        ("p" gist-list-push-visibility-limit)
+        ("x" gist-list-pop-limit)
+        ("RET" gist-fetch-current)
+        ("TAB" gist-fetch-current-noselect)
+        ("f" gist-fork)
+        ("g" gist-reload)
+        ("q" nil))
+      (with-eval-after-load 'gist
+        (bind-key "h" 'lrn/hydra-gist-list-mode/body gist-list-menu-mode-map))
     #+END_SRC
 
 *** =git-gutter=
