@@ -2365,8 +2365,8 @@
     #+BEGIN_SRC emacs-lisp
       (use-package multi-term
         :bind (
-               :map evil-normal-state-map
-               ("C-t" . multi-term)))
+               :map lrn/custom-map
+               ("t" . multi-term)))
     #+END_SRC
 
 *** =shell-command=
