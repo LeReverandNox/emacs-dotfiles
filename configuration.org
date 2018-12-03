@@ -141,18 +141,6 @@
                :prefix-docstring "My very own custom map to hold a lotta stuff")
   #+END_SRC
 
-* 42 Headers
-  Use the official 42 headers in C/CPP files.
-
-  #+BEGIN_SRC emacs-lisp
-    (load (concat user-emacs-directory "config/42/list.el"))
-    (load (concat user-emacs-directory "config/42/string.el"))
-    (load (concat user-emacs-directory "config/42/comments.el"))
-    (load (concat user-emacs-directory "config/42/header.el"))
-
-    (bind-key "h" 'header-insert lrn/custom-map)
-  #+END_SRC
-
 * Beyond good and =Evil=
   I love Emacs, but I can't live without Vim bindings...
   Ever since I watched [[https://www.youtube.com/watch?v=JWD1Fpdd4Pc][this]] video, I knew it was only a matter of time until I
@@ -2079,6 +2067,19 @@
     From what I've read, =rtags= is more powerfull but also a LOT more ressource
     consuming... So meeeh.
     Thanks to @martinsosic for [[http://martinsosic.com/development/emacs/2017/12/09/emacs-cpp-ide.html][this]] great article.
+
+**** 42 Headers
+     From [[https://github.com/sullivanv/emacs][here]].\\
+     Use the official 42 headers in C/CPP files.
+
+     #+BEGIN_SRC emacs-lisp
+       (load (concat user-emacs-directory "config/42/list.el"))
+       (load (concat user-emacs-directory "config/42/string.el"))
+       (load (concat user-emacs-directory "config/42/comments.el"))
+       (load (concat user-emacs-directory "config/42/header.el"))
+
+       (bind-key "h" 'header-insert lrn/custom-map)
+     #+END_SRC
 
 **** Indentation
      Indent with tabs for C/CPP files, displayed as 4 spaces.
