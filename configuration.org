@@ -1567,8 +1567,6 @@
       (use-package magit
         :hook (
                (with-editor-mode . evil-insert-state))
-        :bind (
-               ("C-x g" . magit-status))
         :config
         (use-package evil-magit))
     #+END_SRC
