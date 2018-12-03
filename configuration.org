@@ -2508,9 +2508,9 @@
     of the world, but for me, using Chunkwm on OSX, I use this binding to change
     workspace...
 
-    Let's rebind =shell-command= on =C-S-t=
+    Let's rebind =shell-command= on =T= in my custom map.
     #+BEGIN_SRC emacs-lisp
-      (define-key evil-normal-state-map (kbd "C-S-t") 'shell-command)
+      (bind-key "T" 'shell-command lrn/custom-map)
     #+END_SRC
 ** Docker
    See [[http://manuel-uberti.github.io/emacs/2017/10/19/docker/][here]].\\
