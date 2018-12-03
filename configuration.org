@@ -387,6 +387,7 @@
     #+END_SRC
 ** Modeline
 *** =powerline=
+    From [[https://www.google.com/search?client=firefox-b-ab&q=emacs+powerline][here]].\\
     I love Vim's powerline, so when I heard there's an Emacs version...
 
     Here's a fork of the =powerline-evil-center-color-theme= (from [[https://github.com/raugturi/powerline-evil][here]]) that
@@ -475,6 +476,7 @@
       (setq display-time-format "%H:%M:%S")
     #+END_SRC
 *** =diminish=
+    From [[https://github.com/myrjola/diminish.el][here]].\\
     The =modeline= is often waaaay to crowded, when a lot of modes are enabled.
     Hopefully, there's =dimisish= ! It allows you to rename every minor/major
     modes to save space.
@@ -505,11 +507,13 @@
         (diminish-minor-mode 'abbrev 'abbrev-mode))
     #+END_SRC
 ** Icons
+   From [[https://github.com/domtronn/all-the-icons.el][here]].\\
    Because it's always nice to have cool icons instead of plain text
    #+BEGIN_SRC emacs-lisp
      (use-package all-the-icons)
    #+END_SRC
 ** =neotree=
+   From [[https://www.google.com/search?client=firefox-b-ab&q=emacs+neotree][here]].\\
    Similar to Vim's Nerdtree, such a cool package to browse the filesystem in a
    conveniant sidebar <3
 
@@ -620,6 +624,7 @@
      The completion framework itself. Waaay way smaller than =helm=, with less
      functionalities. But since I was using about 5% of =helm=, it doesn't matter
 
+     From [[https://github.com/PythonNut/historian.el][here]].\\
      =ivy-historian= persists the =ivy= candidates in a file.
      #+BEGIN_SRC emacs-lisp
        (use-package ivy-historian)
@@ -789,6 +794,7 @@
    #+END_SRC
 
 *** =dired+=
+    From [[https://www.emacswiki.org/emacs/DiredPlus][here]].\\
     =dired+= is a package that provides additional features to the basic
     =dired-mode=
     However, I had to intall it manually, since it's not present on
@@ -799,6 +805,7 @@
     #+END_SRC
 
 *** =dired-narrow=
+    From [[https://github.com/Fuco1/dired-hacks/blob/master/dired-narrow.el][here]].\\
     A cool package that allows to filter files by name ! (See [[http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/][here]])
 
     In a =dired= buffer, hit =C-s= to invok =dired-narrow= and type a string to
@@ -950,6 +957,7 @@
      (global-auto-revert-mode t)
    #+END_SRC
 ** Parens
+   See [[http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html][here]] and [[https://www.emacswiki.org/emacs/ElectricPair][here]].\\
    Automatically write the closing quote, bracket, parenthesis… you know what I
    mean.
    Don't forget to disable =electric-pair-mode= for lispy languages,
@@ -971,6 +979,7 @@
 
 ** Folding
 *** =hideshow=
+    From [[https://www.emacswiki.org/emacs/HideShow][here]].\\
     Emacs requires a mode to handle folding.
     Let's run with =hideshow=, which is built-in and really efficient.
 
@@ -1020,6 +1029,7 @@
     #+END_SRC
 
 *** =ace-jump-mode=
+    From [[https://github.com/winterTTr/ace-jump-mode][here]].\\
     I always loved Vim's =EasyMotion=, even though I never used it that much.
     Basically, it allows me to jump to the desired occurence of a word in the
     displayed content by just pressing a key.
@@ -1080,6 +1090,7 @@
         (setq ialign-initial-repeat t))
     #+END_SRC
 ** =undo-tree=
+   From [[http://www.dr-qubit.org/undo-tree.html][here.]] See [[https://www.emacswiki.org/emacs/UndoTree][here]].\\
    Emacs does almost everything well... except undos ! That's a nightmare
    compare to Vim.
 
@@ -1102,6 +1113,7 @@
          (global-undo-tree-mode)))
    #+END_SRC
 ** =move-text=
+   From [[https://github.com/emacsfodder/move-text][here]].\\
    =move-text= allows to text up and down with =<M-up>= / =<M-down>=, like in VSCode
    #+BEGIN_SRC emacs-lisp
      (use-package move-text
@@ -1109,8 +1121,10 @@
        (move-text-default-bindings))
    #+END_SRC
 ** =rainbow-mode=
+   From [[https://github.com/emacsmirror/rainbow-mode][here]].
    Because it can be usefull to visualise the actual color of hex colors, not
-   only in =CSS Mode=.
+   only in =CSS Mode= (Okay, sometimes it will color stuff that doesn't need to
+   be... meeeeeeeh, I don't care.).
    #+BEGIN_SRC emacs-lisp
      (use-package rainbow-mode
        :diminish rainbow-mode
@@ -1135,6 +1149,7 @@
    #+END_SRC
 ** Text
 *** =refill-mode=
+    See [[https://www.emacswiki.org/emacs/RefillMode][here]].\\
     I like to have a nice formatting to write text.\\
     =refill-mode= does a pretty good job to keep text wrapped, making nice
     paragraphs, by auto-filling at =fill-column= length.
@@ -1284,6 +1299,7 @@
           (persistent-scratch-setup-default)))
     #+END_SRC
 ** =winner-mode=
+   See [[https://www.emacswiki.org/emacs/WinnerMode][here]].\\
    Allow to switch back and forth between window configuration with =C-c <left>=
    and =C-c <right>=!
    So useful.
@@ -1303,6 +1319,7 @@
    #+END_SRC
 ** Manage buffers
 *** =ibuffer=
+    See [[https://www.emacswiki.org/emacs/IbufferMode][here]].\\
     I really like =helm-mini= to quickly find a buffer or re-open a recently
     close file. But when it comes to manage multiple buffers at the same time...
     I can't get used to it's shitty bindings.\\
@@ -1539,6 +1556,7 @@
 ** VCS
    Everything needed to work with =Git= in the best conditions
 *** =magit=
+    From [[https://magit.vc/][here]], repo [[https://github.com/magit/magit][here]].
     =magit= is greaaaaaaat. So much great ! Every other Git client can get back at
     their moms house.
     Just hit =C-x g= (=magit-status=) and let the magic operate.
@@ -1554,6 +1572,7 @@
         (use-package evil-magit))
     #+END_SRC
 *** =gist=
+    From [[https://github.com/defunkt/gist.el][here]].\\
     A cool package to manage gists directly from within Emacs
     #+BEGIN_SRC emacs-lisp
       (use-package gist
@@ -1632,6 +1651,7 @@
     #+END_SRC
 
 *** =git-gutter=
+    From [[https://github.com/syohex/emacs-git-gutter-fringe][here]].\\
     Another Sublime package that I really like, makes atomic commits and partial
     staging so much easier.
     #+BEGIN_SRC emacs-lisp
@@ -1695,6 +1715,7 @@
     #+END_SRC
 ** Project management
 *** =projectile=
+    From [[https://github.com/bbatsov/projectile][here]]. Website [[https://www.projectile.mx/en/latest/][here]].\\
     =projectile= is another awesome package, allowing us to work with projects
     instead of just folders. So much possibilities, I still have a lot to learn
     about it.
@@ -1739,6 +1760,7 @@
     #+END_SRC
 ** Completion
 *** =company=
+    From [[https://github.com/company-mode/company-mode][here]]. Website [[http://company-mode.github.io/][here]].\\
     =company= is a completion framework pluggable with different backends to
     provide a cool completion during programming.
     I need to configure the popup style, because for now it looks like Windows
@@ -1770,6 +1792,7 @@
           (global-company-mode)))
     #+END_SRC
 *** =company-quickhelp=
+    From[[https://github.com/expez/company-quickhelp][ here]].\\
     It's nice to have small popups with the documentation of the candidates in
     =company= :)
     #+BEGIN_SRC emacs-lisp
@@ -1797,6 +1820,7 @@
     #+END_SRC
 ** Documentation
 *** =eldoc=
+    From [[https://www.emacswiki.org/emacs/ElDoc][here]].\\
     =eldoc= shows the prototype of the function at point in the echo area.
     By default it only works for Lisp, but you can plug additional backends to
     support other languages. It's really nifty.
@@ -1810,6 +1834,7 @@
     #+END_SRC
 ** Syntax checking
 *** =flycheck=
+    From [[https://github.com/flycheck/flycheck][here]]. Website [[https://www.flycheck.org/en/latest/][here]].\\
     A great realtime syntax checking extension that works with a lot of
     backends.
 
@@ -1841,6 +1866,7 @@
       (use-package json-mode)
     #+END_SRC
 *** CMake
+    From [[https://github.com/Kitware/CMake/blob/master/Auxiliary/cmake-mode.el][here]].\\
     A major mode for CMake files
     #+BEGIN_SRC emacs-lisp
       (use-package cmake-mode)
@@ -1947,6 +1973,7 @@
     #+END_SRC
 
 **** =pipenv=
+     From [[https://github.com/pwalsh/pipenv.el][here]].\\
      A package that provides bindings for =pipenv=, cool for working with
      virtual envs.
      It's hard to find a good solution when it comes to venv in Emacs, most of
@@ -1968,6 +1995,7 @@
          (setq pipenv-keymap-prefix (kbd "C-c p")))
      #+END_SRC
 **** =company-jedi=
+     From [[https://github.com/syohex/emacs-company-jedi][here]].\\
      A backend for =company= powered by =jedi=. Pretty cool.
 
      #+BEGIN_SRC emacs-lisp
@@ -1987,6 +2015,7 @@
                                             )))
      #+END_SRC
 **** =elpy=
+     From [[https://github.com/jorgenschaefer/elpy][here]]. Doc [[https://elpy.readthedocs.io/en/latest/introduction.html][here]].\\
      =elpy= is THE Python IDE for Emacs. It can do a lot of stuff and I need to
      learn a lot more about it.
      #+BEGIN_SRC emacs-lisp
@@ -2020,6 +2049,7 @@
        (setq python-shell-completion-native-disabled-interpreters '("python"))
      #+END_SRC
 **** =autopep8=
+     From [[https://github.com/paetzke/py-autopep8.el][here]].\\
      Automatic format and correction of PEP8 errors at save.
      Not 100% convince, but I keep it for now.
 
@@ -2050,6 +2080,7 @@
        (setq-default c-default-style "linux")
      #+END_SRC
 **** =irony=
+     From [[https://github.com/Sarcasm/irony-mode][here]].\\
      The core of this setup
      #+BEGIN_SRC emacs-lisp
        ;; (use-package irony
@@ -2066,6 +2097,7 @@
        ;;     (unless (irony--find-server-executable) (call-interactively #'irony-install-server))))
      #+END_SRC
 
+     From [[https://github.com/Sarcasm/company-irony][here]].\\
      =irony= based =company= backend, for completion
      #+BEGIN_SRC emacs-lisp
        ;; (use-package company-irony
@@ -2074,12 +2106,14 @@
        ;; (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
      #+END_SRC
 
+     From [[https://github.com/Sarcasm/flycheck-irony][here]].\\
      =irony= based =flycheck= backend, for syntax checking
      #+BEGIN_SRC emacs-lisp
        ;; (use-package flycheck-irony
        ;;   :hook (flycheck-mode . flycheck-irony-setup))
      #+END_SRC
 
+     From [[https://github.com/ikirill/irony-eldoc][here]].\\
      =irony= based =eldoc= backend, for documentation
      #+BEGIN_SRC emacs-lisp
        ;; (use-package irony-eldoc
@@ -2087,6 +2121,7 @@
      #+END_SRC
 
 **** =rtags=
+     From [[https://github.com/Andersbakken/rtags][here]].\\
      =rtags= need some binaries to work: rc and rdm.
 
      #+BEGIN_SRC emacs-lisp
@@ -2111,13 +2146,15 @@
            (rtags-enable-standard-keybindings)))
      #+END_SRC
 
--     =rtags= integration for =ivy=, to search definitions, I guess.
+     From [[https://melpa.org/#/ivy-rtags][here]].\\
+     =rtags= integration for =ivy=, to search definitions, I guess.
      #+BEGIN_SRC emacs-lisp
        (use-package ivy-rtags
          :init
          (setq rtags-display-result-backend 'ivy))
      #+END_SRC
 
+     From [[https://github.com/Andersbakken/rtags/blob/master/src/company-rtags.el][here]].\\
      =rtags= =company= backend for completion
      #+BEGIN_SRC emacs-lisp
        (use-package company-rtags
@@ -2142,6 +2179,7 @@
          )
      #+END_SRC
 
+     From [[https://github.com/Andersbakken/rtags/blob/master/src/flycheck-rtags.el][here]].\\
      =rtags= =flycheck= backend for syntax checking
      #+BEGIN_SRC emacs-lisp
        (use-package flycheck-rtags
@@ -2166,7 +2204,7 @@
     better have some cools packages to help me do it !
 
 **** =emmet-mode=
-     From [[https://github.com/smihica/emmet-mode][here]].
+     From [[https://github.com/smihica/emmet-mode][here]].\\
      Big-up to Adrien !
      Just kidding, =Emmet= is great for people like me who dislike writing HTML
      and/or CSS.
@@ -2182,7 +2220,7 @@
      #+END_SRC
 
 **** =web-mode=
-     From [[http://web-mode.org/][here]].
+     From [[http://web-mode.org/][here]].\\
      =web-mode= allows me to edit HTML templates with cool features.
 
      TODO: Support all needed file types, Company.
@@ -2437,6 +2475,7 @@
    cool tricks...
 
 *** =multi-term=
+    From [[https://www.emacswiki.org/emacs/MultiTerm][here]].\\
     I'm not sure why I chose =multi-term=, but it looks like a popular option !
     Thanks @[[https://github.com/hrs/dotfiles/blob/master/emacs/.emacs.d/configuration.org#terminal][HRS]]
 
