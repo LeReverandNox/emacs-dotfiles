@@ -104,6 +104,7 @@
    #+END_SRC
 
 ** and finally, use =auto-compile= to always compile packages and use the latest version.
+   From [[https://github.com/emacscollective/auto-compile][here]].\\
    #+BEGIN_SRC emacs-lisp
      (use-package auto-compile
        :init
