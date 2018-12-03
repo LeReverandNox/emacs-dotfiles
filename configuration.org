@@ -152,105 +152,114 @@
     (bind-key "h" 'header-insert lrn/custom-map)
   #+END_SRC
 
-* =Evil=
+* Beyond good and =Evil=
   I love Emacs, but I can't live without Vim bindings...
   Ever since I watched [[https://www.youtube.com/watch?v=JWD1Fpdd4Pc][this]] video, I knew it was only a matter of time until I
   switch to Emacs
 
   So without further ado, ladies and gentlemen : EVIL !
-  #+BEGIN_SRC emacs-lisp
-    (use-package evil
-      :bind (
-             :map evil-normal-state-map
-             ;; I need to unbind M-. to make goto-definition work when programming
-             ("M-." . nil)
-             :map evil-motion-state-map
-             ;; Also need to unbind C-i (evil-jump-forward) for hideshow-org to works
-             ;; Since the keycode for TAB and C-i is the same, and I don't want to find a workaround for now...
-             ("C-i" . nil)
-             ;; Rebind (evil-jump-forward) to C-S-o
-             ("C-S-o" . evil-jump-forward))
-      :init
-      (progn
-        ;; Don't expand the abbrev when going back to Normal state
-        (setq evil-want-abbrev-expand-on-insert-exit nil)
-        ;; Shift lines by 2 spaces
-        (setq-default evil-shift-width 2)
-        ;; Enable Evil bindings in the minibuffer
-        (setq evil-want-minibuffer t)
-        ;; Don't use regex during search
-        (setq evil-regexp-search nil)
-        ;; Use much more smaller step for undo
-        (setq evil-want-fine-undo t)
-        ;; Disable keybindings, for evil-collection
-        (setq evil-want-keybinding nil))
-      :config
-      (progn
-        (evil-mode t)))
-  #+END_SRC
+** =evil=
+   From [[https://github.com/emacs-evil/evil][here]].\\
 
-  =evil-collection= adds a shitload of keybindings for a shitload of modes.
-  I don't know if it worth it, but I'm gonna give it a shot.
-  #+BEGIN_SRC emacs-lisp
-    (use-package evil-collection
-      :after evil
-      :config
-      (progn
-        ;; Disable neotree bindings, I'm already happy with mine
-        (setq evil-collection-mode-list (remove 'neotree evil-collection-mode-list))
-        ;; Disable outline bindings, conflict with TAB (org-cycle)
-        (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
-        (evil-collection-init)))
-  #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil
+       :bind (
+              :map evil-normal-state-map
+              ;; I need to unbind M-. to make goto-definition work when programming
+              ("M-." . nil)
+              :map evil-motion-state-map
+              ;; Also need to unbind C-i (evil-jump-forward) for hideshow-org to works
+              ;; Since the keycode for TAB and C-i is the same, and I don't want to find a workaround for now...
+              ("C-i" . nil)
+              ;; Rebind (evil-jump-forward) to C-S-o
+              ("C-S-o" . evil-jump-forward))
+       :init
+       (progn
+         ;; Don't expand the abbrev when going back to Normal state
+         (setq evil-want-abbrev-expand-on-insert-exit nil)
+         ;; Shift lines by 2 spaces
+         (setq-default evil-shift-width 2)
+         ;; Enable Evil bindings in the minibuffer
+         (setq evil-want-minibuffer t)
+         ;; Don't use regex during search
+         (setq evil-regexp-search nil)
+         ;; Use much more smaller step for undo
+         (setq evil-want-fine-undo t)
+         ;; Disable keybindings, for evil-collection
+         (setq evil-want-keybinding nil))
+       :config
+       (progn
+         (evil-mode t)))
+   #+END_SRC
 
-  Let's also add =evil-surround= and =evil-mc=, to have surrounding and
-  multi-cursors, just like Vim ! Hu-uh !
-  #+BEGIN_SRC emacs-lisp
-    (use-package evil-surround
-      :config
-      (global-evil-surround-mode t))
-  #+END_SRC
+** =evil-collection=
+   From [[https://github.com/emacs-evil/evil-collection][here]].\\
+   =evil-collection= adds a shitload of keybindings for a shitload of modes.
+   I don't know if it worth it, but I'm gonna give it a shot.
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil-collection
+       :after evil
+       :config
+       (progn
+         ;; Disable neotree bindings, I'm already happy with mine
+         (setq evil-collection-mode-list (remove 'neotree evil-collection-mode-list))
+         ;; Disable outline bindings, conflict with TAB (org-cycle)
+         (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
+         (evil-collection-init)))
+   #+END_SRC
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package evil-mc
-      :diminish evil-mc-mode
-      :config
-      (global-evil-mc-mode 1))
-  #+END_SRC
+** =evil-surround=
+   From [[https://github.com/emacs-evil/evil-surround][here]].\\
+   Let's also add =evil-surround= to have surrounding, just like in Vim ! Hu-uh !
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil-surround
+       :config
+       (global-evil-surround-mode t))
+   #+END_SRC
 
-  Let's make an =hydra= to bind =evil-mc= commands on my custom map
-  #+BEGIN_SRC emacs-lisp
-    (defhydra lrn/hydra-evil-mc (
-                                 :color pink
-                                 :hint nil)
-      "
-              ^Up^                        ^Down^                     ^Other^
-    -----------------------------------------------------------------------------------
-    [_k_]   Make & prev line    [_j_]   Make & next line    [_<mouse-1>_] Make at click
-    [_p_]   Make & prev match   [_n_]   Make & next match   [_a_]         Make all
-    [_C-p_] Make & prev curs.   [_C-n_] Make & netxt curs.  [_u_]         Undo all
-    [_P_]   Skip & prev match   [_N_]   Skip & next match   [_q_]         Quit
-    [_C-P_] Skip & prev curs.   [_C-N_] Skip & prev curs.
-    "
-      ("k" evil-mc-make-cursor-move-prev-line)
-      ("p" evil-mc-make-and-goto-prev-match)
-      ("C-p" evil-mc-make-and-goto-prev-cursor)
-      ("P" evil-mc-skip-and-goto-prev-match)
-      ("C-P" evil-mc-skip-and-goto-prev-cursor)
-      ("j" evil-mc-make-cursor-move-next-line)
-      ("n" evil-mc-make-and-goto-next-match)
-      ("C-n" evil-mc-make-and-goto-next-cursor)
-      ("N" evil-mc-skip-and-goto-next-match)
-      ("C-N" evil-mc-skip-and-goto-next-cursor)
-      ("<mouse-1>" evil-mc-toggle-cursor-on-click)
-      ("a" evil-mc-make-all-cursors :color blue)
-      ("u" evil-mc-undo-all-cursors :color blue)
-      ("<down-mouse-1>" ignore :hint nil)
-      ("<drag-mouse-1>" ignore :hint nil)
-      ("q" nil)
-      ("C-g" nil))
-    (bind-key "m" 'lrn/hydra-evil-mc/body lrn/custom-map)
-  #+END_SRC
+** =evil-mc=
+   From [[https://github.com/gabesoft/evil-mc][here]].\\
+   And =evil-mc=, to have multiple-cursors... again, just like in Vim !
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil-mc
+       :diminish evil-mc-mode
+       :config
+       (global-evil-mc-mode 1))
+   #+END_SRC
+
+   Let's make an =hydra= to bind =evil-mc= commands on my custom map
+   #+BEGIN_SRC emacs-lisp
+     (defhydra lrn/hydra-evil-mc (
+                                  :color pink
+                                  :hint nil)
+       "
+               ^Up^                        ^Down^                     ^Other^
+     -----------------------------------------------------------------------------------
+     [_k_]   Make & prev line    [_j_]   Make & next line    [_<mouse-1>_] Make at click
+     [_p_]   Make & prev match   [_n_]   Make & next match   [_a_]         Make all
+     [_C-p_] Make & prev curs.   [_C-n_] Make & netxt curs.  [_u_]         Undo all
+     [_P_]   Skip & prev match   [_N_]   Skip & next match   [_q_]         Quit
+     [_C-P_] Skip & prev curs.   [_C-N_] Skip & prev curs.
+     "
+       ("k" evil-mc-make-cursor-move-prev-line)
+       ("p" evil-mc-make-and-goto-prev-match)
+       ("C-p" evil-mc-make-and-goto-prev-cursor)
+       ("P" evil-mc-skip-and-goto-prev-match)
+       ("C-P" evil-mc-skip-and-goto-prev-cursor)
+       ("j" evil-mc-make-cursor-move-next-line)
+       ("n" evil-mc-make-and-goto-next-match)
+       ("C-n" evil-mc-make-and-goto-next-cursor)
+       ("N" evil-mc-skip-and-goto-next-match)
+       ("C-N" evil-mc-skip-and-goto-next-cursor)
+       ("<mouse-1>" evil-mc-toggle-cursor-on-click)
+       ("a" evil-mc-make-all-cursors :color blue)
+       ("u" evil-mc-undo-all-cursors :color blue)
+       ("<down-mouse-1>" ignore :hint nil)
+       ("<drag-mouse-1>" ignore :hint nil)
+       ("q" nil)
+       ("C-g" nil))
+     (bind-key "m" 'lrn/hydra-evil-mc/body lrn/custom-map)
+   #+END_SRC
 * UI / UX
 ** Tweak UI
    Hide menu / tool / scroll bars, for I don't use them
