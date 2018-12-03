@@ -944,6 +944,7 @@
     #+END_SRC
 
 ** Case
+   From [[https://wikemacs.org/wiki/Subword-mode][here]].\\
    Treat lower/uppper CamelCase as separate words
    #+BEGIN_SRC emacs-lisp
      (use-package subword
@@ -1453,6 +1454,7 @@
   #+END_SRC
 * =Org-mode=
 ** =org=
+   From [[https://www.orgmode.org/fr/index.html][here]]. Full doc [[https://orgmode.org/org.html][here]].\\
    Let's install the latest =org= package and set some stuff.
    #+BEGIN_SRC emacs-lisp
      (use-package org
@@ -1866,6 +1868,7 @@
     #+END_SRC
 ** Languages
 *** YAML
+    From [[https://github.com/yoshiki/yaml-mode][here]].\\
     A major mode to edit YAML files :) Pretty good, with syntax highlighting,
     correct indenting etc...
     #+BEGIN_SRC emacs-lisp
