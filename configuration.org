@@ -836,6 +836,12 @@
    #+BEGIN_SRC emacs-lisp
      (define-key global-map (kbd "C-x C-S-c") 'kill-emacs)
    #+END_SRC
+** =hydra=
+   From [[https://github.com/abo-abo/hydra][here]].\\
+   To read: [[https://matutine.gitlab.io/2015/03/11/les-hydres-vont-enchanter-votre-exp-C3-A9rience-avec-emacs.html][here]], [[https://oremacs.com/2015/01/20/introducing-hydra/][here]], [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/][here]], [[https://writequit.org/denver-emacs/presentations/2017-06-20-hydra.html][here]], [[https://www.wisdomandwonder.com/article/10748/emacsorg-mode-abo-abos-hydra-makes-you-a-lightweight-literate-programmer-hyper-boosting-your-productivity-with-about-ten-of-minutes-effort-for-learning-it][here]]
+   #+BEGIN_SRC emacs-lisp
+     (use-package hydra)
+   #+END_SRC
 * Persitency
 ** =backup= and =auto-save=
    I love to keep my backups and auto-saves neatly in separates directories.
