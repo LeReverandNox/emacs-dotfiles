@@ -1693,11 +1693,11 @@
                ("M-i" . swiper)))
     #+END_SRC
 *** =ag=
-    TODO: Useless ?
-    =ag=, AKA The Silver Searcher, is great to find stuff in files. Specially
-    with =projectile=, tu search in a whole project.
+    =ag=, AKA The Silver Searcher, is great to fuzzy-find stuff in files. It's
+    needed by =projectile-ag=, but since I use =counsel-ag= (which is shipped
+    with it's own =ag= implementation), it shoudn't be necessary.
 
-    It requires the "[[https://github.com/ggreer/the_silver_searcher][the_silver_searcher]]" binary installed on the system to
+    Nevertheless, it requires the "[[https://github.com/ggreer/the_silver_searcher][the_silver_searcher]]" binary installed on the system to
     work.
     #+BEGIN_SRC emacs-lisp
       (use-package ag)
