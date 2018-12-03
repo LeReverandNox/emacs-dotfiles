@@ -1832,6 +1832,14 @@
         :config
         (yas-global-mode t))
     #+END_SRC
+*** =ivy-yasnippet=
+    From [[https://github.com/mkcms/ivy-yasnippet][here]].\\
+    This package provides snippet preview using =ivy=.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package ivy-yasnippet
+        :bind ("C-c & i" . ivy-yasnippet))
+    #+END_SRC
 ** Documentation
 *** =eldoc=
     From [[https://www.emacswiki.org/emacs/ElDoc][here]].\\
@@ -1857,14 +1865,6 @@
         :config
         (progn
           (global-flycheck-mode)))
-    #+END_SRC
-*** =ivy-yasnippet=
-    From [[https://github.com/mkcms/ivy-yasnippet][here]].\\
-    This package provides snippet preview using =ivy=.
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package ivy-yasnippet
-        :bind ("C-c & i" . ivy-yasnippet))
     #+END_SRC
 ** Languages
 *** YAML
