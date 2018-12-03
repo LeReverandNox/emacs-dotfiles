@@ -733,7 +733,7 @@
    the next time ! I don't like this behavior. Thanks to [[https://superuser.com/a/1155381][this]] post, there's a
    worakoung that reloads the actual theme after restoring the .desktop
 
-   EDIT: Since I start using =--daemon= / =emacsclient=, I had to fix
+   TODO: Since I start using =--daemon= / =emacsclient=, I had to fix
    =desktop-save=mode= so I can restore frames in a new frame... But it seems to
    have broken the up-mentioned workaround...  will (try) to-fix someday.
    #+BEGIN_SRC emacs-lisp
@@ -930,6 +930,8 @@
     This package is suppose to do a great job with code indentation, even during
     shitfing, transposing, slurping etc.
 
+    TODO: Maybe it's a bit TOO aggressive in some modes... I'll probably disable
+    it locally.
     #+BEGIN_SRC emacs-lisp
       (use-package aggressive-indent
         :hook (prog-mode . aggressive-indent-mode))
@@ -1437,6 +1439,8 @@
   =TRAMP= is great to remote-edit files with Emacs !
   I need to use it way more.
 
+  TODO: Learn =TRAMP= !
+
   Use =ssh= by default
   #+BEGIN_SRC emacs-lisp
     (setq tramp-default-method "ssh")
@@ -1692,6 +1696,7 @@
                ("M-i" . swiper)))
     #+END_SRC
 *** =ag=
+    TODO: Useless ?
     =ag=, AKA The Silver Searcher, is great to find stuff in files. Specially
     with =projectile=, tu search in a whole project.
 
@@ -1811,6 +1816,7 @@
     for very-repetitive stuff like control-structures, I have to admit, it's
     usefull.
 
+    TODO: Fix binding conflict with =company=
     #+BEGIN_SRC emacs-lisp
       (use-package yasnippet
         :init
