@@ -517,32 +517,56 @@
            (if (neo-buffer--expanded-node-p path) (neotree-enter)))))
    #+END_SRC
 
+   Thanks to [[https://emacs.stackexchange.com/a/29500][@ideasman42]] for this function that will open =neotree= at the
+   current =projectile= root, or the directory of the current buffer if not in a
+   projet. I'll use it instead of =neotree-projectile-action=.
+   #+BEGIN_SRC emacs-lisp
+     (defun my/neotree-project-dir-toggle ()
+       "Open NeoTree using the project root, using find-file-in-project,
+     or the current buffer directory."
+       (interactive)
+       (let ((project-dir
+              (ignore-errors
+                ;;; Pick one: projectile or find-file-in-project
+                ; (projectile-project-root)
+                (ffip-project-root)
+                ))
+             (file-name (buffer-file-name))
+             (neo-smart-open t))
+         (if (and (fboundp 'neo-global--window-exists-p)
+                  (neo-global--window-exists-p))
+             (neotree-hide)
+           (progn
+             (neotree-show)
+             (if project-dir
+                 (neotree-dir project-dir))
+             (if file-name
+                 (neotree-find file-name))))))
+   #+END_SRC
+
    Let's install =neotree= and set the bindings
    #+BEGIN_SRC emacs-lisp
-     (use-package neotree
-       :init
-       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-       (setq neo-window-fixed-size nil)
-       :config
-       (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-       (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-change-root)
-       (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-       (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-       (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-       (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-       (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
-       (evil-define-key 'normal neotree-mode-map (kbd "s") 'neotree-enter-horizontal-split)
-       (evil-define-key 'normal neotree-mode-map (kbd "v") 'neotree-enter-vertical-split)
-       (evil-define-key 'normal neotree-mode-map (kbd "O") 'neotree-open-file-in-system-application)
-       (evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-filepath-to-yank-ring)
-       (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
-       (evil-define-key 'normal neotree-mode-map (kbd "C-b") 'neotree-hide)
-       (evil-define-key 'normal neotree-mode-map (kbd "C-c C-y") 'neotree-copy-node)
-       (evil-define-key 'normal neotree-mode-map (kbd "x") 'my/neotree-close-parent)
-       (define-key evil-motion-state-map (kbd "C-b") 'neotree-show)
-       (define-key evil-motion-state-map (kbd "C-S-b") 'neotree-projectile-action))
+          (use-package neotree
+            :bind (
+                   :map neotree-mode-map
+                   ;; Neotree doesn't respect the binding convention, it conflicts with my custom map.
+                   ("C-c c" . nil)
+                   ("s" . neotree-enter-horizontal-split)
+                   ("v" . neotree-enter-vertical-split)
+                   ("y" . neotree-copy-filepath-to-yank-ring)
+                   ("r" . neotree-refresh)
+                   ("C-c C-y" . neotree-copy-node)
+                   ("x" . my/neotree-close-parent)
+                   ("<tab>" . neotree-change-root)
+                   ("j" . neotree-next-line)
+                   ("k" . neotree-previous-line))
+            :init
+            (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+            (setq neo-window-fixed-size nil)
+            ;; Switch to Emacs state when entering neotree-mode, no need for Evil there.
+            (evil-set-initial-state 'neotree-mode 'emacs)
+            (bind-key "n" 'neotree-show lrn/custom-map)
+            (bind-key "N" 'my/neotree-project-dir-toggle lrn/custom-map))
    #+END_SRC
 
 ** Completion
