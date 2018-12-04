@@ -1140,10 +1140,13 @@
 ** Mark
    By default, =set-mark-command= is bound on =C-@= and =C-SPC=.\\
    =C-@= is totally unpractical, period.
-   However, I prefere to use =C-SPC= to invoke =company-complete=, like Intellisence in VSCode.
 
-   So, let's remap =set-mark-command=
-   on =C-c C-SPC=, to match his brother =C-x C-SPC= (=pop-global-mark)
+   However, I prefere to use =C-SPC= to invoke =company-complete=, like
+   Intellisence in VSCode. (and since I don't use =set-mark-command= with
+   =evil=, but =evil-visual=... I doesn't matter.)
+
+   So, let's remap =set-mark-command= on =C-c C-SPC=, to match his brother
+   =C-x C-SPC= (=pop-global-mark)
    #+BEGIN_SRC emacs-lisp
      (bind-key "C-c C-SPC" 'set-mark-command global-map)
    #+END_SRC
