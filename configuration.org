@@ -807,9 +807,8 @@
     When done, hit =g r= (=revert-buffer=) to remove the filters.
     #+BEGIN_SRC emacs-lisp
       (use-package dired-narrow
-        :config
-        (progn
-          (evil-define-key 'normal dired-mode-map (kbd "C-s") 'dired-narrow)))
+        :init
+        (bind-key "C-s" 'dired-narrow dired-mode-map))
     #+END_SRC
 
 *** =dired-quick-sort=
@@ -828,7 +827,7 @@
 ** Emacs server
    Let's add a binding to kill the Emacs server.
    #+BEGIN_SRC emacs-lisp
-     (define-key global-map (kbd "C-x C-S-c") 'kill-emacs)
+     (bind-key "C-x C-S-c" 'kill-emacs global-map)
    #+END_SRC
 ** =hydra=
    From [[https://github.com/abo-abo/hydra][here]].\\
@@ -1141,7 +1140,7 @@
    So, let's remap =set-mark-command=
    on =C-c C-SPC=, to match his brother =C-x C-SPC= (=pop-global-mark)
    #+BEGIN_SRC emacs-lisp
-     (define-key global-map (kbd "C-c C-SPC") 'set-mark-command)
+     (bind-key "C-c C-SPC" 'set-mark-command global-map)
    #+END_SRC
 
 ** Default mode
@@ -1211,13 +1210,12 @@
 
    Bind those 2 functions. I had to overwrite Evil map.
    #+BEGIN_SRC emacs-lisp
-     (define-key evil-window-map "v" 'hrs/split-window-right-and-switch)
-     (define-key evil-window-map "\C-v" 'hrs/split-window-right-and-switch)
-
-     (define-key evil-window-map "s" 'hrs/split-window-below-and-switch)
-     (define-key evil-window-map "S" 'hrs/split-window-below-and-switch)
-     (define-key evil-window-map "\C-s" 'hrs/split-window-below-and-switch)
-     (define-key evil-window-map (kbd "C-S-s") 'hrs/split-window-below-and-switch)
+     (bind-key "v" 'hrs/split-window-right-and-switch evil-window-map)
+     (bind-key "C-v" 'hrs/split-window-right-and-switch evil-window-map)
+     (bind-key "s" 'hrs/split-window-below-and-switch evil-window-map)
+     (bind-key "S" 'hrs/split-window-below-and-switch evil-window-map)
+     (bind-key "C-s" 'hrs/split-window-below-and-switch evil-window-map)
+     (bind-key "C-S-s" 'hrs/split-window-below-and-switch evil-window-map)
    #+END_SRC
 ** Scratch buffers
 *** Mooooore !
@@ -1263,7 +1261,7 @@
     Then, the map and the bindings
     #+BEGIN_SRC emacs-lisp
       ;; Unbind C-w C-n (evil-new-window)
-      (define-key evil-motion-state-map (kbd "C-w C-n") nil)
+      (bind-key "C-w C-n" nil evil-motion-state-map)
 
       (bind-keys :map evil-window-map
                  :prefix "C-n"
@@ -1541,7 +1539,7 @@
 
    Let's make =org-open-at-point= globally available
    #+BEGIN_SRC emacs-lisp
-     (define-key global-map (kbd "C-c C-o") 'org-open-at-point-global)
+     (bind-key "C-c C-o" 'org-open-at-point-global global-map)
    #+END_SRC
 * Programming
   I will put a lot of stuff in this section, sometimes not justified at all !
@@ -1710,8 +1708,8 @@
     pattern again, using =<up>= and =down=. See [[https://emacs.stackexchange.com/a/31336][here]].
 
     #+BEGIN_SRC emacs-lisp
-      (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat)
-      (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance)
+      (bind-key "<up>" 'isearch-ring-retreat isearch-mode-map)
+      (bind-key "<down>" 'isearch-ring-advance isearch-mode-map)
     #+END_SRC
 
     Show the match count.
@@ -1966,7 +1964,7 @@
       Let's bind this function on the =C-x C-e= map
       #+BEGIN_SRC emacs-lisp
         ;; C-x C-e s (eval-last-sexp)
-        (define-key lrn/eval-map (kbd "s") 'lrn/eval-and-replace)
+        (bind-key "s" 'lrn/eval-and-replace lrn/eval-map)
       #+END_SRC
 *** Python
     My Python setup, working smoothly but definitly not perfect. Based on [[https://realpython.com/emacs-the-best-python-editor/#pep8-compliance-autopep8][this]]
