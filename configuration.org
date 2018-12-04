@@ -1565,7 +1565,9 @@
 ** VCS
    Everything needed to work with =Git= in the best conditions
 *** =magit=
-    From [[https://magit.vc/][here]], repo [[https://github.com/magit/magit][here]].
+    From [[https://magit.vc/][here]], repo [[https://github.com/magit/magit][here]].\\
+    Don't forget the [[https://github.com/magit/magit/wiki/Cheatsheet][cheatsheet]] :)
+
     =magit= is greaaaaaaat. So much great ! Every other Git client can get back at
     their moms house.
     Just hit =C-x g= (=magit-status=) and let the magic operate.
