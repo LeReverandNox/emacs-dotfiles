@@ -1542,9 +1542,10 @@
    Because sometimes =org-mode= features are so great, I want to use them in
    every other mode !
 
-   Let's make =org-open-at-point= globally available
+   Let's make =org-open-at-point= globally available (in my custom-map, to avoid
+   conflict with other major-modes...)
    #+BEGIN_SRC emacs-lisp
-     (bind-key "C-c C-o" 'org-open-at-point-global global-map)
+     (bind-key "o" 'org-open-at-point-global lrn/custom-map)
    #+END_SRC
 * Programming
   I will put a lot of stuff in this section, sometimes not justified at all !
