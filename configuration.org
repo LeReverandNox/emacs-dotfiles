@@ -157,31 +157,28 @@
      (use-package evil
        :bind (
               :map evil-normal-state-map
-              ;; I need to unbind M-. to make goto-definition work when programming
+              ;; I need to unbind M-. (evil-repeat-pop-next) to make goto-definition work when programming
               ("M-." . nil)
               :map evil-motion-state-map
-              ;; Also need to unbind C-i (evil-jump-forward) for hideshow-org to works
-              ;; Since the keycode for TAB and C-i is the same, and I don't want to find a workaround for now...
-              ("C-i" . nil)
-              ;; Rebind (evil-jump-forward) to C-S-o
+              ;; Bind (evil-jump-forward) to C-S-o
               ("C-S-o" . evil-jump-forward))
        :init
-       (progn
-         ;; Don't expand the abbrev when going back to Normal state
-         (setq evil-want-abbrev-expand-on-insert-exit nil)
-         ;; Shift lines by 2 spaces
-         (setq-default evil-shift-width 2)
-         ;; Enable Evil bindings in the minibuffer
-         (setq evil-want-minibuffer t)
-         ;; Don't use regex during search
-         (setq evil-regexp-search nil)
-         ;; Use much more smaller step for undo
-         (setq evil-want-fine-undo t)
-         ;; Disable keybindings, for evil-collection
-         (setq evil-want-keybinding nil))
+       ;; Don't expand the abbrev when going back to Normal state
+       (setq evil-want-abbrev-expand-on-insert-exit nil)
+       ;; Shift lines by 2 spaces
+       (setq-default evil-shift-width 2)
+       ;; Enable Evil bindings in the minibuffer
+       (setq evil-want-minibuffer t)
+       ;; Don't use regex during search
+       (setq evil-regexp-search nil)
+       ;; Use much more smaller step for undo
+       (setq evil-want-fine-undo t)
+       ;; Disable keybindings, for evil-collection
+       (setq evil-want-keybinding nil)
+       ;; I don't want to bind C-i (evil-jump-forward), since C-i = TAB and vice-versa... TAB is TAB !
+       (setq evil-want-C-i-jump nil)
        :config
-       (progn
-         (evil-mode t)))
+       (evil-mode t))
    #+END_SRC
 
 ** =evil-collection=
