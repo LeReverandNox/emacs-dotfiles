@@ -160,6 +160,8 @@
               :map evil-normal-state-map
               ;; I need to unbind M-. (evil-repeat-pop-next) to make goto-definition work when programming
               ("M-." . nil)
+              ;; Unbind C-t (pop-tar-mark), I use M-, (and it overrides transpose-chars)
+              ("C-t" . nil)
               :map evil-motion-state-map
               ;; Bind (evil-jump-forward) to C-S-o
               ("C-S-o" . evil-jump-forward))
@@ -1053,12 +1055,17 @@
    By default, only =M-t= (=transpose-words=) and =C-x C-t= (=transpose-lines=)
    are bound.
 
-   Let's create a custom map to access all of them, with =C-x C-t= as prefix.
+   Let's create a map to access all of them, inside my custom map.
    I'll maybe have to type a few more keys, but since I don't use them that
    often, I won't mind.
 
+   TODO: Maybe an =hydra= instead ? Or maybe I can delete this map... since the
+   basic transpose commands (chars, words, lines) are bound by default, and I
+   unbound C-t in evil-normal-state... It's a good opportunity to learn the
+   default bindings
    #+BEGIN_SRC emacs-lisp
-     (bind-keys :prefix "C-x C-t"
+     (bind-keys :map lrn/custom-map
+                :prefix "C-t"
                 :prefix-map lrn/transpose-map
                 :prefix-docstring "Keymap for transpose commands"
                 ("w" . transpose-words)
