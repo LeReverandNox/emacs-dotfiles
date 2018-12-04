@@ -2568,7 +2568,8 @@
        (add-to-list 'ivy-initial-inputs-alist '(sx-search . "^stackoverflow"))
        (add-to-list 'ivy-initial-inputs-alist '(sx-tab-all-questions . "^stackoverflow"))
        :config
-       (bind-keys :prefix "C-c s"
+       (bind-keys :map lrn/custom-map
+                  :prefix "s"
                   :prefix-map lrn/sx-map
                   :prefix-docstring "Global keymap for SX."
                   ("q" . sx-tab-all-questions)
