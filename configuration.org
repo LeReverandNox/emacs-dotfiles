@@ -1937,10 +1937,12 @@
       By default, there's only one content-evalutation binding, =C-x C-e= (=eval-last-sexp=)
       I'd like to also have binding for =eval-buffer=, =eval-region= and
       stuff.\\
-      So let's make =C-x C-e= a prefix, and redefine some binding, should we ?
+      So let's make a map inside my custom map, and define some binding, should we ?
 
+      TODO: Maybe an =hydra= instead ?
       #+BEGIN_SRC emacs-lisp
-        (bind-keys :prefix "C-x C-e"
+        (bind-keys :map lrn/custom-map
+                   :prefix "e"
                    :prefix-map lrn/eval-map
                    :prefix-docstring "Keymap for evaluation commands"
                    ("e" . eval-last-sexp)
