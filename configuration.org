@@ -74,9 +74,12 @@
                 "Status: " '("available" "new" "installed" "dependency" "obsolete"))))
         (package-menu-filter (concat "status:" status)))
 
+      (with-eval-after-load 'bind-key
+        (bind-key "s" 'package-menu-filter-by-status package-menu-mode-map)
+        (bind-key "a" 'package-menu-find-marks package-menu-mode-map))
+
       (with-eval-after-load 'evil
-        (evil-define-key 'normal package-menu-mode-map (kbd "s") 'package-menu-filter-by-status)
-        (evil-define-key 'normal package-menu-mode-map (kbd "a") 'package-menu-find-marks))
+        (evil-set-initial-state 'package-menu-mode 'emacs))
     #+END_SRC
 
 ** then, setup =use-package=, our beloved package-manager...
@@ -194,6 +197,8 @@
          (setq evil-collection-mode-list (remove 'neotree evil-collection-mode-list))
          ;; Disable outline bindings, conflict with TAB (org-cycle)
          (setq evil-collection-mode-list (remove 'outline evil-collection-mode-list))
+         ;; Disable package-menu bindings, I don't use evil for this mode
+         (setq evil-collection-mode-list (remove 'package-menu evil-collection-mode-list))
          (evil-collection-init)))
    #+END_SRC
 
