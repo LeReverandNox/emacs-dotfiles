@@ -78,8 +78,9 @@
         (bind-key "s" 'package-menu-filter-by-status package-menu-mode-map)
         (bind-key "a" 'package-menu-find-marks package-menu-mode-map))
 
-      (with-eval-after-load 'evil
-        (evil-set-initial-state 'package-menu-mode 'emacs))
+      ;; Disable evil for package-menu-mode
+      (add-hook 'package-menu-mode-hook (lambda ()
+                                          (evil-set-initial-state 'package-menu-mode 'emacs)))
     #+END_SRC
 
 ** then, setup =use-package=, our beloved package-manager...
