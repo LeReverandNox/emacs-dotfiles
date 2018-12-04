@@ -2502,7 +2502,7 @@
     I'm not sure why I chose =multi-term=, but it looks like a popular option !
     Thanks @[[https://github.com/hrs/dotfiles/blob/master/emacs/.emacs.d/configuration.org#terminal][HRS]]
 
-    Let's bind it to =C-t= (override =-pop-tag-mark=)
+    Let's bind it to =t= on my custom map
     #+BEGIN_SRC emacs-lisp
       (use-package multi-term
         :bind (
