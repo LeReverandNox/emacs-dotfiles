@@ -231,7 +231,7 @@
      -----------------------------------------------------------------------------------
      [_k_]   Make & prev line    [_j_]   Make & next line    [_<mouse-1>_] Make at click
      [_p_]   Make & prev match   [_n_]   Make & next match   [_a_]         Make all
-     [_C-p_] Make & prev curs.   [_C-n_] Make & netxt curs.  [_u_]         Undo all
+     [_C-p_] Make & prev curs.   [_C-n_] Make & next curs.   [_u_]         Undo all
      [_P_]   Skip & prev match   [_N_]   Skip & next match   [_q_]         Quit
      [_C-P_] Skip & prev curs.   [_C-N_] Skip & prev curs.
      "
