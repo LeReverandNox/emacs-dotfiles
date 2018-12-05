@@ -1088,8 +1088,8 @@
     #+BEGIN_SRC emacs-lisp
       (use-package ialign
         :bind (
-               :map evil-normal-state-map
-               ("C-x C-a" . ialign))
+               :map lrn/custom-map
+               ("a" . ialign))
         :init
         ;; Change the default regex to align by the first space
         (setq ialign-initial-regexp "\\( \\)")
