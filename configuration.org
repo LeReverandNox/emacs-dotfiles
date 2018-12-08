@@ -2004,7 +2004,8 @@
          :hook (python-mode . pipenv-mode)
          :bind (
                 :map pipenv-command-map
-                ("w" . pyvenv-workon))
+                ("w" . pyvenv-workon)
+                ("k" . jedi:stop-all-servers))
          :init
          (setenv "WORKON_HOME" "~/.local/share/virtualenvs")
          (setq
