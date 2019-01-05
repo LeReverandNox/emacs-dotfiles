@@ -1423,6 +1423,8 @@
        :bind (
               ;; That's stupid, I need to include the prefix in the binding... bug ?
               :map eyebrowse-mode-map
+              ("C-c C-w h" . eyebrowse-prev-window-config)
+              ("C-c C-w l" . eyebrowse-next-window-config)
               ("C-c C-w <left>" . eyebrowse-prev-window-config)
               ("C-c C-w <right>" . eyebrowse-next-window-config))
        :init
