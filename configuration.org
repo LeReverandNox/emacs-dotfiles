@@ -2499,6 +2499,16 @@
 *** PHP
     Coming soon...
     TODO: Check [[https://www.philnewton.net/guides/emacs-as-a-php-editor/][this]], [[http://irreal.org/blog/?p=5499][this]], [[http://www.blogbyben.com/2016/08/emacs-php-modern-and-far-more-complete.html][this]], [[https://www.drupal.org/docs/develop/development-tools/emacs][this]] and [[https://github.com/emacs-php/php-suite][that]].
+*** Lua
+**** =lua-mode=
+     From [[https://github.com/immerrr/lua-mode][here]]. See [[http://immerrr.github.io/lua-mode/][here]].
+
+     A major mode to edit Lua files.
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package lua-mode
+         :mode ("\\.lua\\'"))
+     #+END_SRC
 ** Shell
    I use my terminal A LOT. So if I can use it directly in Emacs and so some
    cool tricks...
