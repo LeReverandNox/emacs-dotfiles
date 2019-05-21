@@ -119,6 +119,16 @@
          ;; Auto-compile before loading if byte-code is outdated
          (auto-compile-on-load-mode)))
    #+END_SRC
+* Dvorak
+  Since I switch from Qwerty to Dvorak, =C-x= has become a real pain to type...
+  According to the [[https://www.emacswiki.org/emacs/DvorakKeyboard#toc1][EmacsWiki]], =C-z= might be a good alternative, since it's not
+  a usefull binding, and it allow to have it on the right hand along with =f=,
+  =s=, =w=, etc.\\
+  Let's give it a shot !
+
+  #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-z") ctl-x-map)
+  #+END_SRC
 * Custom map
   After some research, I found [[https://karl-voit.at/2018/07/08/emacs-key-bindings/][this]] interesting article about how to deal with
   custom keybindings in order to avoid messing with the default Emacs and
@@ -164,7 +174,9 @@
               ("C-t" . nil)
               :map evil-motion-state-map
               ;; Bind (evil-jump-forward) to C-S-o
-              ("C-S-o" . evil-jump-forward))
+              ("C-S-o" . evil-jump-forward)
+              ;; Unbind C-z, since it's my C-x alternative for Dvorak
+              ("C-z" . nil))
        :init
        ;; Don't expand the abbrev when going back to Normal state
        (setq evil-want-abbrev-expand-on-insert-exit nil)
