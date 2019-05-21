@@ -2509,6 +2509,14 @@
        (use-package lua-mode
          :mode ("\\.lua\\'"))
      #+END_SRC
+*** Arduino
+**** =arduino-mode=
+     From [[https://github.com/bookest/arduino-mode][here]].
+
+     #+BEGIN_SRC emacs-lisp
+       (use-package arduino-mode
+         :mode ("\\.ino\\'"))
+     #+END_SRC
 ** Shell
    I use my terminal A LOT. So if I can use it directly in Emacs and so some
    cool tricks...
