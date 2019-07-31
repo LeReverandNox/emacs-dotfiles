@@ -1443,10 +1443,6 @@
               ("C-c C-w <left>" . eyebrowse-prev-window-config)
               ("C-c C-w <right>" . eyebrowse-next-window-config))
        :init
-       ;; This is a custom face, so the active workspace is more visible in the mode-line.
-       (set-face-attribute 'eyebrowse-mode-line-active nil
-                           :inherit font-lock-builtin-face
-                           :weight 'bold)
        ;; Circle through the workspaces.
        (setq eyebrowse-wrap-around t)
        ;; Create a scratch buffer in a new workspace.
@@ -1456,6 +1452,10 @@
        ;; Always show the mode-line indicator, even if there's only one workspace
        (setq eyebrowse-mode-line-style t)
        :config
+       ;; This is a custom face, so the active workspace is more visible in the mode-line.
+       (set-face-attribute 'eyebrowse-mode-line-active nil
+                           :inherit font-lock-builtin-face
+                           :weight 'bold)
        (eyebrowse-mode t))
    #+END_SRC
 
