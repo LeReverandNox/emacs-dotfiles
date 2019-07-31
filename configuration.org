@@ -1891,7 +1891,9 @@
     A major mode to edit YAML files :) Pretty good, with syntax highlighting,
     correct indenting etc...
     #+BEGIN_SRC emacs-lisp
-      (use-package yaml-mode)
+      (use-package yaml-mode
+        :hook (yaml-mode . (lambda ()
+                             refill-mode -1)))
     #+END_SRC
 *** JSON
     Here's a major-mode ([[https://github.com/joshwnj/json-mode][here]]) to edit JSON, with syntax highlithing, indentation,
