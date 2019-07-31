@@ -23,3 +23,7 @@ speed-type/
 persp-confs/
 .sx/
 .historian
+transient/
+games/
+abbrev_defs
+.org-id-locations
