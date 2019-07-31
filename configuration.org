@@ -172,6 +172,9 @@
               ("M-." . nil)
               ;; Unbind C-t (pop-tar-mark), I use M-, (and it overrides transpose-chars)
               ("C-t" . nil)
+              ;; Unbind Z Z and ZQ, I don't use them to exit Emacs
+              ("Z Z" . nil)
+              ("Z Q" . nil)
               :map evil-motion-state-map
               ;; Bind (evil-jump-forward) to C-S-o
               ("C-S-o" . evil-jump-forward)
