@@ -1775,7 +1775,6 @@
         (setq projectile-require-project-root nil)
         :config
         (progn
-          (setq projectile-switch-project-action 'neotree-projectile-action)
           (projectile-mode t)))
     #+END_SRC
 
