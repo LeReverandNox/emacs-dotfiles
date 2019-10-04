@@ -2544,6 +2544,13 @@
        (use-package arduino-mode
          :mode ("\\.ino\\'"))
      #+END_SRC
+*** Fish
+    From [[https://github.com/wwwjfy/emacs-fish][here]].
+    A major mode to support =Fish= script, since they use a different syntax than =Bash=
+    #+BEGIN_SRC emacs-lisp
+      (use-package fish-mode
+        :mode ("\\.fish\\'"))
+    #+END_SRC
 ** Shell
    I use my terminal A LOT. So if I can use it directly in Emacs and so some
    cool tricks...
