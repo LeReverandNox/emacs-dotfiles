@@ -850,6 +850,17 @@
    #+BEGIN_SRC emacs-lisp
      (use-package hydra)
    #+END_SRC
+** Suspend
+   There's a command to suspend the frame : =suspend-frame=. Pretty cool when
+   using =Emacs= from terminal, but very dangerous in GUI. The frame is
+   suspended and cannot be recovered easily !
+
+  Even worse, it's bound on =C-x C-z=, and since I use =C-z= as =C-x= in Dvorak,
+  is trigger it A LOT. Let's unbind this stuff.
+
+  #+BEGIN_SRC emacs-lisp
+    (global-unset-key (kbd "C-z C-z"))
+  #+END_SRC
 * Persitency
 ** =backup= and =auto-save=
    I love to keep my backups and auto-saves neatly in separates directories.
