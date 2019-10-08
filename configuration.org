@@ -1732,7 +1732,9 @@
     #+BEGIN_SRC emacs-lisp
       (use-package swiper
         :bind (
-               ("M-i" . swiper)))
+               ("M-i" . swiper)
+               ;; Also bind swiper to C-s instead of isearch-forward, I don't use it anyway
+               ("C-s" . swiper)))
     #+END_SRC
 *** =ag=
     =ag=, AKA The Silver Searcher, is great to fuzzy-find stuff in files. It's
