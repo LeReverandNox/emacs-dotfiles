@@ -172,6 +172,23 @@
 ** =evil=
    From [[https://github.com/emacs-evil/evil][here]].\\
 
+   I'd want to be able to return to Normal state by pressing =C-g=, I think it's
+   more convenient than =Esc=. (See [[https://emacs.stackexchange.com/a/13770][here]].)\\
+   Be careful, the minibuffers don't use =keyboard-quit= to be closed, but
+   =abort-recursive-edit=. It should do the trick.
+
+   Maybe it broke the behavior of =C-g= for some other action, I dond't know
+   yet. We'll see.
+   #+BEGIN_SRC emacs-lisp
+     (defun evil-keyboard-quit ()
+       "Keyboard quit and force normal state."
+       (interactive)
+       (and evil-mode (evil-force-normal-state))
+       (if (active-minibuffer-window)
+           (minibuffer-keyboard-quit)
+         (keyboard-quit)))
+   #+END_SRC
+
    #+BEGIN_SRC emacs-lisp
      (use-package evil
        :bind (
@@ -187,7 +204,24 @@
               ;; Bind (evil-jump-forward) to C-S-o
               ("C-S-o" . evil-jump-forward)
               ;; Unbind C-z, since it's my C-x alternative for Dvorak
-              ("C-z" . nil))
+              ("C-z" . nil)
+              ;; Return to Normal state with C-g
+              ("C-g" . evil-keyboard-quit)
+              :map evil-insert-state-map
+              ;; Return to Normal state with C-g
+              ("C-g" . evil-keyboard-quit)
+              :map evil-emacs-state-map
+              ;; Return to Normal state with C-g
+              ("C-g" . evil-keyboard-quit)
+              :map evil-operator-state-map
+              ;; Return to Normal state with C-g
+              ("C-g" . evil-keyboard-quit)
+              :map evil-replace-state-map
+              ;; Return to Normal state with C-g
+              ("C-g" . evil-keyboard-quit)
+              :map evil-visual-state-map
+              ;; Return to Normal state with C-g
+              ("C-g" . evil-keyboard-quit))
        :init
        ;; Don't expand the abbrev when going back to Normal state
        (setq evil-want-abbrev-expand-on-insert-exit nil)
