@@ -2553,6 +2553,13 @@
       (use-package fish-mode
         :mode ("\\.fish\\'"))
     #+END_SRC
+*** Rust
+    From [[https://github.com/rust-lang/rust-mode][here]].
+    A major mode for =Rust= files.
+    #+BEGIN_SRC emacs-lisp
+      (use-package rust-mode
+        :mode ("\\.rs\\.'"))
+    #+END_SRC
 ** Shell
    I use my terminal A LOT. So if I can use it directly in Emacs and so some
    cool tricks...
