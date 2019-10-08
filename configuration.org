@@ -119,6 +119,14 @@
          ;; Auto-compile before loading if byte-code is outdated
          (auto-compile-on-load-mode)))
    #+END_SRC
+** =try=
+   From [[https://github.com/larstvei/Try][here]].\\
+   This package allow to test other package without installing them. Looks cool,
+   let's give it a try !
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package try)
+   #+END_SRC
 * Dvorak
   Since I switch from Qwerty to Dvorak, =C-x= has become a real pain to type...
   According to the [[https://www.emacswiki.org/emacs/DvorakKeyboard#toc1][EmacsWiki]], =C-z= might be a good alternative, since it's not
