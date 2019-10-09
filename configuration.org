@@ -774,6 +774,22 @@
         :init
         (setq free-keys-modifiers '("" "C" "M" "C-M" "M-S")))
     #+END_SRC
+*** =find-library=, =find-variable= and =find-function=
+    From [[https://emacsredux.com/blog/2014/06/18/quickly-find-emacs-lisp-sources/][here]].\\
+    Two very useful command to see the souce of a library, package, function,
+    variable etc...
+    Let's bind them so I can use them easily.
+
+    #+BEGIN_SRC emacs-lisp
+      (bind-key "C-h C-l" 'find-library-other-window global-map)
+      (bind-key "C-h C-v p" 'find-variable-at-point global-map)
+      (bind-key "C-h C-v o" 'find-variable-other-window global-map)
+      (bind-key "C-h C-f" 'nil global-map)
+      (bind-key "C-h C-f k" 'find-function-on-key-other-window global-map)
+      (bind-key "C-h C-f p" 'find-function-at-point global-map)
+      (bind-key "C-h C-f o" 'find-function-other-window global-map)
+    #+END_SRC
+
 ** Sessions
    Emacs can save and restore the current session. Convenient since I'm closing
    Emacs often !
