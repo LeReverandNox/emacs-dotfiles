@@ -210,9 +210,8 @@
               :map evil-insert-state-map
               ;; Return to Normal state with C-g
               ("C-g" . evil-keyboard-quit)
-              :map evil-emacs-state-map
-              ;; Return to Normal state with C-g
-              ("C-g" . evil-keyboard-quit)
+              ;; Unbind evil-state-mode from Insert state, cause too much trouble since I use C-z as C-x
+              ("C-z" . nil)
               :map evil-operator-state-map
               ;; Return to Normal state with C-g
               ("C-g" . evil-keyboard-quit)
