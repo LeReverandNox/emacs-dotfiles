@@ -562,75 +562,176 @@
    #+BEGIN_SRC emacs-lisp
      (use-package all-the-icons)
    #+END_SRC
-** =neotree=
-   From [[https://www.google.com/search?client=firefox-b-ab&q=emacs+neotree][here]].\\
-   Similar to Vim's Nerdtree, such a cool package to browse the filesystem in a
-   conveniant sidebar <3
+** File Explorer
+*** =neotree=
+    From [[https://www.google.com/search?client=firefox-b-ab&q=emacs+neotree][here]].\\
+    Similar to Vim's Nerdtree, such a cool package to browse the filesystem in a
+    conveniant sidebar <3
 
-   Thanks [[https://github.com/jaypei/emacs-neotree/issues/293][@stereoproxy]] for this function that allows me to close the parent
-   directory of a node easily !
-   #+BEGIN_SRC emacs-lisp
-     (defun my/neotree-close-parent ()
-       "Close parent directory of current node."
-       (interactive)
-       (neotree-select-up-node)
-       (let* ((btn-full-path (neo-buffer--get-filename-current-line))
-              (path (if btn-full-path btn-full-path neo-buffer--start-node)))
-         (when (file-name-directory path)
-           (if (neo-buffer--expanded-node-p path) (neotree-enter)))))
-   #+END_SRC
+    Thanks [[https://github.com/jaypei/emacs-neotree/issues/293][@stereoproxy]] for this function that allows me to close the parent
+    directory of a node easily !
+    #+BEGIN_SRC emacs-lisp
+      (defun my/neotree-close-parent ()
+        "Close parent directory of current node."
+        (interactive)
+        (neotree-select-up-node)
+        (let* ((btn-full-path (neo-buffer--get-filename-current-line))
+               (path (if btn-full-path btn-full-path neo-buffer--start-node)))
+          (when (file-name-directory path)
+            (if (neo-buffer--expanded-node-p path) (neotree-enter)))))
+    #+END_SRC
 
-   Thanks to [[https://emacs.stackexchange.com/a/29500][@ideasman42]] for this function that will open =neotree= at the
-   current =projectile= root, or the directory of the current buffer if not in a
-   projet. I'll use it instead of =neotree-projectile-action=.
-   #+BEGIN_SRC emacs-lisp
-     (defun my/neotree-project-dir-toggle ()
-       "Open NeoTree using the project root, using find-file-in-project,
-     or the current buffer directory."
-       (interactive)
-       (let ((project-dir
-              (ignore-errors
-                ;;; Pick one: projectile or find-file-in-project
-                ; (projectile-project-root)
-                (ffip-project-root)
-                ))
-             (file-name (buffer-file-name))
-             (neo-smart-open t))
-         (if (and (fboundp 'neo-global--window-exists-p)
-                  (neo-global--window-exists-p))
-             (neotree-hide)
-           (progn
-             (neotree-show)
-             (if project-dir
-                 (neotree-dir project-dir))
-             (if file-name
-                 (neotree-find file-name))))))
-   #+END_SRC
+    Thanks to [[https://emacs.stackexchange.com/a/29500][@ideasman42]] for this function that will open =neotree= at the
+    current =projectile= root, or the directory of the current buffer if not in a
+    projet. I'll use it instead of =neotree-projectile-action=.
+    #+BEGIN_SRC emacs-lisp
+      (defun my/neotree-project-dir-toggle ()
+        "Open NeoTree using the project root, using find-file-in-project,
+      or the current buffer directory."
+        (interactive)
+        (let ((project-dir
+               (ignore-errors
+                 ;;; Pick one: projectile or find-file-in-project
+                 ; (projectile-project-root)
+                 (ffip-project-root)
+                 ))
+              (file-name (buffer-file-name))
+              (neo-smart-open t))
+          (if (and (fboundp 'neo-global--window-exists-p)
+                   (neo-global--window-exists-p))
+              (neotree-hide)
+            (progn
+              (neotree-show)
+              (if project-dir
+                  (neotree-dir project-dir))
+              (if file-name
+                  (neotree-find file-name))))))
+    #+END_SRC
 
-   Let's install =neotree= and set the bindings
-   #+BEGIN_SRC emacs-lisp
-          (use-package neotree
-            :bind (
-                   :map neotree-mode-map
-                   ;; Neotree doesn't respect the binding convention, it conflicts with my custom map.
-                   ("C-c c" . nil)
-                   ("s" . neotree-enter-horizontal-split)
-                   ("v" . neotree-enter-vertical-split)
-                   ("y" . neotree-copy-filepath-to-yank-ring)
-                   ("r" . neotree-refresh)
-                   ("C-c C-y" . neotree-copy-node)
-                   ("x" . my/neotree-close-parent)
-                   ("<tab>" . neotree-change-root)
-                   ("j" . neotree-next-line)
-                   ("k" . neotree-previous-line))
-            :init
-            (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-            (setq neo-window-fixed-size nil)
-            ;; Switch to Emacs state when entering neotree-mode, no need for Evil there.
-            (evil-set-initial-state 'neotree-mode 'emacs)
-            (bind-key "n" 'neotree-show lrn/custom-map)
-            (bind-key "N" 'my/neotree-project-dir-toggle lrn/custom-map))
-   #+END_SRC
+    Let's install =neotree= and set the bindings
+    #+BEGIN_SRC emacs-lisp
+      ;; (use-package neotree
+      ;;   :bind (
+      ;;          :map neotree-mode-map
+      ;;          ;; Neotree doesn't respect the binding convention, it conflicts with my custom map.
+      ;;          ("C-c c" . nil)
+      ;;          ("s" . neotree-enter-horizontal-split)
+      ;;          ("v" . neotree-enter-vertical-split)
+      ;;          ("y" . neotree-copy-filepath-to-yank-ring)
+      ;;          ("r" . neotree-refresh)
+      ;;          ("C-c C-y" . neotree-copy-node)
+      ;;          ("x" . my/neotree-close-parent)
+      ;;          ("<tab>" . neotree-change-root)
+      ;;          ("j" . neotree-next-line)
+      ;;          ("k" . neotree-previous-line))
+      ;;   :init
+      ;;   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+      ;;   (setq neo-window-fixed-size nil)
+      ;;   ;; Switch to Emacs state when entering neotree-mode, no need for Evil there.
+      ;;   (evil-set-initial-state 'neotree-mode 'emacs)
+      ;;   (bind-key "n" 'neotree-show lrn/custom-map)
+      ;;   (bind-key "N" 'my/neotree-project-dir-toggle lrn/custom-map))
+    #+END_SRC
+
+*** =treemacs=
+    From [[https://github.com/Alexander-Miller/treemacs][here]].\\
+    A replacement for =neotree=, more recent, with more features and a nicer UI.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package treemacs
+        :defer t
+        :config
+        (progn
+          (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+                treemacs-deferred-git-apply-delay      0.5
+                treemacs-display-in-side-window        t
+                treemacs-eldoc-display                 t
+                treemacs-file-event-delay              5000
+                treemacs-file-follow-delay             0.2
+                treemacs-follow-after-init             t
+                treemacs-git-command-pipe              ""
+                treemacs-goto-tag-strategy             'refetch-index
+                treemacs-indentation                   2
+                treemacs-indentation-string            " "
+                treemacs-is-never-other-window         nil
+                treemacs-max-git-entries               5000
+                treemacs-missing-project-action        'ask
+                treemacs-no-png-images                 nil
+                treemacs-no-delete-other-windows       t
+                treemacs-project-follow-cleanup        nil
+                treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+                treemacs-position                      'left
+                treemacs-recenter-distance             0.1
+                treemacs-recenter-after-file-follow    nil
+                treemacs-recenter-after-tag-follow     nil
+                treemacs-recenter-after-project-jump   'always
+                treemacs-recenter-after-project-expand 'on-distance
+                treemacs-show-cursor                   nil
+                treemacs-show-hidden-files             t
+                treemacs-silent-filewatch              nil
+                treemacs-silent-refresh                nil
+                treemacs-sorting                       'alphabetic-desc
+                treemacs-space-between-root-nodes      t
+                treemacs-tag-follow-cleanup            t
+                treemacs-tag-follow-delay              1.5
+                treemacs-width                         35)
+
+          ;; The default width and height of the icons is 22 pixels. If you are
+          ;; using a Hi-DPI display, uncomment this to double the icon size.
+          ;;(treemacs-resize-icons 44)
+
+          (treemacs-follow-mode t)
+          (treemacs-filewatch-mode t)
+          (treemacs-fringe-indicator-mode t)
+          (pcase (cons (not (null (executable-find "git")))
+                       (not (null treemacs-python-executable)))
+            (`(t . t)
+             (treemacs-git-mode 'deferred))
+            (`(t . _)
+             (treemacs-git-mode 'simple))))
+        :bind
+        (:map global-map
+              ("C-x t s"   . treemacs-select-window)
+              ("C-x t 1"   . treemacs-delete-other-windows)
+              ("C-x t t"   . treemacs)
+              ("C-x t B"   . treemacs-bookmark)
+              ("C-x t C-t" . treemacs-find-file)
+              ("C-x t M-t" . treemacs-find-tag)))
+    #+END_SRC
+
+    Plug =treemacs= with =magit= so it can display better info regarding the git statuses
+    #+BEGIN_SRC emacs-lisp
+      (use-package treemacs-magit
+        :after treemacs magit)
+    #+END_SRC
+
+    Add an additional =evil= map to =treemacs-mode=, to use =treemacs= without any conflict.
+    #+BEGIN_SRC emacs-lisp
+      (use-package treemacs-evil
+        :after treemacs evil
+        ;; Needed to force-load the package, since :bind implies a :defer
+        :demand t
+        :bind (
+               ;; Remap C-g to its default value, since it's inherited from the motion-state-map...
+               :map evil-treemacs-state-map
+               ("C-g" . keyboard-quit)))
+    #+END_SRC
+
+    Easily add a =projectile= project to =treemacs=
+    #+BEGIN_SRC emacs-lisp
+      (use-package treemacs-projectile
+        :after treemacs projectile
+        :bind
+        (:map global-map
+              ("C-x t a" . treemacs-projectile)))
+    #+END_SRC
+
+    Use =treemacs= icons in =dired= buffers :D
+    #+BEGIN_SRC emacs-lisp
+      (use-package treemacs-icons-dired
+        :after treemacs dired
+        :config (treemacs-icons-dired-mode))
+    #+END_SRC
 
 ** Completion
 *** =helm= and friends
