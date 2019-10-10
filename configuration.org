@@ -1,5 +1,6 @@
 #+TITLE: My wonderful Emacs configuration
 #+AUTHOR: LeReverandNox
+#+PROPERTY: header-args    :results silent
 
 * Use sensible-defaults.el
   Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] by [[https://github.com/hrs/sensible-defaults.el][@HRS]] to setup basic and usefull stuff without
