@@ -1002,13 +1002,19 @@
     From [[https://github.com/Fuco1/dired-hacks/blob/master/dired-narrow.el][here]].\\
     A cool package that allows to filter files by name ! (See [[http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/][here]])
 
-    In a =dired= buffer, hit =C-s= to invok =dired-narrow= and type a string to
-    filter.\\
+    In a =dired= buffer, hit =C-c C-n= to invok =dired-narrow= and type a string to
+    filter. (hit =C-u C-c C-n= for =dired-narrow-regexps= !)\\
     When done, hit =g r= (=revert-buffer=) to remove the filters.
     #+BEGIN_SRC emacs-lisp
+      (defun lrn/dired-narrow (arg)
+        (interactive "P")
+        (if (equal arg nil)
+            (dired-narrow)
+          (dired-narrow-regexp)))
+
       (use-package dired-narrow
         :init
-        (bind-key "C-s" 'dired-narrow dired-mode-map))
+        (bind-key "C-c C-n" 'lrn/dired-narrow dired-mode-map))
     #+END_SRC
 
 *** =dired-quick-sort=
