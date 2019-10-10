@@ -344,10 +344,20 @@
 
    Okay, let's try one of my other favorite theme, One Dark from Atom.
    #+BEGIN_SRC emacs-lisp
-     (use-package atom-one-dark-theme
+     ;; (use-package atom-one-dark-theme
+     ;;   :config
+     ;;   (progn
+     ;;     (load-theme 'atom-one-dark t)))
+   #+END_SRC
+
+   This theme seems lovely, let's give it a shot.
+   #+BEGIN_SRC emacs-lisp
+     (use-package cherry-blossom-theme
        :config
        (progn
-         (load-theme 'atom-one-dark t)))
+         (load-theme 'cherry-blossom t)
+         (set-face-attribute 'default nil
+                             :background "#1a1a1a")))
    #+END_SRC
 
    I love some transparency. Let's make it a bit transparent when active, and a
