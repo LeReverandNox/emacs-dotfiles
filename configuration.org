@@ -908,6 +908,11 @@
       (bind-key "C-h C-f o" 'find-function-other-window global-map)
     #+END_SRC
 
+*** =describe-face=
+    Let's add a binding to invoke =describe-face= quickly.
+    #+BEGIN_SRC emacs-lisp
+      (bind-key "C-h C-y" 'describe-face global-map)
+    #+END_SRC
 ** Sessions
    Emacs can save and restore the current session. Convenient since I'm closing
    Emacs often !
