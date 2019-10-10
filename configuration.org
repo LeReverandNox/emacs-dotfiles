@@ -375,6 +375,12 @@
                          :foreground (face-attribute 'warning :foreground))
    #+END_SRC
 
+   Let's also allow customization of =font-lock-maximum-decoration= per mode, so
+   I can choose to use or not the additional decoration. (For example, the
+   decoration provided to =dired-mode= by =dired+= is ugly...)
+   #+BEGIN_SRC emacs-lisp
+     (setq font-lock-maximum-decoration '((t . t)))
+   #+END_SRC
 ** Font
    Thanks again to @HRS for those really helpful functions !
 
@@ -980,6 +986,11 @@
     #+BEGIN_SRC emacs-lisp
       (add-to-list 'load-path (concat user-emacs-directory "config/dired-plus"))
       (require 'dired+)
+    #+END_SRC
+
+    I found the builtin colors for =dired+= kind of ugly. Let's disable them.
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'font-lock-maximum-decoration '(dired-mode . nil))
     #+END_SRC
 
 *** =dired-narrow=
