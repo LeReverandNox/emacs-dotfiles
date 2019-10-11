@@ -27,3 +27,6 @@ transient/
 games/
 abbrev_defs
 .org-id-locations
+*.BAK
+.cache/
+.lsp-session*
