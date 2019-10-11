@@ -996,6 +996,7 @@
     I found the builtin colors for =dired+= kind of ugly. Let's disable them.
     #+BEGIN_SRC emacs-lisp
       (add-to-list 'font-lock-maximum-decoration '(dired-mode . nil))
+      (add-to-list 'font-lock-maximum-decoration '(wdired-mode . nil))
     #+END_SRC
 
 *** =dired-narrow=
