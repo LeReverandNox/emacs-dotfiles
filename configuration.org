@@ -1454,6 +1454,11 @@
         (switch-to-buffer (make-temp-name "scratch-")))
     #+END_SRC
 
+    Let's bind it on my custom map
+    #+BEGIN_SRC emacs-lisp
+      (bind-key "s" 'hrs/generate-scratch-buffer lrn/custom-map)
+    #+END_SRC
+
     I want to be able to spawn scratch buffers in a new split-window, horizontal
     or vertical.
     Let's make a small keymap on =C-w C-n= (instead of =evil-window-new=), and
