@@ -1456,7 +1456,7 @@
 
     Let's bind it on my custom map
     #+BEGIN_SRC emacs-lisp
-      (bind-key "s" 'hrs/generate-scratch-buffer lrn/custom-map)
+      (bind-key "S" 'hrs/generate-scratch-buffer lrn/custom-map)
     #+END_SRC
 
     I want to be able to spawn scratch buffers in a new split-window, horizontal
