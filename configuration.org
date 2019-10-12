@@ -241,6 +241,19 @@
        (evil-mode t))
    #+END_SRC
 
+   I want to be able to toggle =evil-emacs-state= easily. I don't use it often,
+   but it can be helpful sometimes. Let's bind a function to toggle it in my
+   custom map.
+   #+BEGIN_SRC emacs-lisp
+     (defun lrn/toggle-evil-emacs-state ()
+       "Toggle evil-emacs-state"
+       (interactive)
+       (if (equal evil-state 'emacs)
+           (evil-force-normal-state)
+         (evil-emacs-state)))
+
+     (bind-key "z" 'lrn/toggle-evil-emacs-state lrn/custom-map)
+   #+END_SRC
 ** =evil-collection=
    From [[https://github.com/emacs-evil/evil-collection][here]].\\
    =evil-collection= adds a shitload of keybindings for a shitload of modes.
