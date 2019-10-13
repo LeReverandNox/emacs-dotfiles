@@ -2263,73 +2263,13 @@
          :bind (
                 :map pipenv-command-map
                 ("w" . pyvenv-workon)
-                ("k" . jedi:stop-all-servers))
+                ("p" . run-python)
+                )
          :init
-         (setenv "WORKON_HOME" "~/.local/share/virtualenvs")
          (setq
           pipenv-projectile-after-switch-function
           #'pipenv-projectile-after-switch-extended))
      #+END_SRC
-**** =company-jedi=
-     From [[https://github.com/syohex/emacs-company-jedi][here]].\\
-     A backend for =company= powered by =jedi=. Pretty cool.
-
-     #+BEGIN_SRC emacs-lisp
-       (defun lrn/python-company-hook ()
-         (jedi:setup)
-         (add-to-list 'company-backends 'company-jedi))
-     #+END_SRC
-
-     #+BEGIN_SRC emacs-lisp
-       (use-package company-jedi
-         :hook ((python-mode . lrn/python-company-hook))
-         :init
-         (setq jedi:complete-on-dot t)
-         (setq pyvenv-post-activate-hooks (lambda ()
-                                            (elpy-rpc--disconnect)
-                                            (jedi:stop-server)
-                                            )))
-     #+END_SRC
-**** =elpy=
-     From [[https://github.com/jorgenschaefer/elpy][here]]. Doc [[https://elpy.readthedocs.io/en/latest/introduction.html][here]].\\
-     =elpy= is THE Python IDE for Emacs. It can do a lot of stuff and I need to
-     learn a lot more about it.
-     #+BEGIN_SRC emacs-lisp
-       (use-package elpy
-         :config
-         (progn
-           (elpy-enable)
-           ;; Disable elpy company-backend, conflict with jedi
-           (remove-hook 'elpy-modules 'elpy-module-company)
-           ;; Disable elpy-flymake, conflict with flycheck
-           (remove-hook 'elpy-modules 'elpy-module-flymake)))
-     #+END_SRC
-
-     TODO: As of today, when I want to run a Python script with
-     =elpy-shell-send-region-or-buffer=, I get the following error :
-     #+BEGIN_QUOTE
-     Warning (python): Your ‘python-shell-interpreter’ doesn’t seem to support
-     readline, yet ‘python-shell-completion-native-enable’ was t and "python" is not
-     part of the ‘python-shell-completion-native-disabled-interpreters’ list.  Native
-     completions have been disabled locally.
-     #+END_QUOTE
-     According to [[https://github.com/jorgenschaefer/elpy/issues/887][this]], it seems to be a well known bug. And there's no solution
-     yet.
-     So, to avoid being spammed by warning, let's disable the native completion
-     for python.
-     #+BEGIN_SRC emacs-lisp
-       (setq python-shell-completion-native-disabled-interpreters '("python"))
-     #+END_SRC
-**** =autopep8=
-     From [[https://github.com/paetzke/py-autopep8.el][here]].\\
-     Automatic format and correction of PEP8 errors at save.
-     Not 100% convince, but I keep it for now.
-
-     #+BEGIN_SRC emacs-lisp
-       (use-package py-autopep8
-         :hook (elpy-mode . py-autopep8-enable-on-save))
-     #+END_SRC
-
 *** C / CPP
     I haven't decide yet between =rtags= and =irony=.
     From what I've read, =rtags= is more powerfull but also a LOT more ressource
