@@ -2063,6 +2063,17 @@
         :config
         (company-quickhelp-mode))
     #+END_SRC
+*** =company-box=
+   From [[https://github.com/sebastiencs/company-box][here]].\\
+   This package add icons to the =company= candidates !
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-box
+       :diminish company-box-mode
+       :hook
+       (company-mode . company-box-mode))
+   #+END_SRC
+
 ** Snippets
 *** =yasnippet=
     From [[https://github.com/joaotavora/yasnippet][here]]. Ressouces [[https://www.emacswiki.org/emacs/Yasnippet][here]], [[http://ergoemacs.org/emacs/emacs_templates.html][here]], [[http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/][here]], [[http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/][here]].
