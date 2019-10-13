@@ -2020,7 +2020,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package company
-        :diminish (company-mode "Company")
+        :diminish (company-mode "Cpn")
         :bind (
                ("C-SPC" . company-complete)
                :map company-active-map
