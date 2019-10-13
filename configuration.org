@@ -2843,10 +2843,12 @@
    #+BEGIN_SRC emacs-lisp
      (use-package lsp-mode
        :hook (prog-mode . lsp)
+       :bind (
+              :map lsp-mode-map
+              ("C-c f" . lsp-format-buffer))
        :config
        (progn
-         (setq
-          lsp-clients-python-command (concat (getenv "HOME") "/.pyenv/shims/pyls"))))
+         ))
    #+END_SRC
 
    From [[https://github.com/emacs-lsp/lsp-ui][here]].
@@ -2860,9 +2862,11 @@
    #+END_SRC
 
    From [[https://github.com/emacs-lsp/lsp-treemacs][here]].
-   TODO: bind functions
    #+BEGIN_SRC emacs-lisp
-     (use-package lsp-treemacs)
+     (use-package lsp-treemacs
+       :bind (
+              :map lsp-mode-map
+              ("C-c t" . lsp-treemacs-errors-list)))
    #+END_SRC
 
 * Miscellaneous
