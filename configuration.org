@@ -2239,14 +2239,19 @@
         (bind-key "s" 'lrn/eval-and-replace lrn/eval-map)
       #+END_SRC
 *** Python
-    My Python setup, working smoothly but definitly not perfect. Based on [[https://realpython.com/emacs-the-best-python-editor/#pep8-compliance-autopep8][this]]
-    article, but not only.
-    I will improve it little by little.
+    See [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][here]].
 
-    This setup requires some python packages to works.
-    Make sure to install them in so =elpy= can find them
+    Previously I was using =elpy= and =jedi= for Python development. Now I'm
+    using =LSP=.\\
+    So far it seems to work quite well, got the same features, but with just one
+    ('ish) package.
+
+    I kept =pipenv= to manage the virtual environments, no changes here.\\
+    For =LSP= to work, I need to have the =pyls= package installed on the venv (or globally,
+    if I'm a sac a merde).\\
+    Don't forget to install it by running :
     #+BEGIN_SRC sh
-      pip install jedi rope autopep8 yapf black flake8
+      # pipenv install --dev 'python-language-server[all]'
     #+END_SRC
 
 **** =pipenv=
@@ -2266,6 +2271,7 @@
                 ("p" . run-python)
                 )
          :init
+         (setenv "WORKON_HOME" (concat (getenv "HOME") "/.local/share/virtualenvs"))
          (setq
           pipenv-projectile-after-switch-function
           #'pipenv-projectile-after-switch-extended))
@@ -2778,7 +2784,7 @@
     #+END_SRC
 ** LSP
    From [[https://github.com/emacs-lsp/lsp-mode][here]].
-   See [[https://cestlaz.github.io/post/using-emacs-58-lsp-mode/][here]], [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][here]].
+   See [[https://cestlaz.github.io/post/using-emacs-58-lsp-mode/][here]].
 
    #+BEGIN_SRC emacs-lisp
      (use-package lsp-mode
