@@ -2836,6 +2836,35 @@
     #+BEGIN_SRC emacs-lisp
       (use-package docker-compose-mode)
     #+END_SRC
+** LSP
+   From [[https://github.com/emacs-lsp/lsp-mode][here]].
+   See [[https://cestlaz.github.io/post/using-emacs-58-lsp-mode/][here]], [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][here]].
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package lsp-mode
+       :hook (prog-mode . lsp)
+       :config
+       (progn
+         (setq
+          lsp-clients-python-command (concat (getenv "HOME") "/.pyenv/shims/pyls"))))
+   #+END_SRC
+
+   From [[https://github.com/emacs-lsp/lsp-ui][here]].
+   #+BEGIN_SRC emacs-lisp
+     (use-package lsp-ui)
+   #+END_SRC
+
+   From [[https://github.com/tigersoldier/company-lsp][here]].
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-lsp)
+   #+END_SRC
+
+   From [[https://github.com/emacs-lsp/lsp-treemacs][here]].
+   TODO: bind functions
+   #+BEGIN_SRC emacs-lisp
+     (use-package lsp-treemacs)
+   #+END_SRC
+
 * Miscellaneous
 ** =speed-type=
    From [[https://github.com/hagleitn/speed-type][here]].
