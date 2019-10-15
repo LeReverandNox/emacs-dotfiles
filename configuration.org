@@ -1799,7 +1799,7 @@
       (use-package exec-path-from-shell
         :config
         (progn
-          (when (memq window-system '(mac ns nil))
+          (when (memq window-system '(mac ns nil x))
             (exec-path-from-shell-initialize))))
     #+END_SRC
 ** VCS
