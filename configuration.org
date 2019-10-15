@@ -2739,20 +2739,48 @@
        :hook (prog-mode . lsp)
        :bind (
               :map lsp-mode-map
-              ("C-c f" . lsp-format-buffer))
+              ("C-c f" . lsp-format-buffer)
+              ("C-c r" . lsp-rename)
+              )
        :config
        (progn
+         (setq
+          lsp-auto-guess-root t)
          ))
    #+END_SRC
 
    From [[https://github.com/emacs-lsp/lsp-ui][here]].
    #+BEGIN_SRC emacs-lisp
-     (use-package lsp-ui)
+     (defun lrn/toggle-lsp-ui-doc ()
+       (interactive)
+       (if lsp-ui-doc-mode
+           (progn
+             (lsp-ui-doc-mode -1)
+             (lsp-ui-doc--hide-frame))
+         (lsp-ui-doc-mode 1)))
+
+     (use-package lsp-ui
+       :bind
+       (
+        :map lsp-mode-map
+        ("M-." . lsp-ui-peek-find-definitions)
+        ("M-?" . lsp-ui-peek-find-references)
+        ("C-c i" . lsp-ui-peek-find-implementation)
+        ("C-c u m"   . lsp-ui-imenu)
+        ("C-c u s"   . lsp-ui-sideline-mode)
+        ("C-c u d"   . lrn/toggle-lsp-ui-doc)
+        ))
    #+END_SRC
 
    From [[https://github.com/tigersoldier/company-lsp][here]].
    #+BEGIN_SRC emacs-lisp
-     (use-package company-lsp)
+     (use-package company-lsp
+       :config
+       (progn
+         (setq
+          company-lsp-cache-candidates t ;; auto, t(always using a cache), or nil
+          )))
+
    #+END_SRC
 
    From [[https://github.com/emacs-lsp/lsp-treemacs][here]].
