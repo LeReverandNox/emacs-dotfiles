@@ -2676,10 +2676,23 @@
     #+END_SRC
 *** Rust
     From [[https://github.com/rust-lang/rust-mode][here]].
+    See [[https://www.reddit.com/r/rust/comments/a3da5g/my_entire_emacs_config_for_rust_in_fewer_than_20/][here]], [[https://www.mortens.dev/blog/emacs-and-the-language-server-protocol/][here]].
+
     A major mode for =Rust= files.
     #+BEGIN_SRC emacs-lisp
       (use-package rust-mode
         :mode ("\\.rs\\.'"))
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package cargo
+        :hook (rust-mode . cargo-minor-mode))
+    #+END_SRC
+
+    You need to have =rls= (the Rust language server) installed and available in
+    your path for =lsp= to be happy.
+    #+BEGIN_SRC sh
+      rustup component add rls rust-analysis rust-src
     #+END_SRC
 ** Shell
    I use my terminal A LOT. So if I can use it directly in Emacs and so some
