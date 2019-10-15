@@ -2605,6 +2605,12 @@
       go get -u golang.org/x/tools/cmd/...
     #+END_SRC
 
+    You need to have =gopls= installed and available on your =PATH= for =LSP= to
+    work with =golang=
+    #+BEGIN_SRC sh
+      GO111MODULE=on go get golang.org/x/tools/gopls@latest
+    #+END_SRC
+
 **** =go-mode=
      From [[https://github.com/dominikh/go-mode.el][here]].
 
@@ -2615,34 +2621,15 @@
        (use-package go-mode
          :mode ("\\.go\\'")
          :hook ((go-mode . (lambda () (add-hook 'before-save-hook 'gofmt-before-save nil 'local))))
-         :bind (
-                :map go-mode-map
-                ("M-." . godef-jump)
-                ("M-," . pop-tag-mark)
-                ("C-c C-r" . go-remove-unused-imports)
-                ("C-c g" . gofmt)
-                ("C-c C-k" . godoc)
-                ("C-c k" . godoc-at-point)))
-     #+END_SRC
-
-**** =go-guru=
-     From [[https://github.com/dominikh/go-mode.el][here]] too.\\
-     =go-guru= is a great tool that provides code-analysis features. (Find the
-     implementations, the callees, the callers etc...)
-
-     It requires the =guru= binary to work. It should already be installed, but
-     just in case:
-     #+BEGIN_SRC sh
-       go get -u golang.org/x/tools/cmd/guru
-     #+END_SRC
-
-     #+BEGIN_SRC emacs-lisp
-       (use-package go-guru
-         :hook (go-mode . go-guru-hl-identifier-mode)
-         :bind (
-                ;; I need to explicitly map it, since I already use C-c C-o system-wide for org-open-at-point-global
-                :map go-mode-map
-                ("C-c C-o" . go-guru-map)))
+         :bind
+         (:map go-mode-map
+               ;; ("C-c C-r" . go-remove-unused-imports)
+               ;; ("C-c C-k" . godoc)
+               ;; ("C-c k" . godoc-at-point)
+               )
+         :config
+         (progn
+           ))
      #+END_SRC
 
 **** =goimports=
@@ -2657,45 +2644,6 @@
      Then set it as =gofmt-command=
      #+BEGIN_SRC emacs-lisp
        (setq gofmt-command "goimports")
-     #+END_SRC
-
-**** =company-go=
-     From [[https://github.com/nsf/gocode][here]]. Doc for =company= [[https://github.com/nsf/gocode/tree/master/emacs-company][here]].
-
-     An autocompletion backend for golang that integrates with =company=\\
-     It requires =godoc= binary to work. Install it with:
-     #+BEGIN_SRC sh
-       go get -u github.com/nsf/gocode
-     #+END_SRC
-
-     TODO: Apparently, it's deprecated... but it works great for now.
-     #+BEGIN_SRC emacs-lisp
-       (use-package company-go
-         :hook (company-mode . (lambda () (add-to-list 'company-backends 'company-go))))
-     #+END_SRC
-
-**** =go-eldoc=
-     From [[https://github.com/syohex/emacs-go-eldoc][here]].
-
-     This package provided =eldoc= integration for golang. Just like
-     =company-go=, it requires =godoc= in order to work.
-     #+BEGIN_SRC emacs-lisp
-       (use-package go-eldoc
-         :hook (go-mode . (lambda () (go-eldoc-setup))))
-     #+END_SRC
-**** =goflymake=
-     From [[https://github.com/dougm/goflymake][here]].
-
-     A package that provide a golang checker for =flycheck=.
-     It requires the =goflymake= binary to work. Install it with:
-     #+BEGIN_SRC sh
-       go get -u github.com/dougm/goflymake
-     #+END_SRC
-
-     It's not on MELPA, so I get it as a submodule.
-     #+BEGIN_SRC emacs-lisp
-       (add-to-list 'load-path (concat user-emacs-directory "config/goflymake"))
-       (require 'go-flycheck)
      #+END_SRC
 
 *** PHP
