@@ -2282,6 +2282,12 @@
     consuming... So meeeh.
     Thanks to @martinsosic for [[http://martinsosic.com/development/emacs/2017/12/09/emacs-cpp-ide.html][this]] great article.
 
+    You need to have =clangd= command available in your =PATH= for =lsp= to work
+    with C files.\\
+    It is included in the =llvm= package.
+    #+BEGIN_SRC sh
+      pacman -S llvm
+    #+END_SRC
 **** 42 Headers
      From [[https://github.com/sullivanv/emacs][here]].\\
      Use the official 42 headers in C/CPP files.
@@ -2310,113 +2316,6 @@
      #+BEGIN_SRC emacs-lisp
        (setq-default c-default-style "linux")
      #+END_SRC
-**** =irony=
-     From [[https://github.com/Sarcasm/irony-mode][here]].\\
-     The core of this setup
-     #+BEGIN_SRC emacs-lisp
-       ;; (use-package irony
-       ;;   :hook (
-       ;;          ((c++-mode c-mode) . irony-mode)
-       ;;          (irony-mode . irony-cdb-autosetup-compile-options))
-       ;;   :init
-       ;;   ;; Use compilation database first, clang_complete as fallback.
-       ;;   (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
-       ;;                                                     irony-cdb-clang-complete))
-       ;;   :config
-       ;;   (progn
-       ;;     ;; If irony server was never installed, install it.
-       ;;     (unless (irony--find-server-executable) (call-interactively #'irony-install-server))))
-     #+END_SRC
-
-     From [[https://github.com/Sarcasm/company-irony][here]].\\
-     =irony= based =company= backend, for completion
-     #+BEGIN_SRC emacs-lisp
-       ;; (use-package company-irony
-       ;; :config
-       ;; (progn
-       ;; (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))))
-     #+END_SRC
-
-     From [[https://github.com/Sarcasm/flycheck-irony][here]].\\
-     =irony= based =flycheck= backend, for syntax checking
-     #+BEGIN_SRC emacs-lisp
-       ;; (use-package flycheck-irony
-       ;;   :hook (flycheck-mode . flycheck-irony-setup))
-     #+END_SRC
-
-     From [[https://github.com/ikirill/irony-eldoc][here]].\\
-     =irony= based =eldoc= backend, for documentation
-     #+BEGIN_SRC emacs-lisp
-       ;; (use-package irony-eldoc
-       ;;   :hook (irony-mode . irony-eldoc))
-     #+END_SRC
-
-**** =rtags=
-     From [[https://github.com/Andersbakken/rtags][here]].\\
-     =rtags= need some binaries to work: rc and rdm.
-
-     #+BEGIN_SRC emacs-lisp
-       (use-package rtags
-         :hook (
-                ;; Start rdm process on entering C/CPP/ObjC modes
-                ((c-mode c++-mode objc-mode) . rtags-start-process-unless-running)
-                ;; Shutdown rdm when leaving emacs.
-                (kill-emacs . rtags-quit-rdm))
-         :bind (
-                :map c-mode-base-map
-                ("M-." . rtags-find-symbol-at-point)
-                ("M-," . rtags-find-references-at-point)
-                ("M-?" . rtags-display-summary))
-         :init
-         ;; Needed to avoid Emacs freeze when calling find-symbol
-         (setq rtags-rdm-process-use-pipe t)
-         :config
-         (progn
-           (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
-           (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
-           (rtags-enable-standard-keybindings)))
-     #+END_SRC
-
-     From [[https://melpa.org/#/ivy-rtags][here]].\\
-     =rtags= integration for =ivy=, to search definitions, I guess.
-     #+BEGIN_SRC emacs-lisp
-       (use-package ivy-rtags
-         :init
-         (setq rtags-display-result-backend 'ivy))
-     #+END_SRC
-
-     From [[https://github.com/Andersbakken/rtags/blob/master/src/company-rtags.el][here]].\\
-     =rtags= =company= backend for completion
-     #+BEGIN_SRC emacs-lisp
-       (use-package company-rtags
-         :init
-         (setq rtags-autostart-diagnostics t)
-         (setq rtags-completions-enabled t)
-         :config
-         (progn
-           (rtags-diagnostics)
-           (push 'company-rtags company-backends)))
-     #+END_SRC
-
-     helper function to setup =flycheck-rtags=, apparently needed to ensure that
-     only rtags is used for checking. See [[https://github.com/Andersbakken/rtags#optional-1][here]]
-     #+BEGIN_SRC emacs-lisp
-       (defun setup-flycheck-rtags ()
-         (flycheck-select-checker 'rtags)
-         (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-         (setq-local flycheck-check-syntax-automatically nil)
-         (setq-local rtags-autostart-diagnostics t)
-         (rtags-set-periodic-reparse-timeout 1)  ;; Run flycheck 2 seconds after being idle.
-         )
-     #+END_SRC
-
-     From [[https://github.com/Andersbakken/rtags/blob/master/src/flycheck-rtags.el][here]].\\
-     =rtags= =flycheck= backend for syntax checking
-     #+BEGIN_SRC emacs-lisp
-       (use-package flycheck-rtags
-         :hook ((c-mode c++-mode) . setup-flycheck-rtags))
-     #+END_SRC
-
 **** Misc
      These are test settings for C/CPP, to remove.
      #+BEGIN_SRC emacs-lisp
@@ -2758,8 +2657,10 @@
        :config
        (progn
          (setq
-          lsp-auto-guess-root t)
-         ))
+          lsp-auto-guess-root t
+          ;; Arguments for clangd (C/C++)
+          lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
+          )))
    #+END_SRC
 
    From [[https://github.com/emacs-lsp/lsp-ui][here]].
