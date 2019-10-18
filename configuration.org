@@ -2277,10 +2277,18 @@
           #'pipenv-projectile-after-switch-extended))
      #+END_SRC
 *** C / CPP
-    I haven't decide yet between =rtags= and =irony=.
-    From what I've read, =rtags= is more powerfull but also a LOT more ressource
-    consuming... So meeeh.
-    Thanks to @martinsosic for [[http://martinsosic.com/development/emacs/2017/12/09/emacs-cpp-ide.html][this]] great article.
+    I'm now using =LSP= for C/C++ development, it works as good as the old
+    =irony= or =rtags= setup, but way simpler.
+
+    For =clangd= to work, you must generate a =compile_command.json= file. This
+    file is already present if the project is built by =clang=.\\
+    For the projects that use =make=, you can use =bear= to generate the JSON
+    file.
+    #+BEGIN_SRC sh
+      # Like this
+      # make clean
+      # bear make ...
+    #+END_SRC
 
     You need to have =clangd= command available in your =PATH= for =lsp= to work
     with C files.\\
