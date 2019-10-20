@@ -30,3 +30,4 @@ abbrev_defs
 *.BAK
 .cache/
 .lsp-session*
+lsp-cache/
