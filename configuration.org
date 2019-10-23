@@ -947,7 +947,11 @@
    =desktop-save=mode= so I can restore frames in a new frame... But it seems to
    have broken the up-mentioned workaround...  will (try) to-fix someday.
    #+BEGIN_SRC emacs-lisp
-     (setq desktop-path (list (concat user-emacs-directory "tmp/sessions")))
+     (let ((sessions-dir (concat user-emacs-directory "tmp/sessions")))
+       (when (not (file-directory-p sessions-dir))
+         (make-directory sessions-dir t))
+       (setq desktop-path (list (concat user-emacs-directory "tmp/sessions"))))
+
      (desktop-save-mode)
      (setq desktop-restore-forces-onscreen nil)
      (setq desktop-load-locked-desktop t)
