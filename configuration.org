@@ -164,6 +164,14 @@
                :prefix-docstring "My very own custom map to hold a lotta stuff")
   #+END_SRC
 
+* =Hydra=
+   From [[https://github.com/abo-abo/hydra][here]].\\
+   To read: [[https://matutine.gitlab.io/2015/03/11/les-hydres-vont-enchanter-votre-exp-C3-A9rience-avec-emacs.html][here]], [[https://oremacs.com/2015/01/20/introducing-hydra/][here]], [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/][here]], [[https://writequit.org/denver-emacs/presentations/2017-06-20-hydra.html][here]], [[https://www.wisdomandwonder.com/article/10748/emacsorg-mode-abo-abos-hydra-makes-you-a-lightweight-literate-programmer-hyper-boosting-your-productivity-with-about-ten-of-minutes-effort-for-learning-it][here]]
+
+   I need to load =hydra= pretty early in the file, since I use it for =evil-mc=
+   #+BEGIN_SRC emacs-lisp
+     (use-package hydra)
+   #+END_SRC
 * Beyond good and =Evil=
   I love Emacs, but I can't live without Vim bindings...
   Ever since I watched [[https://www.youtube.com/watch?v=JWD1Fpdd4Pc][this]] video, I knew it was only a matter of time until I
@@ -1048,12 +1056,6 @@
    Let's add a binding to kill the Emacs server.
    #+BEGIN_SRC emacs-lisp
      (bind-key "C-x C-S-c" 'kill-emacs global-map)
-   #+END_SRC
-** =hydra=
-   From [[https://github.com/abo-abo/hydra][here]].\\
-   To read: [[https://matutine.gitlab.io/2015/03/11/les-hydres-vont-enchanter-votre-exp-C3-A9rience-avec-emacs.html][here]], [[https://oremacs.com/2015/01/20/introducing-hydra/][here]], [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/][here]], [[https://writequit.org/denver-emacs/presentations/2017-06-20-hydra.html][here]], [[https://www.wisdomandwonder.com/article/10748/emacsorg-mode-abo-abos-hydra-makes-you-a-lightweight-literate-programmer-hyper-boosting-your-productivity-with-about-ten-of-minutes-effort-for-learning-it][here]]
-   #+BEGIN_SRC emacs-lisp
-     (use-package hydra)
    #+END_SRC
 ** Suspend
    There's a command to suspend the frame : =suspend-frame=. Pretty cool when
