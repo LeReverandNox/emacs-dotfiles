@@ -104,7 +104,7 @@
    Require additional modules to use cool features of =use-package=
 
    #+BEGIN_SRC emacs-lisp
-     (require 'diminish)  ;; if you use :diminish
+     (use-package diminish)
      (require 'bind-key)  ;; if you use any :bind variant
    #+END_SRC
 
