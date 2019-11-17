@@ -1075,6 +1075,37 @@
   #+BEGIN_SRC emacs-lisp
     (global-unset-key (kbd "C-z C-z"))
   #+END_SRC
+
+** Sudo
+   Because it's cool to use Emacs to edit files as root. I know it can be done by
+   manually opening the file with =TRAMP= by using the =/sudo::= prefix, but
+   I'm a lazy boy...
+
+   Let's use two packages to do all the work for me ;)
+
+   From here [[https://github.com/ncaq/auto-sudoedit][here]].\\
+   This package automaticaly prompt for the root password when opening a
+   protected file. However, it doesn't work if the file is opened from the
+   terminal with =emacsclient=, and there is no command to re-open the file as root.
+   #+BEGIN_SRC emacs-lisp
+     (use-package auto-sudoedit
+       :diminish auto-sudoedit-mode
+       :config
+       (auto-sudoedit-mode t))
+   #+END_SRC
+
+   From here [[https://github.com/nflath/sudo-edit][here]].\\
+   This package completes the previous one, it allows to manually open/re-open a
+   file as root, and displays a warning at the top of the buffer. I'll use it
+   when =auto-sudoedit= is not triggered.
+   #+BEGIN_SRC emacs-lisp
+     (use-package sudo-edit
+       :bind (
+              :map lrn/custom-map
+              ("r" . sudo-edit))
+       :config
+       (sudo-edit-indicator-mode t))
+   #+END_SRC
 * Persitency
 ** =backup= and =auto-save=
    I love to keep my backups and auto-saves neatly in separates directories.
