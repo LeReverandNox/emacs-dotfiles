@@ -1211,10 +1211,8 @@
    From [[https://wikemacs.org/wiki/Subword-mode][here]].\\
    Treat lower/uppper CamelCase as separate words
    #+BEGIN_SRC emacs-lisp
-     (use-package subword
-       :diminish subword-mode
-       :config
-       (global-subword-mode 1))
+     (global-subword-mode 1)
+     (diminish-minor-mode 'subword 'subword-mode)
    #+END_SRC
 ** Cursor width
    From [[http://pragmaticemacs.com/emacs/adaptive-cursor-width/][here]].
@@ -1257,9 +1255,8 @@
     Let's run with =hideshow=, which is built-in and really efficient.
 
     #+BEGIN_SRC emacs-lisp
-      (use-package hideshow
-        :diminish hs-minor-mode
-        :hook (prog-mode . hs-minor-mode))
+      (add-hook 'prog-mode-hook 'hs-minor-mode)
+      (diminish-minor-mode 'hideshow 'hs-minor-mode)
     #+END_SRC
 
 *** =vimish-fold=
@@ -1626,49 +1623,46 @@
     to easily know which buffer belongs to which project, without being in a
     =Projectile= thing.
     #+BEGIN_SRC emacs-lisp
-      (use-package ibuffer
-        :hook (
-               ;; Enable ibuffer-auto-mode to auto-refresh buffer if changes occur on the disk
-               (ibuffer . ibuffer-auto-mode)
-               ;; Enable ibuffer-vc filter groups when I open ibuffer
-               (ibuffer . lrn/ibuffer-set-up-preferred-filters))
-        :bind (("C-x C-b" . ibuffer))
-        :init
-        (use-package ibuffer-vc)
-        ;; Hide empty filter-groups
-        (setq ibuffer-show-empty-filter-groups nil)
-        ;; Here's a custom filter-group, in case I don't want ibuffer-vc filtering,
-        ;; but style have some groups I like.
-        (setq ibuffer-saved-filter-groups
-              '(("basic"
-                 ("Org" (mode . org-mode))
-                 ("Magit" (name . "^magit:*"))
-                 ("Helm" (name . "^\*helm*"))
-                 )))
-        :config
-        (progn
-          ;; Let's create a custom column with file size displayed in a human-redeable
-          ;; style...
-          (define-ibuffer-column size-h
-            (:name "Size" :inline t)
-            (cond
-             ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
-             ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
-             (t (format "%8d" (buffer-size)))))
-          ;; ... then apply it by redefining ibuffer-formats.
-          (setq ibuffer-formats
-                '((mark modified read-only " "
-                        (name 18 18 :left :elide)
-                        " "
-                        (size-h 9 -1 :right)
-                        " "
-                        (mode 16 16 :left :elide)
-                        " "
-                        filename-and-process)))
-          ;; I want to be able to switch back to ibuffer-vc filter-groups in ibuffer,
-          ;; if I disabled them.
-          (evil-define-key 'normal ibuffer-mode-map (kbd "s V") 'lrn/ibuffer-set-up-preferred-filters)
-          ))
+      (bind-key "C-x C-b" 'ibuffer global-map)
+
+      ;; Enable ibuffer-auto-mode to auto-refresh buffer if changes occur on the disk
+      (add-hook 'ibuffer-hook 'ibuffer-auto-mode)
+      ;; Enable ibuffer-vc filter groups when I open ibuffer
+      (add-hook 'ibuffer-hook 'lrn/ibuffer-set-up-preferred-filters)
+
+      (use-package ibuffer-vc)
+      ;; Hide empty filter-groups
+      (setq ibuffer-show-empty-filter-groups nil)
+      ;; Here's a custom filter-group, in case I don't want ibuffer-vc filtering,
+      ;; but style have some groups I like.
+      (setq ibuffer-saved-filter-groups
+            '(("basic"
+               ("Org" (mode . org-mode))
+               ("Magit" (name . "^magit:*"))
+               ("Helm" (name . "^\*helm*"))
+               )))
+
+      ;; Let's create a custom column with file size displayed in a human-redeable
+      ;; style...
+      (define-ibuffer-column size-h
+        (:name "Size" :inline t)
+        (cond
+         ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+         ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+         (t (format "%8d" (buffer-size)))))
+      ;; ... then apply it by redefining ibuffer-formats.
+      (setq ibuffer-formats
+            '((mark modified read-only " "
+                    (name 18 18 :left :elide)
+                    " "
+                    (size-h 9 -1 :right)
+                    " "
+                    (mode 16 16 :left :elide)
+                    " "
+                    filename-and-process)))
+      ;; I want to be able to switch back to ibuffer-vc filter-groups in ibuffer,
+      ;; if I disabled them.
+      (evil-define-key 'normal ibuffer-mode-map (kbd "s V") 'lrn/ibuffer-set-up-preferred-filters)
     #+END_SRC
 
 * Workspaces
@@ -2147,10 +2141,8 @@
 
     Let's enable it globally
     #+BEGIN_SRC emacs-lisp
-      (use-package eldoc
-        :diminish (eldoc-mode "eldoc")
-        :config
-        (global-eldoc-mode t))
+      (global-eldoc-mode t)
+      (diminish-minor-mode 'eldoc 'eldoc-mode)
     #+END_SRC
 ** Syntax checking
 *** =flycheck=
