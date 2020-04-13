@@ -2586,8 +2586,13 @@
      #+END_SRC
 
 *** PHP
-    Coming soon...
     TODO: Check [[https://www.philnewton.net/guides/emacs-as-a-php-editor/][this]], [[http://irreal.org/blog/?p=5499][this]], [[http://www.blogbyben.com/2016/08/emacs-php-modern-and-far-more-complete.html][this]], [[https://www.drupal.org/docs/develop/development-tools/emacs][this]] and [[https://github.com/emacs-php/php-suite][that]].
+
+    A major mode for =php= files.
+    #+BEGIN_SRC emacs-lisp
+      (use-package php-mode
+        :mode ("\\.php\\'"))
+    #+END_SRC
 *** Lua
 **** =lua-mode=
      From [[https://github.com/immerrr/lua-mode][here]]. See [[http://immerrr.github.io/lua-mode/][here]].
