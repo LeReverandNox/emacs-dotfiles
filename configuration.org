@@ -857,11 +857,25 @@
      =counsel= is a collection of replacement functions for various Emacs
      commands, infused with =ivy=.
 
+     A small helper function to call =counsel-ag= on the current directory
+     automaticaly, not the project root, since it's what I want to do most of the time.
+     #+begin_src emacs-lisp
+       (defun lrn/counsel-ag (arg)
+         "Call counsel-ag on the current directory. If ARG is present, make it interactive"
+         (interactive "P")
+         (if (equal arg nil)
+             (counsel-ag nil default-directory)
+           (counsel-ag)))
+     #+end_src
+
      #+BEGIN_SRC emacs-lisp
        (use-package counsel
          :diminish counsel-mode
          :bind (
-                ("C-x y" . counsel-yank-pop))
+                ("C-x y" . counsel-yank-pop)
+                ;; Bind counsel-ag to C-S-s
+                ("C-S-s" . lrn/counsel-ag)
+                )
          :init
          ;; Override the binding descriptions with counsel stuff
          (setq counsel-mode-override-describe-bindings t)
