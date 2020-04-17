@@ -31,3 +31,4 @@ abbrev_defs
 .cache/
 .lsp-session*
 lsp-cache/
+forge-database.sqlite
