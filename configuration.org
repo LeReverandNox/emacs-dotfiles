@@ -2300,8 +2300,8 @@
     For =LSP= to work, I need to have the =pyls= package installed on the venv (or globally,
     if I'm a sac a merde).\\
     Don't forget to install it by running :
-    #+BEGIN_SRC sh
-      # pipenv install --dev 'python-language-server[all]'
+    #+BEGIN_SRC sh :tangle no
+      pipenv install --dev 'python-language-server[all]'
     #+END_SRC
 
 **** =pipenv=
@@ -2334,16 +2334,15 @@
     file is already present if the project is built by =clang=.\\
     For the projects that use =make=, you can use =bear= to generate the JSON
     file.
-    #+BEGIN_SRC sh
-      # Like this
-      # make clean
-      # bear make ...
+    #+BEGIN_SRC sh :tangle no
+       make clean
+       bear make ...
     #+END_SRC
 
     You need to have =clangd= command available in your =PATH= for =lsp= to work
     with C files.\\
     It is included in the =llvm= package.
-    #+BEGIN_SRC sh
+    #+BEGIN_SRC sh :tangle no
       pacman -S llvm
     #+END_SRC
 **** 42 Headers
@@ -2471,7 +2470,7 @@
 
      It requires to have =tern= installed on the system. Let's do it globally by
      running the following command :
-     #+BEGIN_SRC sh
+     #+BEGIN_SRC sh :tangle no
        npm install -g tern
      #+END_SRC
      TODO: I need to find a way to make my =NVM= lazy-loading works with
@@ -2558,13 +2557,13 @@
 
     Almost all of the following packages requires the golang tools.
     They can all be installed at once by running:
-    #+BEGIN_SRC sh
+    #+BEGIN_SRC sh :tangle no
       go get -u golang.org/x/tools/cmd/...
     #+END_SRC
 
     You need to have =gopls= installed and available on your =PATH= for =LSP= to
     work with =golang=
-    #+BEGIN_SRC sh
+    #+BEGIN_SRC sh :tangle no
       GO111MODULE=on go get golang.org/x/tools/gopls@latest
     #+END_SRC
 
@@ -2594,7 +2593,7 @@
      This golang command manages imports for you !
 
      You need to install the =goimports= binary first.
-     #+BEGIN_SRC sh
+     #+BEGIN_SRC sh :tangle no
        go get -u golang.org/x/tools/cmd/goimports
      #+END_SRC
 
@@ -2653,7 +2652,7 @@
 
     You need to have =rls= (the Rust language server) installed and available in
     your path for =lsp= to be happy.
-    #+BEGIN_SRC sh
+    #+BEGIN_SRC sh :tangle no
       rustup component add rls rust-analysis rust-src
     #+END_SRC
 ** Shell
