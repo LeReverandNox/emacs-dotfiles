@@ -1446,11 +1446,8 @@
     =refill-mode= does a pretty good job to keep text wrapped, making nice
     paragraphs, by auto-filling at =fill-column= length.
 
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'text-mode-hook 'refill-mode)
-    #+END_SRC
-
-    Let's add a shortcut to disable =refill-mode=, just in case.
+    Let's add a shortcut to enable =refill-mode=, instead of having it
+    automaticaly on.
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "C-c q") 'refill-mode)
     #+END_SRC
