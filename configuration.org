@@ -2182,7 +2182,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package yaml-mode
         :hook (yaml-mode . (lambda ()
-                             refill-mode -1)))
+                             (refill-mode -1))))
     #+END_SRC
 *** JSON
     Here's a major-mode ([[https://github.com/joshwnj/json-mode][here]]) to edit JSON, with syntax highlithing, indentation,
