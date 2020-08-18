@@ -363,7 +363,7 @@
      ;; (load-theme 'earthsong t)
    #+END_SRC
 
-   Okay, let's try one of my other favorite theme, One Dark from Atom.
+   +Okay, let's try one of my other favorite theme, One Dark from Atom.+
    #+BEGIN_SRC emacs-lisp
      ;; (use-package atom-one-dark-theme
      ;;   :config
@@ -371,15 +371,23 @@
      ;;     (load-theme 'atom-one-dark t)))
    #+END_SRC
 
-   This theme seems lovely, let's give it a shot.
+   +This theme seems lovely, let's give it a shot.+
    #+BEGIN_SRC emacs-lisp
-     (use-package cherry-blossom-theme
+     ;; (use-package cherry-blossom-theme
+     ;;   :config
+     ;;   (progn
+     ;;     (load-theme 'cherry-blossom t)
+     ;;     (set-face-attribute 'default nil
+     ;;                         :background "#1a1a1a")))
+   #+END_SRC
+
+   Let's try dracula !
+   #+begin_src emacs-lisp
+     (use-package dracula-theme
        :config
        (progn
-         (load-theme 'cherry-blossom t)
-         (set-face-attribute 'default nil
-                             :background "#1a1a1a")))
-   #+END_SRC
+         (load-theme 'dracula t)))
+   #+end_src
 
    I love some transparency. Let's make it a bit transparent when active, and a
    bit more transparent when inactive
@@ -408,12 +416,14 @@
 *** Setup
     Let's set =Office Code Pro= as the default font
     #+BEGIN_SRC emacs-lisp
-      (setq hrs/default-font "Office Code Pro")
+      ;; (setq hrs/default-font "Office Code Pro")
+      ;; (setq hrs/default-font "RobotoMono Nerd Font Mono")
+      (setq hrs/default-font "JetBrains Mono")
     #+END_SRC
 
     With a default size of 12
     #+BEGIN_SRC emacs-lisp
-      (setq hrs/default-font-size 12)
+      (setq hrs/default-font-size 11)
     #+END_SRC
 
 *** Resizing
