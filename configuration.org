@@ -2729,6 +2729,10 @@
        :config
        (progn
          (setq
+          ;; According to lsp-mode documentation, increase gc-cons-treshold to improve performances
+          gc-cons-threshold 100000000
+          ;; Also increase the amount of data Emacs can read from a process
+          read-process-output-max (* 1024 1024) ;; 1mb
           lsp-auto-guess-root t
           ;; Arguments for clangd (C/C++)
           lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")
